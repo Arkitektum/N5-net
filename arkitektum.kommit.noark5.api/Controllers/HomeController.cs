@@ -10,7 +10,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "NOARK 5";
 
             return View();
         }

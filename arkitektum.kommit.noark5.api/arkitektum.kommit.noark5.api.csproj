@@ -158,11 +158,9 @@
     <Compile Include="Controllers\RegistreringController.cs" />
     <Compile Include="Controllers\SaksmappeController.cs" />
     <Compile Include="Controllers\Set.cs" />
-    <Compile Include="Controllers\testController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\arkitektumkommitnoark5apiContext.cs" />
     <Compile Include="Models\Generert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
