@@ -8,7 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
 using System.Xml.Serialization;
 
 // 
@@ -26,7 +25,7 @@ using System.Xml.Serialization;
 public partial class LinkType
 {
 
-    private string uriField;
+    private string hrefField;
 
     private string relField;
 
@@ -36,15 +35,15 @@ public partial class LinkType
 
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public string uri
+    public string href
     {
         get
         {
-            return this.uriField;
+            return this.hrefField;
         }
         set
         {
-            this.uriField = value;
+            this.hrefField = value;
         }
     }
 
@@ -1694,7 +1693,6 @@ public partial class AbstraktArkivenhetType
 
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    [Key]
     public string systemID
     {
         get

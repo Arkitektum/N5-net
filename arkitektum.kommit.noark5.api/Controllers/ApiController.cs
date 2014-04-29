@@ -28,9 +28,10 @@ namespace arkitektum.kommit.noark5.api.Controllers
             linker.Add(addLink(baseUri, "Arkivstruktur")); //Obligatorisk
             linker.Add(addLink(baseUri, "Sakarkiv"));
             linker.Add(addLink(baseUri, "MoeteOgUtvalgsbehandling"));
-            linker.Add(addLink(baseUri, "Periodisering")); //Funksjoner?
+            linker.Add(addLink(baseUri, "Administrasjon"));
+            //linker.Add(addLink(baseUri, "Periodisering")); //Funksjoner?
             linker.Add(addLink(baseUri, "OffentligJournal"));
-            linker.Add(addLink(baseUri, "Restanser"));
+            linker.Add(addLink(baseUri, "Restanseliste"));
             LinkListe liste = new LinkListe();
             liste.link = linker.ToArray();
             return liste;
@@ -39,7 +40,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
         private LinkType addLink(Uri baseUri, string rel)
         {
             LinkType l2 = new LinkType();
-            l2.uri = baseUri + Url.Route("DefaultApi", new { controller = rel });
+            l2.href = baseUri + Url.Route("DefaultApi", new { controller = rel });
             l2.rel = Set._REL + "/" + rel;
             return l2;
         }

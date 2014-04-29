@@ -1,0 +1,18 @@
+﻿<p>Arkiv:</p>
+<ul>
+    <li ng-repeat="m in data.arkiv">
+        <a href="#/arkiv/{{m.self}}">{{m.tittel}}</a>
+    </li>
+</ul>
+<p>Arkivdel:</p>
+<ul>
+    <li ng-repeat="m in data.arkivdel">
+        <a href="#/arkivdel/{{m.self}}">{{m.tittel}}</a>
+    </li>
+</ul>
+<p>Mapper:</p>
+<ul>
+    <li ng-repeat="m in data.mappe">
+        <a href="#/mappe/{{m.self}}">{{m.tittel}}</a>
+    </li>
+</ul>

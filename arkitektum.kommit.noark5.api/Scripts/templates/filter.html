@@ -1,0 +1,17 @@
+﻿<p>Søk</p>
+<form name="filter">
+    <label>Filter:</label>
+    <input type="text" name="soek" class="form-control" >
+    <a href="#/" class="btn">Cancel</a>
+    <button ng-click="save()"
+            class="btn btn-primary">
+        Søk
+    </button>
+</form>
+
+<ul>
+    <li ng-repeat="d in data">
+        <p>{{d.tittel}}</p>
+        
+    </li>
+</ul>

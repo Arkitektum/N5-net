@@ -171,6 +171,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -187,11 +188,18 @@
     <Content Include="App_Data\eksempel.pdf" />
     <None Include="Properties\PublishProfiles\n5test.kxml.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\controllers.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\templates\filter.html" />
+    <Content Include="Scripts\templates\arkiv.html" />
+    <Content Include="Scripts\templates\dataliste.html" />
+    <Content Include="Scripts\templates\linkliste.html" />
+    <Content Include="Scripts\templates\arkivstruktur.html" />
+    <Content Include="Scripts\templates\main.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -210,6 +218,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Home\test.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

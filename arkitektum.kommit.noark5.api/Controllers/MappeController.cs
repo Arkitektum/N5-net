@@ -26,34 +26,53 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
             //TODO støtte odata filter syntaks
             queryOptions.Validate(_validationSettings);
+            
+            //$orderby=ReleaseDate asc, Rating desc
+            //$filter=Price lt 10.00
+            //$top=5&$skip=2
+
 
             //Rettinghetsstyring...og alle andre restriksjoner
             List<MappeType> testdata = new List<MappeType>();
 
-            testdata.Add(GetMappe("12345"));
-            testdata.Add(GetMappe("234"));
+            //TODO Håndtere filter... 
+            if (queryOptions.Top == null)
+            {
+                testdata.Add(GetMappe("12345"));
+                testdata.Add(GetMappe("234"));
+                testdata.Add(GetMappe(Guid.NewGuid().ToString()));
+                testdata.Add(GetMappe(Guid.NewGuid().ToString()));
+                testdata.Add(GetMappe(Guid.NewGuid().ToString()));
+                testdata.Add(GetMappe(Guid.NewGuid().ToString()));
+                testdata.Add(GetMappe(Guid.NewGuid().ToString()));
+                testdata.Add(GetMappe(Guid.NewGuid().ToString()));
+                testdata.Add(GetMappe(Guid.NewGuid().ToString()));
+                testdata.Add(GetMappe(Guid.NewGuid().ToString()));
+            }
+            else if (queryOptions.Top.Value == 5)
+            {
+                testdata.Add(GetMappe("12345"));
+                testdata.Add(GetMappe("234"));
+                testdata.Add(GetMappe(Guid.NewGuid().ToString()));
+                testdata.Add(GetMappe(Guid.NewGuid().ToString()));
+                testdata.Add(GetMappe(Guid.NewGuid().ToString()));
+
+            }
 
             MappeListe ma = new MappeListe();
             ma.mappe = testdata.ToArray();
 
             //trenger vi disse når top og skip kan benyttes og en for nye objekter først bør finne det objektet det skal opprettes på?
-            List<LinkType> linkerma = new List<LinkType>();
-            linkerma.Add(addLink(baseUri, "api/arkivstruktur/Mappe/ny-mappe", "/ny-mappe"));
-            linkerma.Add(addLink(url, "?page=1", "/previus")); 
-            linkerma.Add(addLink(url, "?page=3", "/next"));
+            //List<LinkType> linkerma = new List<LinkType>();
+            //linkerma.Add(addLink(baseUri, "api/arkivstruktur/Mappe/ny-mappe", "/ny-mappe"));
+            //linkerma.Add(addLink(url, "?page=1", "/previus")); 
+            //linkerma.Add(addLink(url, "?page=3", "/next"));
 
-            ma._links = linkerma.ToArray();
+            //ma._links = linkerma.ToArray();
 
             return ma;
         }
 
-        private static LinkType addLink(Uri baseUri, string aksjon, string relasjon)
-        {
-            LinkType nl = new LinkType();
-            nl.uri = baseUri + aksjon;
-            nl.rel = Set._REL + relasjon;
-            return nl;
-        }
 
         [Route("api/arkivstruktur/Arkivdel/{Id}/mappe")]
         [HttpGet]

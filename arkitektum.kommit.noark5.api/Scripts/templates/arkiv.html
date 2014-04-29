@@ -1,0 +1,30 @@
+﻿<p>Ny/endre Arkiv</p>
+<form name="Arkiv">
+    <label>Tittel:</label>
+    <input type="text" class="form-control" ng-model="data.tittel">
+    <label>Beskrivelse:</label>
+    <input type="text" class="form-control" ng-model="data.beskrivelse">
+    <label>Arkivstatus:</label>
+    <input type="text" class="form-control" ng-model="data.arkivstatus">
+    <label>Dokumentmedium:</label>
+    <input type="text" class="form-control" ng-model="data.dokumentmedium">
+    <br>
+    <a href="#/" class="btn">Cancel</a>
+    <button ng-click="save()" ng-disabled="Arkiv.$invalid"
+            class="btn btn-primary">
+        Save
+    </button>
+    <button ng-click="destroy()"
+            ng-show="project.$remove" class="btn btn-danger">
+        Delete
+    </button>
+</form>
+
+<p>Navigering(lenker):</p>
+<ul>
+    <li ng-repeat="link in data._links">
+        <a ng-if="link.rel=='http://rel.kxml.no/noark5/v4/api/administrasjon/dokumentmedium'" href="#/link/{{link.href}}">Søk etter lovlige dokumentmedium</a>
+        <a ng-if="link.rel=='http://rel.kxml.no/noark5/v4/api/administrasjon/arkivstatus'" href="#/link/{{link.href}}">Søk etter lovlige arkivstatus</a>
+        <a target="_blank" href="{{link.rel}}"><span class="glyphicon glyphicon-info-sign"></span></a>
+    </li>
+</ul>

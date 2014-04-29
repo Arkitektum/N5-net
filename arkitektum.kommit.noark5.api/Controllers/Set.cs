@@ -7,13 +7,13 @@ namespace arkitektum.kommit.noark5.api.Controllers
 {
     public static class Set
     {
-        public  const string _REL = "http://rel.kxml.no/noark5/v4";
+        public  const string _REL = "http://rel.kxml.no/noark5/v4/api";
 
         
         public static LinkType addLink(Uri baseUri, string apiUrl, string relUrl)
         {
             LinkType l = new LinkType();
-            l.uri = baseUri + apiUrl;
+            l.href = baseUri + apiUrl;
             l.rel = relUrl;
             return l;
         }
@@ -21,7 +21,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
         public static LinkType addTempLink(Uri baseUri, string apiUrl, string relUrl, string template)
         {
             LinkType l = new LinkType();
-            l.uri = baseUri + apiUrl + "{" + template + "}";
+            l.href = baseUri + apiUrl + "{" + template + "}";
             l.rel = relUrl;
             l.templated = true;
             l.templatedSpecified = true;
