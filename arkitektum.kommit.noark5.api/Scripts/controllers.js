@@ -62,6 +62,9 @@ n5Controllers.controller('FilterController', function ($scope, $routeParams, $ht
     //$http.get($scope.data_url).success(function (data) {
     //    $scope.data = data;
     //});
+    $scope.search = function (data) {
+        alert("søk");
+    };
 });
 
 n5Controllers.controller('LinkController', function ($scope, $routeParams, $http, $sce) {
@@ -71,6 +74,12 @@ n5Controllers.controller('LinkController', function ($scope, $routeParams, $http
     $http.get($scope.data_url).success(function (data) {
         $scope.data= data;
     });
+    $scope.save = function (data) {
+        $http.post($scope.data_url).success(function (data) {
+            $scope.data = data;
+        });
+        alert("lagret");
+    };
 });
 
 
