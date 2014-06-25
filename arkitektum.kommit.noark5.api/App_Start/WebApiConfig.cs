@@ -19,7 +19,7 @@ namespace arkitektum.kommit.noark5.api
             // Web API routes
             config.MapHttpAttributeRoutes();
 
-            var cors = new EnableCorsAttribute("http://localhost:64708", "*", "*");
+            var cors = new EnableCorsAttribute("*", "*", "*");
             config.EnableCors(cors);
 
             config.Routes.MapHttpRoute(
