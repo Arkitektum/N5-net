@@ -82,5 +82,78 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
             return m;
         }
+
+
+        [Route("api/arkivstruktur/ny-arkivdel")]
+        [HttpGet]
+        public ArkivType InitialiserArkiv()
+        {
+            var url = HttpContext.Current.Request.Url;
+            var baseUri =
+                new UriBuilder(
+                    url.Scheme,
+                    url.Host,
+                    url.Port).Uri;
+            //Legger på standardtekster feks for pålogget bruker
+            ArkivType m = new ArkivType();
+            m.tittel = "angi tittel på arkiv";
+            m.dokumentmedium = "Elektronisk arkiv";
+            m.arkivstatus = "O";
+
+            List<LinkType> linker = new List<LinkType>();
+            linker.Add(Set.addTempLink(baseUri, "api/kodelister/Dokumentmedium", Set._REL + "/administrasjon/dokumentmedium", "?$filter&$orderby&$top&$skip"));
+            linker.Add(Set.addTempLink(baseUri, "api/kodelister/Arkivstatus", Set._REL + "/administrasjon/arkivstatus", "?$filter&$orderby&$top&$skip"));
+
+
+            m._links = linker.ToArray();
+            if (m == null)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
+            }
+
+            return m;
+        }
+
+        [Route("api/arkivstruktur/ny-arkivdel")]
+        [HttpPost]
+        public HttpResponseMessage PostArkivdel(ArkivdelType arkivdel)
+        {
+            if (arkivdel != null)
+            {
+                //TODO rettigheter og lagring til DB el.l
+                var url = HttpContext.Current.Request.Url;
+                var baseUri =
+                    new UriBuilder(
+                        url.Scheme,
+                        url.Host,
+                        url.Port).Uri;
+                arkivdel.systemID = Guid.NewGuid().ToString();
+                arkivdel.opprettetDato = DateTime.Now;
+                arkivdel.opprettetDatoSpecified = true;
+                arkivdel.opprettetAv = "pålogget bruker";
+
+                List<LinkType> linker = new List<LinkType>();
+                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + arkivdel.systemID, "self"));
+                linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Arkivdel/" + arkivdel.systemID + "/mappe", Set._REL + "/mappe", "?$filter&$orderby&$top&$skip&$search"));
+                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + arkivdel.systemID + "/ny-mappe", Set._REL + "/ny-mappe"));
+                linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Arkivdel/" + arkivdel.systemID + "/registrering", Set._REL + "/registrering", "?$filter&$orderby&$top&$skip&$search"));
+                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + arkivdel.systemID + "/ny-registrering", Set._REL + "/ny-registrering"));
+                linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Arkivdel/" + arkivdel.systemID + "/klassifikasjonssystem", Set._REL + "/klassifikasjonssystem", "?$filter&$orderby&$top&$skip&$search"));
+                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + arkivdel.systemID + "/ny-klassifikasjonssystem", Set._REL + "/ny-klassifikasjonssystem"));
+                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkiv/" + "45345", Set._REL + "/referanseArkiv"));
+
+                arkivdel._links = linker.ToArray();
+
+
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, arkivdel);
+                response.Headers.Location = new Uri(baseUri + "api/arkivstruktur/Arkivdel/" + arkivdel.systemID);
+                return response;
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+        }
     }
 }

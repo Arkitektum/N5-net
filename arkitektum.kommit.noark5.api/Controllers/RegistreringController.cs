@@ -90,5 +90,88 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
             return m;
         }
+
+
+        [Route("api/arkivstruktur/ny-registrering")]
+        [HttpGet]
+        public RegistreringType InitialiserRegistrering()
+        {
+            var url = HttpContext.Current.Request.Url;
+            var baseUri =
+                new UriBuilder(
+                    url.Scheme,
+                    url.Host,
+                    url.Port).Uri;
+            //Legger på standardtekster feks for pålogget bruker
+            RegistreringType m = new RegistreringType();
+            m.arkivertDato = DateTime.Now;
+            m.arkivertAv = "Pålogget bruker 2";
+            m.referanseArkivdel = null;
+            
+
+            
+            
+
+            List<LinkType> linker = new List<LinkType>();
+            linker.Add(Set.addTempLink(baseUri, "api/kodelister/Dokumentmedium", Set._REL + "/administrasjon/dokumentmedium", "?$filter&$orderby&$top&$skip"));
+            linker.Add(Set.addTempLink(baseUri, "api/kodelister/Arkivstatus", Set._REL + "/administrasjon/arkivstatus", "?$filter&$orderby&$top&$skip"));
+
+
+            m._links = linker.ToArray();
+            if (m == null)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
+            }
+
+            return m;
+        }
+
+        [Route("api/arkivstruktur/ny-registrering")]
+        [HttpPost]
+        public HttpResponseMessage PostRegistrering(RegistreringType registrering)
+        {
+            if (registrering != null)
+            {
+                //TODO rettigheter og lagring til DB el.l
+                var url = HttpContext.Current.Request.Url;
+                var baseUri =
+                    new UriBuilder(
+                        url.Scheme,
+                        url.Host,
+                        url.Port).Uri;
+                registrering.systemID = Guid.NewGuid().ToString();
+                registrering.opprettetDato = DateTime.Now.AddDays(-2);
+                registrering.opprettetDatoSpecified = true;
+                registrering.opprettetAv = "pålogget bruker";
+
+                List<LinkType> linker = new List<LinkType>();
+                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Registrering/" + registrering.systemID, "self"));
+                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Basisregistrering/" + registrering.systemID, Set._REL + "/utvid-til-basisregistrering"));
+                linker.Add(Set.addLink(baseUri, "api/sakarkiv/Journalpost/" + registrering.systemID, Set._REL + "/utvid-til-journalpost"));
+                linker.Add(Set.addLink(baseUri, "api/MoeteOgUtvalgsbehandling/Moeteregistrering/" + registrering.systemID, Set._REL + "/utvid-til-moeteregistrering"));
+
+                linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Registrering/" + registrering.systemID + "/dokumentbeskrivelse", Set._REL + "/dokumentbeskrivelse", "?$filter&$orderby&$top&$skip&$search"));
+                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Registrering/" + registrering.systemID + "/ny-dokumentbeskrivelse", Set._REL + "/ny-dokumentbeskrivelse"));
+                linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Registrering/" + registrering.systemID + "/dokumentobjekt", Set._REL + "/dokumentobjekt", "?$filter&$orderby&$top&$skip&$search"));
+                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Registrering/" + registrering.systemID + "/ny-dokumentobjekt", Set._REL + "/ny-dokumentobjekt"));
+
+                //Enten eller?
+                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Klasse/234", Set._REL + "/referanseKlasse"));
+                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/665", Set._REL + "/referanseMappe"));
+                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/6578", Set._REL + "/referanseArkivdel"));
+
+                registrering._links = linker.ToArray();
+
+
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, registrering);
+                response.Headers.Location = new Uri(baseUri + "api/arkivstruktur/registrering/" + registrering.systemID);
+                return response;
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+        }
     }
 }
