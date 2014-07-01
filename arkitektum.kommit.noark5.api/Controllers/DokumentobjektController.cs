@@ -48,8 +48,10 @@ namespace arkitektum.kommit.noark5.api.Controllers
             DokumentobjektType m = new DokumentobjektType();
             m.systemID = id;
             m.versjonsnummer = "1";
-            m.variantformat = "Arkivformat";
-            m.format = "pdf/a";
+            m.variantformat = new VariantformatType();
+            m.variantformat.kode = "Arkivformat";
+            m.format = new FormatType();
+            m.format.kode = "pdf/a";
             m.opprettetDato = DateTime.Now;
             m.referanseDokumentfil = "http://..."; //eller som link?
 

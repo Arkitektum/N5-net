@@ -11,7 +11,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
     public class ArkivstrukturController : ApiController
     {
 
-        public LinkListe GetArkivstruktur()
+        public LinkListeType GetArkivstruktur()
         {
             var url = HttpContext.Current.Request.Url;
             var baseUri =
@@ -35,8 +35,8 @@ namespace arkitektum.kommit.noark5.api.Controllers
             linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/basisregistrering", Set._REL + "/arkivstruktur/basisregistrering", "?$filter&$orderby&$top&$skip&$search"));
             linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/dokumentbeskrivelse", Set._REL + "/arkivstruktur/dokumentbeskrivelse", "?$filter&$orderby&$top&$skip&$search"));
             linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/dokumentobjekt", Set._REL + "/arkivstruktur/dokumentobjekt", "?$filter&$orderby&$top&$skip&$search"));
-           
-            LinkListe liste = new LinkListe();
+
+            LinkListeType liste = new LinkListeType();
             liste.link = linker.ToArray();
             return liste;
         }

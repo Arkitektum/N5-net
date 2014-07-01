@@ -18,7 +18,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
         [Route("api")]
         [HttpGet]
-        public LinkListe GetApi4()
+        public LinkListeType GetApi4()
         {
             var url = HttpContext.Current.Request.Url;
             var baseUri =
@@ -37,7 +37,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
             //linker.Add(addLink(baseUri, "Periodisering")); //Funksjoner?
             linker.Add(addLink(baseUri, "OffentligJournal"));
             linker.Add(addLink(baseUri, "Restanseliste"));
-            LinkListe liste = new LinkListe();
+            LinkListeType liste = new LinkListeType();
             liste.link = linker.ToArray();
             return liste;
         }

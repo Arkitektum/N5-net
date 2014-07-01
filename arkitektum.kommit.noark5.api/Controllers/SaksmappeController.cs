@@ -58,7 +58,8 @@ namespace arkitektum.kommit.noark5.api.Controllers
             m.opprettetAv = "tor";
             m.mappeID = "1234/2014";
             m.gradering = new GraderingType();
-            m.gradering.gradering = "jepp";
+            m.gradering.graderingskode = new GraderingskodeType();
+            m.gradering.graderingskode.kode = "jepp";
             m.gradering.graderingsdato = DateTime.Now;
             m.saksaar = "2014";
             m.sakssekvensnummer = "1234";

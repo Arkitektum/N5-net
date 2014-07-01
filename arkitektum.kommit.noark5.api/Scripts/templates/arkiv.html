@@ -5,9 +5,9 @@
     <label>Beskrivelse:</label>
     <input type="text" class="form-control" ng-model="data.beskrivelse">
     <label>Arkivstatus:</label>
-    <input type="text" class="form-control" ng-model="data.arkivstatus">
+    <input type="text" class="form-control" ng-model="data.arkivstatus.kode">
     <label>Dokumentmedium:</label>
-    <input type="text" class="form-control" ng-model="data.dokumentmedium">
+    <input type="text" class="form-control" ng-model="data.dokumentmedium.kode">
     <br>
     <a href="#/" class="btn">Cancel</a>
     <button ng-click="save()" ng-disabled="Arkiv.$invalid"

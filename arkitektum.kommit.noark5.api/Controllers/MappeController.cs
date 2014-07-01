@@ -15,7 +15,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
         [Route("api/arkivstruktur/Mappe")]
         [HttpGet]
-        public MappeListe GetMappes(ODataQueryOptions<MappeType> queryOptions)
+        public MappeListeType GetMappes(ODataQueryOptions<MappeType> queryOptions)
         {
             var url = HttpContext.Current.Request.Url;
             var baseUri =
@@ -59,7 +59,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
             }
 
-            MappeListe ma = new MappeListe();
+            MappeListeType ma = new MappeListeType();
             ma.mappe = testdata.ToArray();
 
             //trenger vi disse når top og skip kan benyttes og en for nye objekter først bør finne det objektet det skal opprettes på?
@@ -76,7 +76,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
         [Route("api/arkivstruktur/Arkivdel/{Id}/mappe")]
         [HttpGet]
-        public MappeListe GetMapperForArkivdel(string Id)
+        public MappeListeType GetMapperForArkivdel(string Id)
         {
             SaksmappeController c = new SaksmappeController();
 
@@ -85,7 +85,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
             testdata.Add(GetMappe("12345"));
             testdata.Add(c.GetSaksmappe("234"));
 
-            MappeListe ma = new MappeListe();
+            MappeListeType ma = new MappeListeType();
             ma.mappe = testdata.ToArray();
             return ma;
         }
@@ -136,7 +136,8 @@ namespace arkitektum.kommit.noark5.api.Controllers
             m.opprettetAv = "tor";
             m.mappeID = "1234/2014";
             m.gradering = new GraderingType();
-            m.gradering.gradering = "jepp";
+            m.gradering.graderingskode = new GraderingskodeType();
+            m.gradering.graderingskode.kode = "B";
             m.gradering.graderingsdato = DateTime.Now;
 
 

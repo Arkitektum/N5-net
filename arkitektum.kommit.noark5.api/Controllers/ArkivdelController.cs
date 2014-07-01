@@ -97,8 +97,10 @@ namespace arkitektum.kommit.noark5.api.Controllers
             //Legger på standardtekster feks for pålogget bruker
             ArkivType m = new ArkivType();
             m.tittel = "angi tittel på arkiv";
-            m.dokumentmedium = "Elektronisk arkiv";
-            m.arkivstatus = "O";
+            m.dokumentmedium = new DokumentmediumType();
+            m.dokumentmedium.kode = "Elektronisk arkiv";
+            m.arkivstatus = new ArkivstatusType();
+            m.arkivstatus.kode= "O";
 
             List<LinkType> linker = new List<LinkType>();
             linker.Add(Set.addTempLink(baseUri, "api/kodelister/Dokumentmedium", Set._REL + "/administrasjon/dokumentmedium", "?$filter&$orderby&$top&$skip"));
