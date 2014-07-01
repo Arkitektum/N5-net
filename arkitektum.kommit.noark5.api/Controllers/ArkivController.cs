@@ -19,12 +19,25 @@ namespace arkitektum.kommit.noark5.api.Controllers
         {
             //støtte odata filter syntaks
             queryOptions.Validate(_validationSettings);
-           
+
 
             //Rettighetsstyring...og alle andre restriksjoner
             List<ArkivType> testdata = new List<ArkivType>();
 
             //TODO Håndtere filter... 
+
+            if (queryOptions.Filter != null)
+            {
+                var q = queryOptions.Filter.FilterClause.Expression;
+                if (queryOptions.Filter.RawValue.Contains("systemID"))
+                {
+                    var mockarkiv = GetArkiv("fra filter eller ");
+                    mockarkiv.beskrivelse = "passe filter";
+                    testdata.Add(GetArkiv(((Microsoft.Data.OData.Query.SemanticAst.ConstantNode)(((Microsoft.Data.OData.Query.SemanticAst.BinaryOperatorNode)(queryOptions.Filter.FilterClause.Expression)).Right)).Value.ToString()));
+                }
+            }
+
+
             if (queryOptions.Top == null)
             {
                 testdata.Add(GetArkiv("12345"));
@@ -38,21 +51,21 @@ namespace arkitektum.kommit.noark5.api.Controllers
                 testdata.Add(GetArkiv(Guid.NewGuid().ToString()));
                 testdata.Add(GetArkiv(Guid.NewGuid().ToString()));
             }
-            else if (queryOptions.Top.Value == 5)
+            else if (queryOptions.Top != null)
             {
-                testdata.Add(GetArkiv("12345"));
-                testdata.Add(GetArkiv("234"));
-                testdata.Add(GetArkiv(Guid.NewGuid().ToString()));
-                testdata.Add(GetArkiv(Guid.NewGuid().ToString()));
-                testdata.Add(GetArkiv(Guid.NewGuid().ToString()));
+                while (testdata.Count < queryOptions.Top.Value)
+                {
+                    testdata.Add(GetArkiv(Guid.NewGuid().ToString()));
+                }
+
 
             }
 
-            
 
             return testdata.AsEnumerable();
 
         }
+
 
 
         [Route("api/arkivstruktur/Arkiv/{id}")]
@@ -86,6 +99,39 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
             return m;
         }
+
+
+        [Route("api/arkivstruktur/Arkiv/{id}")]
+        [HttpPost]
+        public HttpResponseMessage OppdaterArkiv(string id, ArkivType arkiv)
+        {
+            if (arkiv != null)
+            {
+                //TODO rettigheter og lagring til DB el.l
+                var url = HttpContext.Current.Request.Url;
+                var baseUri =
+                    new UriBuilder(
+                        url.Scheme,
+                        url.Host,
+                        url.Port).Uri;
+                arkiv.opprettetDatoSpecified = true;
+
+
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, arkiv);
+                response.Headers.Location = new Uri(baseUri + "api/arkivstruktur/Arkiv/" + arkiv.systemID);
+                return response;
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+        }
+
+
+
+
+
 
         [Route("api/arkivstruktur/nytt-arkiv")]
         [HttpGet]

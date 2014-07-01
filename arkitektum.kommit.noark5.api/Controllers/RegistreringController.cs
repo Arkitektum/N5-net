@@ -19,6 +19,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
             //TODO støtte odata filter syntaks
             queryOptions.Validate(_validationSettings);
 
+
             List<RegistreringType> testdata = new List<RegistreringType>();
             testdata.Add(GetRegistrering(Guid.NewGuid().ToString()));
             testdata.Add(GetRegistrering(Guid.NewGuid().ToString()));
@@ -173,5 +174,36 @@ namespace arkitektum.kommit.noark5.api.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
         }
+
+        [Route("api/arkivstruktur/Registrering/{id}")]
+        [HttpPost]
+        public HttpResponseMessage OppdaterRegistrering(RegistreringType oppdatering)
+        {
+            if (oppdatering != null)
+            {
+                //TODO rettigheter og lagring til DB el.l
+                var url = HttpContext.Current.Request.Url;
+                var baseUri =
+                    new UriBuilder(
+                        url.Scheme,
+                        url.Host,
+                        url.Port).Uri;
+                //oppdatering.oppdatertDato = DateTime.Now;
+                //oppdatering.oppdatertAv = "pålogget bruker 2";
+
+
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, oppdatering);
+                response.Headers.Location = new Uri(baseUri + "api/arkivstruktur/registrering/" + oppdatering.systemID);
+                return response;
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+        }
+
+
+
     }
 }
