@@ -11,9 +11,8 @@ namespace arkitektum.kommit.noark5.api
             bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
                           "~/Scripts/jquery-{version}.js",
                           "~/Scripts/bootstrap.js",
-                          "~/Scripts/respond.js",
-                          "~/Scripts/angular.js",
-                          "~/Scripts/angular-*"));
+                          "~/Scripts/respond.js"
+                         ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

@@ -20,11 +20,6 @@ namespace arkitektum.kommit.noark5.api.Controllers
             return View();
         }
 
-        public ActionResult test()
-        {
-            ViewBag.Title = "NOARK 5 testklient";
-
-            return View();
-        }
+        
     }
 }
