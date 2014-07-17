@@ -154,7 +154,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
             List<LinkType> linker = new List<LinkType>();
             linker.Add(Set.addTempLink(baseUri, "api/kodelister/Dokumentmedium", Set._REL + "/administrasjon/dokumentmedium", "?$filter&$orderby&$top&$skip"));
             linker.Add(Set.addTempLink(baseUri, "api/kodelister/Arkivstatus", Set._REL + "/administrasjon/arkivstatus", "?$filter&$orderby&$top&$skip"));
-           
+
 
             m._links = linker.ToArray();
             if (m == null)

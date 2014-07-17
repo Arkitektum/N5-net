@@ -15,7 +15,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
         [Route("api/arkivstruktur/Mappe")]
         [HttpGet]
-        public MappeListeType GetMappes(ODataQueryOptions<MappeType> queryOptions)
+        public MappeType[] GetMappes(ODataQueryOptions<MappeType> queryOptions)
         {
             var url = HttpContext.Current.Request.Url;
             var baseUri =
@@ -59,24 +59,13 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
             }
 
-            MappeListeType ma = new MappeListeType();
-            ma.mappe = testdata.ToArray();
-
-            //trenger vi disse når top og skip kan benyttes og en for nye objekter først bør finne det objektet det skal opprettes på?
-            //List<LinkType> linkerma = new List<LinkType>();
-            //linkerma.Add(addLink(baseUri, "api/arkivstruktur/Mappe/ny-mappe", "/ny-mappe"));
-            //linkerma.Add(addLink(url, "?page=1", "/previus")); 
-            //linkerma.Add(addLink(url, "?page=3", "/next"));
-
-            //ma._links = linkerma.ToArray();
-
-            return ma;
+            return testdata.ToArray();
         }
 
 
         [Route("api/arkivstruktur/Arkivdel/{Id}/mappe")]
         [HttpGet]
-        public MappeListeType GetMapperForArkivdel(string Id)
+        public MappeType[] GetMapperForArkivdel(string Id)
         {
             SaksmappeController c = new SaksmappeController();
 
@@ -85,9 +74,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
             testdata.Add(GetMappe("12345"));
             testdata.Add(c.GetSaksmappe("234"));
 
-            MappeListeType ma = new MappeListeType();
-            ma.mappe = testdata.ToArray();
-            return ma;
+            return testdata.ToArray();
         }
 
         [Route("api/arkivstruktur/Mappe/{Id}/avslutt-mappe")]
@@ -139,7 +126,17 @@ namespace arkitektum.kommit.noark5.api.Controllers
             m.gradering.graderingskode = new GraderingskodeType();
             m.gradering.graderingskode.kode = "B";
             m.gradering.graderingsdato = DateTime.Now;
+            List<MerknadType> merknader = new List<MerknadType>();
+            MerknadType m1= new MerknadType();
+            m1.merknadstype = new MerknadstypeType();
+            m1.merknadstype.kode = "B";
+            m1.merknadstekst = "test";
+            merknader.Add(m1);
+            m.merknad = merknader.ToArray();
 
+           
+
+            m.virksomhetsspesifikkeMetadata = "";
 
             List<LinkType> linker = new List<LinkType>();
             linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID, "self"));

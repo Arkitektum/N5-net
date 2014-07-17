@@ -38,7 +38,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
             linker.Add(addLink(baseUri, "loggingogsporing"));
             linker.Add(addLink(baseUri, "rapporter"));
             LinkListeType liste = new LinkListeType();
-            liste.link = linker.ToArray();
+            liste._links = linker.ToArray();
             return liste;
         }
 

@@ -37,7 +37,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
             linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/dokumentobjekt", Set._REL + "/arkivstruktur/dokumentobjekt", "?$filter&$orderby&$top&$skip&$search"));
 
             LinkListeType liste = new LinkListeType();
-            liste.link = linker.ToArray();
+            liste._links = linker.ToArray();
             return liste;
         }
     }
