@@ -66,6 +66,9 @@ namespace arkitektum.kommit.noark5.api.Controllers
             RegistreringType m = new RegistreringType();
             m.systemID = id;
             m.opprettetDato = DateTime.Now;
+            m.opprettetDatoSpecified = true;
+            m.oppdatertDato = DateTime.Now;
+            m.oppdatertAv = "bruker";
 
             List<LinkType> linker = new List<LinkType>();
             linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Registrering/" + m.systemID, "self"));
