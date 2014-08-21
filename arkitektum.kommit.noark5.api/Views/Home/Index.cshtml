@@ -12,3 +12,26 @@
         
   
 </div>
+
+@if (Request.IsAuthenticated)
+{
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            Du er autentisert!
+        </div>
+        <div class="panel-body">
+            <dl>
+                @foreach (var claim in System.Security.Claims.ClaimsPrincipal.Current.Claims)
+                {
+                    <dt>
+                        @claim.Type
+                    </dt>
+                    <dd>
+                        @claim.Value
+                    </dd>
+                }
+            </dl>
+        </div>
+    </div>
+    
+}

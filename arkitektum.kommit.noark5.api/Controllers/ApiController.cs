@@ -18,6 +18,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
         [Route("api")]
         [HttpGet]
+        [Authorize]
         public LinkListeType GetApi4()
         {
             var url = HttpContext.Current.Request.Url;
