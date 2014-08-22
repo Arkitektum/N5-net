@@ -8,6 +8,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.IdentityModel.Tokens;
+using Thinktecture.IdentityServer.v3.AccessTokenValidation;
+using System.Web.Http;
+using System.Security.Cryptography.X509Certificates;
+using System.IO;
+using Thinktecture.IdentityModel;
+using System.Reflection;
 
 [assembly: OwinStartup(typeof(arkitektum.kommit.noark5.api.Startup))]
 
@@ -19,45 +25,47 @@ namespace arkitektum.kommit.noark5.api
         {
             JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();
 
-            app.UseCookieAuthentication(new CookieAuthenticationOptions
+
+            app.UseIdentitiyServerSelfContainedToken(new SelfContainedTokenValidationOptions
             {
-                AuthenticationType = "Cookies"
+                IssuerName = "https://identity.arkitektum.no",
+                //SigningCertificate = X509.LocalMachine.TrustedPeople.SubjectDistinguishedName.Find("CN=identity.arkitektum.no", false).First()
+                SigningCertificate = Certificate.Get()
             });
 
-            app.UseOpenIdConnectAuthentication(new OpenIdConnectAuthenticationOptions
+            app.UseIdentitiyServerReferenceToken(new ReferenceTokenValidationOptions
             {
-                ClientId = "implicitclient",
-                Authority = "http://localhost:3333/core",
-                RedirectUri = "http://localhost:49708/",
-                ResponseType = "id_token token",
-                Scope = "openid email",
-
-                SignInAsAuthenticationType = "Cookies",
-
-                // sample how to access token on form (for token response type)
-                //Notifications = new OpenIdConnectAuthenticationNotifications
-                //{
-                //    MessageReceived = async n =>
-                //        {
-                //            var token = n.ProtocolMessage.Token;
-
-                //            if (!string.IsNullOrEmpty(token))
-                //            {
-                //                n.OwinContext.Set<string>("idsrv:token", token);
-                //            }
-                //        },
-                //    SecurityTokenValidated = async n =>
-                //        {
-                //            var token = n.OwinContext.Get<string>("idsrv:token");
-
-                //            if (!string.IsNullOrEmpty(token))
-                //            {
-                //                n.AuthenticationTicket.Identity.AddClaim(
-                //                    new Claim("access_token", token));
-                //            }
-                //        }
-                //}
+                TokenValidationEndpoint = "https://identity.arkitektum.no/core/connect/accessTokenValidation"
             });
+
+       
+        }
+    }
+
+
+    static class Certificate
+    {
+        public static X509Certificate2 Get()
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            using (Stream stream = assembly.GetManifestResourceStream("arkitektum.kommit.noark5.api.Config.identity_arkitektum_no.pfx"))
+            {
+                return new X509Certificate2(ReadStream(stream));
+            }
+        }
+
+        private static byte[] ReadStream(Stream input)
+        {
+            byte[] buffer = new byte[16 * 1024];
+            using (MemoryStream ms = new MemoryStream())
+            {
+                int read;
+                while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    ms.Write(buffer, 0, read);
+                }
+                return ms.ToArray();
+            }
         }
     }
 }
