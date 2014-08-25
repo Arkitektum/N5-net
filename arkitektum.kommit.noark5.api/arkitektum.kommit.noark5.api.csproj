@@ -232,6 +232,7 @@
     <Compile Include="Controllers\MappeController.cs" />
     <Compile Include="Controllers\RegistreringController.cs" />
     <Compile Include="Controllers\SaksmappeController.cs" />
+    <Compile Include="Controllers\SecureApiController.cs" />
     <Compile Include="Controllers\Set.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -294,7 +295,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\SecureApi\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
