@@ -19,13 +19,39 @@ namespace arkitektum.kommit.noark5.api.Controllers
             //TODO støtte odata filter syntaks
             queryOptions.Validate(_validationSettings);
 
-
+            //Rettighetsstyring...og alle andre restriksjoner
             List<RegistreringType> testdata = new List<RegistreringType>();
-            testdata.Add(GetRegistrering(Guid.NewGuid().ToString()));
-            testdata.Add(GetRegistrering(Guid.NewGuid().ToString()));
-            testdata.Add(GetRegistrering(Guid.NewGuid().ToString()));
-            testdata.Add(GetRegistrering(Guid.NewGuid().ToString()));
-            testdata.Add(GetRegistrering(Guid.NewGuid().ToString()));
+
+
+            //TODO Håndtere filter...
+
+            if (queryOptions.Filter != null)
+            {
+                var q = queryOptions.Filter.FilterClause.Expression;
+                if (queryOptions.Filter.RawValue.Contains("systemID"))
+                {
+                    var mockarkiv = GetRegistrering("fra filter eller ");
+     
+                    testdata.Add(GetRegistrering(((Microsoft.Data.OData.Query.SemanticAst.ConstantNode)(((Microsoft.Data.OData.Query.SemanticAst.BinaryOperatorNode)(queryOptions.Filter.FilterClause.Expression)).Right)).Value.ToString()));
+                }
+            }
+
+            if(queryOptions.Top == null)
+            {
+                testdata.Add(GetRegistrering(Guid.NewGuid().ToString()));
+                testdata.Add(GetRegistrering(Guid.NewGuid().ToString()));
+                testdata.Add(GetRegistrering(Guid.NewGuid().ToString()));
+                testdata.Add(GetRegistrering(Guid.NewGuid().ToString()));
+                testdata.Add(GetRegistrering(Guid.NewGuid().ToString()));
+            }
+            else if (queryOptions.Top != null)
+            {
+                while (testdata.Count < queryOptions.Top.Value)
+                {
+                    testdata.Add(GetRegistrering(Guid.NewGuid().ToString()));
+                }
+            }
+            
 
             return testdata.AsEnumerable();
         }
