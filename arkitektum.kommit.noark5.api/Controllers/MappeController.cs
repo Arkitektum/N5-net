@@ -170,5 +170,62 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
             return m;
         }
+
+        [Route("api/arkivstruktur/arkivdel/{arkivdelid}/ny-mappe")]
+        [HttpGet]
+        public MappeType InitialiserMappe(string arkivdelid)
+        {
+            var url = HttpContext.Current.Request.Url;
+            var baseUri =
+                new UriBuilder(
+                    url.Scheme,
+                    url.Host,
+                    url.Port).Uri;
+            //Legger på standardtekster feks for pålogget bruker
+            MappeType m = new MappeType();
+            m.tittel = "angi tittel på mappe";
+            m.dokumentmedium = "Elektronisk arkiv";
+
+
+            List<LinkType> linker = new List<LinkType>();
+            linker.Add(Set.addTempLink(baseUri, "api/kodelister/Dokumentmedium", Set._REL + "/administrasjon/dokumentmedium", "?$filter&$orderby&$top&$skip"));
+            linker.Add(Set.addTempLink(baseUri, "api/kodelister/Mappetype", Set._REL + "/administrasjon/mappetype", "?$filter&$orderby&$top&$skip"));
+
+
+            m._links = linker.ToArray();
+            if (m == null)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
+            }
+
+            return m;
+        }
+        [Route("api/arkivstruktur/arkivdel/{arkivdelid}/ny-mappe")]
+        [HttpPost]
+        public HttpResponseMessage PostMappe(MappeType mappe)
+        {
+            if (mappe != null)
+            {
+                //TODO rettigheter og lagring til DB el.l
+                var url = HttpContext.Current.Request.Url;
+                var baseUri =
+                    new UriBuilder(
+                        url.Scheme,
+                        url.Host,
+                        url.Port).Uri;
+                mappe.systemID = Guid.NewGuid().ToString();
+
+               
+
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
+                response.Headers.Location = new Uri(baseUri + "api/arkivstruktur/Arkiv/" + mappe.systemID);
+                return response;
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+        }
     }
 }
