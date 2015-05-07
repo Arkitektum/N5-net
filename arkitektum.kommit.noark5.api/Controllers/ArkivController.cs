@@ -83,6 +83,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
             m.tittel = "test arkiv " + id;
             m.systemID = id;
             m.opprettetDato = DateTime.Now;
+            m.oppdatertDato = DateTime.Now;
 
             List<LinkType> linker = new List<LinkType>();
             linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkiv/" + m.systemID, "self"));

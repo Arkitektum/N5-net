@@ -6,25 +6,26 @@
 @model Collection<ApiDescription>
 
 @{
-    ViewBag.Title = "API Help Page";
+    ViewBag.Title = "ASP.NET Web API Help Page";
 
     // Group APIs by controller
     ILookup<HttpControllerDescriptor, ApiDescription> apiGroups = Model.ToLookup(api => api.ActionDescriptor.ControllerDescriptor);
 }
 
-<header>
+<link type="text/css" href="~/Areas/HelpPage/HelpPage.css" rel="stylesheet" />
+<header class="help-page">
     <div class="content-wrapper">
         <div class="float-left">
             <h1>@ViewBag.Title</h1>
         </div>
     </div>
 </header>
-<div id="body">
+<div id="body" class="help-page">
     <section class="featured">
         <div class="content-wrapper">
             <h2>Introduction</h2>
             <p>
-                NOARK5 API.
+                Provide a general description of your APIs here.
             </p>
         </div>
     </section>
@@ -35,7 +36,3 @@
         }
     </section>
 </div>
-
-@section Scripts {
-    <link type="text/css" href="~/Areas/HelpPage/HelpPage.css" rel="stylesheet" />
-}
