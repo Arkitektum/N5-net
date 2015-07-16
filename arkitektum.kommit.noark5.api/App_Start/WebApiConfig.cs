@@ -1,4 +1,5 @@
 ﻿using CacheCow.Server;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,8 @@ namespace arkitektum.kommit.noark5.api
 
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new DefaultContractResolver();
             config.Formatters.XmlFormatter.UseXmlSerializer = true;
+            //config.Formatters.JsonFormatter.SerializerSettings.Re‌ferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            config.Formatters.JsonFormatter.SerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
 
             var cachecow = new CachingHandler(config);
             GlobalConfiguration.Configuration.MessageHandlers.Add(cachecow);

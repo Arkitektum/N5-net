@@ -132,7 +132,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
             m1.merknadstype.kode = "B";
             m1.merknadstekst = "test";
             merknader.Add(m1);
-            m.merknad = merknader.ToArray();
+            m.merknader = merknader.ToArray();
 
            
 
@@ -184,7 +184,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
             //Legger på standardtekster feks for pålogget bruker
             MappeType m = new MappeType();
             m.tittel = "angi tittel på mappe";
-            m.dokumentmedium = "Elektronisk arkiv";
+            m.dokumentmedium = new DokumentmediumType() { kode = "E", beskrivelse = "Elektronisk arkiv" };
 
 
             List<LinkType> linker = new List<LinkType>();
