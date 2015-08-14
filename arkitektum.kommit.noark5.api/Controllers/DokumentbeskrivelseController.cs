@@ -15,7 +15,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
         [Route("api/arkivstruktur/Dokumentbeskrivelse")]
         [HttpGet]
-        public IEnumerable<DokumentbeskrivelseType> GetDokumentobjekter(ODataQueryOptions<DokumentbeskrivelseType> queryOptions)
+        public IEnumerable<DokumentbeskrivelseType> GetDokumentbeskrivelser(ODataQueryOptions<DokumentbeskrivelseType> queryOptions)
         {
 
 
@@ -64,9 +64,62 @@ namespace arkitektum.kommit.noark5.api.Controllers
             return m;
         }
 
+        [Route("api/arkivstruktur/Dokumentbeskrivelse/{id}")]
+        [HttpPost]
+        public HttpResponseMessage OppdaterDokumentbeskrivelse(string id)
+        {
+            return null;
+        }
+
+        [Route("api/arkivstruktur/ny-dokumentbeskrivelse")]
+        [HttpGet]
+        public DokumentbeskrivelseType InitialiserDokumentbeskrivelse(string id)
+        {
+            return null;
+        }
+
+        [Route("api/arkivstruktur/ny-dokumentbeskrivelse")]
+        [HttpPost]
+        public HttpResponseMessage PostDokumentbeskrivelse(string id)
+        {
+            return null;
+        }
+
+        // NY  ??? Dokumentobjekt??
+        [Route("api/arkivstruktur/Dokumentbeskrivelse/{Id}/referansefil")]
+        [HttpGet]
+        public IEnumerable<FilreferanseType> GetReferansefiler(string Id)
+        {
+            return null;
+        }
+
+        // NY  ??? Dokumentobjekt??
+        [Route("api/arkivstruktur/Dokumentbeskrivelse/{Id}/referansefil/{referanseFilId}")]
+        [HttpGet]
+        public FilreferanseType GetReferansefil(string Id)
+        {
+            return null;
+        }
+
+        //NY
+        [Route("api/arkivstruktur/Dokumentbeskrivelse/{arkivId}/ny-referansefil")]
+        [HttpGet]
+        public FilreferanseType InitialiserReferansefil()
+        {
+            return null;
+        }
+
+        //NY
+        [Route("api/arkivstruktur/Dokumentbeskrivelse/{id}/ny-referansefil")]
+        [HttpPost]
+        public HttpResponseMessage PostReferansefil()
+        {
+            return null;
+        }
+
         [Route("api/arkivstruktur/Registrering/{Id}/dokumentbeskrivelse")]
         [HttpGet]
-        public IEnumerable<DokumentbeskrivelseType> GetDokumentbeskrivelserByRegistrering(string Id)
+        public IEnumerable<DokumentbeskrivelseType> GetDokumentbeskrivelserFraRegistrering(string Id)
         {
             List<DokumentbeskrivelseType> testdata = new List<DokumentbeskrivelseType>();
 
@@ -79,23 +132,26 @@ namespace arkitektum.kommit.noark5.api.Controllers
             return testdata.AsEnumerable();
         }
 
-        [Route("api/arkivstruktur/Registrering/{Id}/dokumentbeskrivelse")]
-        [HttpPost]
-        public HttpResponseMessage PostRegistreringDokumentbeskrivelse(string Id, DokumentbeskrivelseType dokumentbeskrivelse)
+        //NY
+        [Route("api/arkivstruktur/Registrering/{arkivId}/ny-dokumentbeskrivelse")]
+        [HttpGet]
+        public FilreferanseType InitialiserReferansefilIRegistrering()
         {
-            if (dokumentbeskrivelse != null)
-            {
-
-
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, dokumentbeskrivelse);
-                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = dokumentbeskrivelse.systemID }));
-                return response;
-            }
-            else
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-            }
+            return null;
         }
 
+        //NY
+        [Route("api/arkivstruktur/Registrering/{id}/ny-dokumentbeskrivelse")]
+        [HttpPost]
+        public HttpResponseMessage PostReferansefilIRegistrering()
+        {
+            return null;
+        }
+
+        [Route("api/arkivstruktur/Registrering/{Id}/dokumentbeskrivelse/{dokumentbeskrivelseId}")]
+        [HttpPost]
+        public HttpResponseMessage PostRegistreringAvDokumentbeskrivelse(string Id, DokumentbeskrivelseType dokumentbeskrivelse, string dokumentbeskrivelseId) {
+            return null;
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
         [Route("api/arkivstruktur/Mappe")]
         [HttpGet]
-        public MappeType[] GetMappes(ODataQueryOptions<MappeType> queryOptions)
+        public IEnumerable<MappeType> GetMappes(ODataQueryOptions<MappeType> queryOptions)
         {
             var url = HttpContext.Current.Request.Url;
             var baseUri =
@@ -62,46 +62,6 @@ namespace arkitektum.kommit.noark5.api.Controllers
             return testdata.ToArray();
         }
 
-
-        [Route("api/arkivstruktur/Arkivdel/{Id}/mappe")]
-        [HttpGet]
-        public MappeType[] GetMapperForArkivdel(string Id)
-        {
-            SaksmappeController c = new SaksmappeController();
-
-            List<MappeType> testdata = new List<MappeType>();
-
-            testdata.Add(GetMappe("12345"));
-            testdata.Add(c.GetSaksmappe("234"));
-
-            return testdata.ToArray();
-        }
-
-        [Route("api/arkivstruktur/Mappe/{Id}/avslutt-mappe")]
-        [HttpGet]
-        public MappeType AvsluttMappe(string Id)
-        {
-            //TODO hvis det er en saksmappe eller møtemappe skal det sendes videre til riktig kontroller? På Saksmappe settes status i tillegg, mm
-
-            MappeType avsl = GetMappe(Id);
-            avsl.avsluttetAv = "tor";
-            avsl.avsluttetDatoSpecified = true;
-            avsl.avsluttetDato = DateTime.Now;
-            return avsl;
-        }
-
-        // GET api/Mappe/ND 234234
-        public IEnumerable<MappeType> GetMappeByTittel(string tittel)
-        {
-            List<MappeType> testdata = new List<MappeType>();
-
-            MappeType m = GetMappe("123");
-            m.tittel = tittel;
-            testdata.Add(m);
-            return testdata.AsEnumerable();
-        }
-
-
         [Route("api/arkivstruktur/Mappe/{id}")]
         [HttpGet]
         public MappeType GetMappe(string id)
@@ -112,7 +72,6 @@ namespace arkitektum.kommit.noark5.api.Controllers
                     url.Scheme,
                     url.Host,
                     url.Port).Uri;
-
 
             MappeType m = new MappeType();
             m.tittel = "testmappe " + id;
@@ -132,9 +91,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
             m1.merknadstype.kode = "B";
             m1.merknadstekst = "test";
             merknader.Add(m1);
-            m.merknader = merknader.ToArray();
-
-           
+            m.merknader = merknader.ToArray();           
 
             m.virksomhetsspesifikkeMetadata = "";
 
@@ -171,9 +128,179 @@ namespace arkitektum.kommit.noark5.api.Controllers
             return m;
         }
 
-        [Route("api/arkivstruktur/arkivdel/{arkivdelid}/ny-mappe")]
+        [Route("api/arkivstruktur/Mappe/{id}")]
+        [HttpPost]
+        public MappeType OppdaterMappe(MappeType mappe)
+        {
+            return null;
+        }
+
+        [Route("api/arkivstruktur/ny-mappe")]
+        [HttpGet]
+        public MappeType InitialiserMappe()
+        {
+            return null;
+        }
+
+        [Route("api/arkivstruktur/ny-mappe")]
+        [HttpPost]
+        public HttpResponseMessage PostMappe(MappeType mappe)
+        {
+            return null;
+        }      
+
+        [Route("api/arkivstruktur/Mappe/{Id}/avslutt-mappe")]
+        [HttpGet]
+        public MappeType AvsluttMappe(string Id)
+        {
+            //TODO hvis det er en saksmappe eller møtemappe skal det sendes videre til riktig kontroller? På Saksmappe settes status i tillegg, mm
+
+            MappeType avsl = GetMappe(Id);
+            avsl.avsluttetAv = "tor";
+            avsl.avsluttetDatoSpecified = true;
+            avsl.avsluttetDato = DateTime.Now;
+            return avsl;
+        }
+
+        // NY
+        [Route("api/arkivstruktur/Mappe/{Id}/kryssreferanse")]
+        [HttpGet]
+        public IEnumerable<MappeType> GetKryssreferanserFraMappe(string id)
+        {
+            return null;
+        }
+
+        // NY
+        [Route("api/arkivstruktur/Mappe/{Id}/ny-kryssreferanse")]
+        [HttpGet]
+        public KryssreferanseType InitialiserFraMappeKryssreferanse(string Id)
+        {
+            return null;
+        }
+
+        // NY
+        [Route("api/arkivstruktur/Mappe/{Id}/ny-kryssreferanse")]
+        [HttpPost]
+        public HttpResponseMessage PostKryssreferanseFraMappe(KryssreferanseType kryssreferanse)
+        {
+            return null;
+        }
+
+        // NY
+        [Route("api/arkivstruktur/Mappe/{Id}/undermappe")]
+        [HttpGet]
+        public IEnumerable<MappeType> GetUndermapper(string Id)
+        {
+            return null;
+        }
+
+        // NY
+        [Route("api/arkivstruktur/Mappe/{Id}/ny-undermappe")]
         [HttpGet]
         public MappeType InitialiserMappe(string arkivdelid)
+        {
+            return null;
+        }
+
+        // NY
+        [Route("api/arkivstruktur/Mappe/{Id}/ny-undermappe")]
+        [HttpPost]
+        public HttpResponseMessage PostUndermapper(MappeType undermappe)
+        {
+            return null;
+        }
+
+        // NY
+        [Route("api/arkivstruktur/Mappe/{Id}/undermappe/{undermappeId}")]
+        [HttpGet]
+        public MappeType GetUndermappe(string Id, string undermappeId)
+        {
+            return null;
+        }
+
+        // NY
+        [Route("api/arkivstruktur/Mappe/{Id}/undermappe/{undermappeId}")]
+        [HttpPost]
+        public HttpResponseMessage OppdaterUndermappe(MappeType undermappe)
+        {
+            return null;
+        }
+
+        // NY
+        [Route("api/arkivstruktur/Mappe/{Id}/merknad")]
+        [HttpGet]
+        public IEnumerable<MerknadType> GetMerknaderIMappe(string id)
+        {
+            return null;
+        }
+
+        // NY
+        [Route("api/arkivstruktur/Mappe/{Id}/merknad/{merknadId}")]
+        [HttpGet]
+        public MerknadType GetMerknadIMappe(string id, string merknadId)
+        {
+            return null;
+        }
+
+        // NY
+        [Route("api/arkivstruktur/Mappe/{Id}/merknad/{merknadId}")]
+        [HttpPost]
+        public HttpResponseMessage OppdaterMerknadIMappe(MerknadType merknad)
+        {
+            return null;
+        }
+
+        // NY
+        [Route("api/arkivstruktur/Mappe/{Id}/ny-merknad")]
+        [HttpGet]
+        public MerknadType InitialiserMerknadIMappe(string Id)
+        {
+            return null;
+        }
+
+        // NY
+        [Route("api/arkivstruktur/Mappe/{Id}/ny-merknad")]
+        [HttpPost]
+        public HttpResponseMessage PostMerknadIMappe(MerknadType merknad)
+        {
+            return null;
+        }
+
+
+        [Route("api/arkivstruktur/Arkivdel/{Id}/mappe")]
+        [HttpGet]
+        public IEnumerable<MappeType> GetMapperFraArkivdel(string Id)
+        {
+            SaksmappeController c = new SaksmappeController();
+
+            List<MappeType> testdata = new List<MappeType>();
+
+            testdata.Add(GetMappe("12345"));
+            testdata.Add(c.GetSaksmappe("234"));
+
+            return testdata.ToArray();
+        }
+
+
+        [Route("api/arkivstruktur/Arkivdel/{Id}/mappe/{mappeId}")]
+        [HttpGet]
+        public MappeType GetMappeFraArkivdel(string Id, string mappeId)
+        {
+            return null;
+        }
+
+
+        [Route("api/arkivstruktur/Arkivdel/{Id}/mappe/{mappeId}")]
+        [HttpPost]
+        public MappeType OppdaterMappeFraArkivdel(MappeType mappe)
+        {
+            return null;
+        }
+
+
+        [Route("api/arkivstruktur/Arkivdel/{Id}/ny-mappe")]
+        [HttpGet]
+        public MappeType InitialiserMappeIArkivdel(string Id)
         {
             var url = HttpContext.Current.Request.Url;
             var baseUri =
@@ -200,9 +327,11 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
             return m;
         }
-        [Route("api/arkivstruktur/arkivdel/{arkivdelid}/ny-mappe")]
+
+
+        [Route("api/arkivstruktur/Arkivdel/{Id}/ny-mappe")]
         [HttpPost]
-        public HttpResponseMessage PostMappe(MappeType mappe)
+        public HttpResponseMessage PostMappeIArkivdel(MappeType mappe)
         {
             if (mappe != null)
             {
@@ -226,6 +355,110 @@ namespace arkitektum.kommit.noark5.api.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
+        }
+
+
+
+        [Route("api/arkivstruktur/Klasse/{Id}/mappe")]
+        [HttpGet]
+        public IEnumerable<MappeType> GetMapperIKlasse(string Id)
+        {
+            SaksmappeController c = new SaksmappeController();
+
+            List<MappeType> testdata = new List<MappeType>();
+
+            testdata.Add(GetMappe("12345"));
+            testdata.Add(c.GetSaksmappe("234"));
+
+            return testdata.ToArray();
+        }
+
+
+        [Route("api/arkivstruktur/Klasse/{Id}/mappe/{mappeId}")]
+        [HttpGet]
+        public MappeType GetMappeFraKlasse(string Id, string mappeId)
+        {
+            return null;
+        }
+
+
+        [Route("api/arkivstruktur/Klasse/{Id}/mappe/{mappeId}")]
+        [HttpPost]
+        public MappeType OppdaterMappeFraKlasse(MappeType mappe)
+        {
+            return null;
+        }
+
+
+        [Route("api/arkivstruktur/Klasse/{Id}/ny-mappe")]
+        [HttpGet]
+        public MappeType InitialiserMappeIKlasse(string Id)
+        {
+            var url = HttpContext.Current.Request.Url;
+            var baseUri =
+                new UriBuilder(
+                    url.Scheme,
+                    url.Host,
+                    url.Port).Uri;
+            //Legger på standardtekster feks for pålogget bruker
+            MappeType m = new MappeType();
+            m.tittel = "angi tittel på mappe";
+            m.dokumentmedium = new DokumentmediumType() { kode = "E", beskrivelse = "Elektronisk arkiv" };
+
+
+            List<LinkType> linker = new List<LinkType>();
+            linker.Add(Set.addTempLink(baseUri, "api/kodelister/Dokumentmedium", Set._REL + "/administrasjon/dokumentmedium", "?$filter&$orderby&$top&$skip"));
+            linker.Add(Set.addTempLink(baseUri, "api/kodelister/Mappetype", Set._REL + "/administrasjon/mappetype", "?$filter&$orderby&$top&$skip"));
+
+
+            m._links = linker.ToArray();
+            if (m == null)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
+            }
+
+            return m;
+        }
+
+
+        [Route("api/arkivstruktur/Klasse/{Id}/ny-mappe")]
+        [HttpPost]
+        public HttpResponseMessage PostMappeIKlasse(MappeType mappe)
+        {
+            if (mappe != null)
+            {
+                //TODO rettigheter og lagring til DB el.l
+                var url = HttpContext.Current.Request.Url;
+                var baseUri =
+                    new UriBuilder(
+                        url.Scheme,
+                        url.Host,
+                        url.Port).Uri;
+                mappe.systemID = Guid.NewGuid().ToString();
+
+
+
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
+                response.Headers.Location = new Uri(baseUri + "api/arkivstruktur/Arkiv/" + mappe.systemID);
+                return response;
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+        }
+
+
+        // GET api/Mappe/ND 234234
+        public IEnumerable<MappeType> GetMappeByTittel(string tittel)
+        {
+            List<MappeType> testdata = new List<MappeType>();
+
+            MappeType m = GetMappe("123");
+            m.tittel = tittel;
+            testdata.Add(m);
+            return testdata.AsEnumerable();
         }
     }
 }

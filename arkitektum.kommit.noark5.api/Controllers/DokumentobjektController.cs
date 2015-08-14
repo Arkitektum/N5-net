@@ -75,9 +75,34 @@ namespace arkitektum.kommit.noark5.api.Controllers
             return m;
         }
 
+        // NY
+        [Route("api/arkivstruktur/Dokumentobjekt/{id}")]
+        [HttpPost]
+        public HttpResponseMessage OppdaterDokumentobjekt(string id)
+        {
+            return null;
+        }
+
+        // NY
+        [Route("api/arkivstruktur/ny-dokumentobjekt")]
+        [HttpGet]
+        public DokumentobjektType InitialiserDokumentobjekt(string id)
+        {
+            return null;
+        }
+
+        // NY
+        [Route("api/arkivstruktur/ny-dokumentobjekt")]
+        [HttpPost]
+        public HttpResponseMessage PostDokumentobjekt(string id)
+        {
+            return null;
+        }
+
+
         [Route("api/arkivstruktur/Registrering/{Id}/dokumentobjekt")]
         [HttpGet]
-        public IEnumerable<DokumentobjektType> GetDokumentobjekterByRegistrering(string Id)
+        public IEnumerable<DokumentobjektType> GetDokumentobjekterFraRegistrering(string Id)
         {
             List<DokumentobjektType> testdata = new List<DokumentobjektType>();
 
@@ -90,9 +115,30 @@ namespace arkitektum.kommit.noark5.api.Controllers
             return testdata.AsEnumerable();
         }
 
-        [Route("api/arkivstruktur/Registrering/{Id}/dokumentobjekt")]
+        [Route("api/arkivstruktur/Registrering/{Id}/dokumentobjekt/{dokumentobjektId}")]
+        [HttpGet]
+        public DokumentobjektType GetDokumentobjektFraRegistrering(string Id)
+        {
+            return null;
+        }
+
+        [Route("api/arkivstruktur/Registrering/{Id}/dokumentobjekt/{dokumentobjektId}")]
         [HttpPost]
-        public HttpResponseMessage PostRegistreringDokumentobjekt(string Id, DokumentobjektType dokumentobjekt)
+        public DokumentobjektType OppdaterDokumentobjektFraRegistrering(string Id)
+        {
+            return null;
+        }
+
+        [Route("api/arkivstruktur/Registrering/{Id}/ny-dokumentobjekt")]
+        [HttpGet]
+        public DokumentobjektType InitialiserNyttDokumentobjekterIRegistrering(ODataQueryOptions<DokumentobjektType> queryOptions)
+        {
+            return null;
+        }
+
+        [Route("api/arkivstruktur/Registrering/{Id}/ny-dokumentobjekt")]
+        [HttpPost]
+        public HttpResponseMessage PostDokumentobjektIRegistrering(string Id, DokumentobjektType dokumentobjekt)
         {
             if (dokumentobjekt != null)
             {
@@ -153,7 +199,27 @@ namespace arkitektum.kommit.noark5.api.Controllers
             }
         }
 
+ 
+        [Route("api/arkivstruktur/Dokumentobjekt/{Id}/ny-referansefil")]
+        [HttpGet]
+        public DokumentobjektType InitialiserReferanseFilIDokumentobjekt(string Id)
+        {
+            return null;
+        }
+
+        //Opplasting av fil til et Dokumentobjekt
+        [Route("api/arkivstruktur/Dokumentobjekt/{Id}/ny-referansefil")]
+        [HttpPost]
+        public HttpResponseMessage PostReferansefilIDokumentobjekt(string Id)
+        {
+            return null;
+        }
 
 
+
+
+        
+        
+        
     }
 }

@@ -56,71 +56,6 @@ namespace arkitektum.kommit.noark5.api.Controllers
             return testdata.AsEnumerable();
         }
 
-        [Route("api/arkivstruktur/Arkivdel/{Id}/registrering")]
-        [HttpGet]
-        public IEnumerable<RegistreringType> GetRegistreringerByArkivdel(string Id)
-        {
-            List<RegistreringType> testdata = new List<RegistreringType>();
-
-            testdata.Add(GetRegistrering(Guid.NewGuid().ToString()));
-
-            return testdata.AsEnumerable();
-        }
-
-        [Route("api/arkivstruktur/Mappe/{MappesystemID}/registrering")]
-        public IEnumerable<RegistreringType> GetRegistreringerByMappe(string MappesystemID)
-        {
-
-            List<RegistreringType> testdata = new List<RegistreringType>();
-
-            testdata.Add(GetRegistrering(Guid.NewGuid().ToString()));
-
-            return testdata.AsEnumerable();
-        }
-
-        [Route("api/arkivstruktur/Registrering/{id}")]
-        [HttpGet]
-        public RegistreringType GetRegistrering(string id)
-        {
-            var url = HttpContext.Current.Request.Url;
-            var baseUri =
-                new UriBuilder(
-                    url.Scheme,
-                    url.Host,
-                    url.Port).Uri;
-
-            RegistreringType m = new RegistreringType();
-            m.systemID = id;
-            m.opprettetDato = DateTime.Now;
-            m.opprettetDatoSpecified = true;
-            m.oppdatertDato = DateTime.Now;
-            m.oppdatertAv = "bruker";
-
-            List<LinkType> linker = new List<LinkType>();
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Registrering/" + m.systemID, "self"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Basisregistrering/" + m.systemID, Set._REL + "/utvid-til-basisregistrering"));
-            linker.Add(Set.addLink(baseUri, "api/sakarkiv/Journalpost/" + m.systemID, Set._REL + "/utvid-til-journalpost"));
-            linker.Add(Set.addLink(baseUri, "api/MoeteOgUtvalgsbehandling/Moeteregistrering/" + m.systemID, Set._REL + "/utvid-til-moeteregistrering"));
-
-            linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Registrering/" + m.systemID + "/dokumentbeskrivelse", Set._REL + "/dokumentbeskrivelse", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Registrering/" + m.systemID + "/ny-dokumentbeskrivelse", Set._REL + "/ny-dokumentbeskrivelse"));
-            linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Registrering/" + m.systemID + "/dokumentobjekt", Set._REL + "/dokumentobjekt", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Registrering/" + m.systemID + "/ny-dokumentobjekt", Set._REL + "/ny-dokumentobjekt"));
-
-            //Enten eller?
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Klasse/234", Set._REL + "/referanseKlasse"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/665", Set._REL + "/referanseMappe"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/6578", Set._REL + "/referanseArkivdel"));
-
-            m._links = linker.ToArray();
-            if (m == null)
-            {
-                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
-            }
-
-            return m;
-        }
-
 
         [Route("api/arkivstruktur/ny-registrering")]
         [HttpGet]
@@ -137,10 +72,10 @@ namespace arkitektum.kommit.noark5.api.Controllers
             m.arkivertDato = DateTime.Now;
             m.arkivertAv = "Pålogget bruker 2";
             m.referanseArkivdel = null;
-            
 
-            
-            
+
+
+
 
             List<LinkType> linker = new List<LinkType>();
             linker.Add(Set.addTempLink(baseUri, "api/kodelister/Dokumentmedium", Set._REL + "/administrasjon/dokumentmedium", "?$filter&$orderby&$top&$skip"));
@@ -155,6 +90,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
             return m;
         }
+
 
         [Route("api/arkivstruktur/ny-registrering")]
         [HttpPost]
@@ -204,6 +140,51 @@ namespace arkitektum.kommit.noark5.api.Controllers
             }
         }
 
+
+        [Route("api/arkivstruktur/Registrering/{id}")]
+        [HttpGet]
+        public RegistreringType GetRegistrering(string id)
+        {
+            var url = HttpContext.Current.Request.Url;
+            var baseUri =
+                new UriBuilder(
+                    url.Scheme,
+                    url.Host,
+                    url.Port).Uri;
+
+            RegistreringType m = new RegistreringType();
+            m.systemID = id;
+            m.opprettetDato = DateTime.Now;
+            m.opprettetDatoSpecified = true;
+            m.oppdatertDato = DateTime.Now;
+            m.oppdatertAv = "bruker";
+
+            List<LinkType> linker = new List<LinkType>();
+            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Registrering/" + m.systemID, "self"));
+            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Basisregistrering/" + m.systemID, Set._REL + "/utvid-til-basisregistrering"));
+            linker.Add(Set.addLink(baseUri, "api/sakarkiv/Journalpost/" + m.systemID, Set._REL + "/utvid-til-journalpost"));
+            linker.Add(Set.addLink(baseUri, "api/MoeteOgUtvalgsbehandling/Moeteregistrering/" + m.systemID, Set._REL + "/utvid-til-moeteregistrering"));
+
+            linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Registrering/" + m.systemID + "/dokumentbeskrivelse", Set._REL + "/dokumentbeskrivelse", "?$filter&$orderby&$top&$skip&$search"));
+            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Registrering/" + m.systemID + "/ny-dokumentbeskrivelse", Set._REL + "/ny-dokumentbeskrivelse"));
+            linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Registrering/" + m.systemID + "/dokumentobjekt", Set._REL + "/dokumentobjekt", "?$filter&$orderby&$top&$skip&$search"));
+            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Registrering/" + m.systemID + "/ny-dokumentobjekt", Set._REL + "/ny-dokumentobjekt"));
+
+            //Enten eller?
+            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Klasse/234", Set._REL + "/referanseKlasse"));
+            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/665", Set._REL + "/referanseMappe"));
+            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/6578", Set._REL + "/referanseArkivdel"));
+
+            m._links = linker.ToArray();
+            if (m == null)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
+            }
+
+            return m;
+        }
+
+
         [Route("api/arkivstruktur/Registrering/{id}")]
         [HttpPost]
         public HttpResponseMessage OppdaterRegistrering(RegistreringType oppdatering)
@@ -233,6 +214,189 @@ namespace arkitektum.kommit.noark5.api.Controllers
         }
 
 
+        [Route("api/arkivstruktur/Arkivdel/{Id}/registrering")]
+        [HttpGet]
+        public IEnumerable<RegistreringType> GetRegistreringerIArkivdel(string Id)
+        {
+            List<RegistreringType> testdata = new List<RegistreringType>();
 
-    }
+            testdata.Add(GetRegistrering(Guid.NewGuid().ToString()));
+
+            return testdata.AsEnumerable();
+        }
+
+
+        [Route("api/arkivstruktur/Arkivdel/{Id}/ny-registrering")]
+        [HttpGet]
+        public RegistreringType InitialiserRegistreringerIArkivdel(string Id)
+        {
+            return null;
+        }
+
+
+        [Route("api/arkivstruktur/Arkivdel/{Id}/ny-registrering")]
+        [HttpPost]
+        public HttpResponseMessage PostRegistreringerIArkivdel(RegistreringType registrering)
+        {
+            return null;
+        }
+
+
+        [Route("api/arkivstruktur/Arkivdel/{Id}/registrering/{registreringsId}")]
+        [HttpGet]
+        public RegistreringType GetRegistreringIArkivdel(string Id, string registreringsId)
+        {
+            return null;
+        }
+
+
+        [Route("api/arkivstruktur/Arkivdel/{Id}/registrering/{registreringsId}")]
+        [HttpPost]
+        public HttpResponseMessage OppdaterRegistreringIArkivdel(RegistreringType registrering)
+        {
+            return null;
+        }
+
+
+        [Route("api/arkivstruktur/Mappe/{Id}/registrering")]
+        [HttpGet]
+        public IEnumerable<RegistreringType> GetRegistreringerIMappe(string Id)
+        {
+            List<RegistreringType> testdata = new List<RegistreringType>();
+
+            testdata.Add(GetRegistrering(Guid.NewGuid().ToString()));
+
+            return testdata.AsEnumerable();
+        }
+
+
+        [Route("api/arkivstruktur/Mappe/{Id}/ny-registrering")]
+        [HttpGet]
+        public RegistreringType InitialiserRegistreringerIMappe(string Id)
+        {
+            return null;
+        }
+
+
+        [Route("api/arkivstruktur/Mappe/{Id}/ny-registrering")]
+        [HttpPost]
+        public HttpResponseMessage PostRegistreringerIMappe(RegistreringType registrering)
+        {
+            return null;
+        }
+
+
+        [Route("api/arkivstruktur/Mappe/{Id}/registrering/{registreringsId}")]
+        [HttpGet]
+        public RegistreringType GetRegistreringIMappe(string Id, string registreringsId)
+        {
+            return null;
+        }
+
+
+        [Route("api/arkivstruktur/Mappe/{Id}/registrering/{registreringsId}")]
+        [HttpPost]
+        public HttpResponseMessage OppdaterRegistreringIMappe(RegistreringType registrering)
+        {
+            return null;
+        }
+
+
+
+        // Basisregistrering
+
+        [Route("api/arkivstruktur/Basisregistrering")]
+        public IEnumerable<BasisregistreringType> GetBasisregistrering(ODataQueryOptions<BasisregistreringType> queryOptions)
+        {
+            return null;
+        }
+
+
+        [Route("api/arkivstruktur/ny-Basisregistrering")]
+        [HttpGet]
+        public BasisregistreringType InitialiserBasisregistrering()
+        {
+            return null;
+        }
+
+
+        [Route("api/arkivstruktur/ny-Basisregistrering")]
+        [HttpPost]
+        public HttpResponseMessage Postbasisregistrering(BasisregistreringType basisregistrering)
+        {
+            return null;
+        }
+
+
+        [Route("api/arkivstruktur/Basisregistrering/{id}")]
+        [HttpGet]
+        public BasisregistreringType GetBasisregistrering(string id)
+        {
+            return null;
+        }
+
+
+        [Route("api/arkivstruktur/Basisregistrering/{id}")]
+        [HttpPost]
+        public HttpResponseMessage OppdaterBasisregistrering(BasisregistreringType basisregistrering)
+        {
+            return null;
+        }
+
+
+
+
+        [Route("api/arkivstruktur/Mappe/{Id}/basisregistrering")]
+        [HttpGet]
+        public IEnumerable<BasisregistreringType> GetBasisregistreringerIMappe(string Id)
+        {
+            return null;
+        }
+
+
+        [Route("api/arkivstruktur/Mappe/{Id}/ny-basisregistrering")]
+        [HttpGet]
+        public BasisregistreringType InitialiserBasisregistreringIMappe(string Id)
+        {
+            return null;
+        }
+
+
+        [Route("api/arkivstruktur/Mappe/{Id}/ny-basisregistrering")]
+        [HttpPost]
+        public HttpResponseMessage PostBasisregistreringIMappe(BasisregistreringType basisregistrering)
+        {
+            return null;
+        }
+
+
+        [Route("api/arkivstruktur/Mappe/{Id}/basisregistrering/{basisregistreringsId}")]
+        [HttpGet]
+        public BasisregistreringType GetBasisregistreringIMappe(string Id, string basisregistreringsId)
+        {
+            return null;
+        }
+
+
+        [Route("api/arkivstruktur/Mappe/{Id}/basisregistrering/{basisregistreringsId}")]
+        [HttpPost]
+        public HttpResponseMessage OppdaterBasisregistreringIMappe(BasisregistreringType basisregistrering)
+        {
+            return null;
+        }
+
+
+
+        [Route("api/arkivstruktur/Basisregistrering/{Id}")]
+        public IEnumerable<RegistreringType> GetRegistreringerByMappe(string MappesystemID)
+        {
+
+            List<RegistreringType> testdata = new List<RegistreringType>();
+
+            testdata.Add(GetRegistrering(Guid.NewGuid().ToString()));
+
+            return testdata.AsEnumerable();
+        }
+
+        }
 }

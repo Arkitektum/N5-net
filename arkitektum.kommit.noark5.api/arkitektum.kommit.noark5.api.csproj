@@ -265,6 +265,8 @@
     <Compile Include="Controllers\DokumentbeskrivelseController.cs" />
     <Compile Include="Controllers\DokumentobjektController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KlasseController.cs" />
+    <Compile Include="Controllers\KlassifikasjonssystemController.cs" />
     <Compile Include="Controllers\MappeController.cs" />
     <Compile Include="Controllers\RegistreringController.cs" />
     <Compile Include="Controllers\SaksmappeController.cs" />

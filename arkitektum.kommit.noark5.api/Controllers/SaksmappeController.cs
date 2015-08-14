@@ -15,7 +15,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
         [Route("api/sakarkiv/Saksmappe")]
         [HttpGet]
-        public IEnumerable<SaksmappeType> GetSaksmappes(ODataQueryOptions<SaksmappeType> queryOptions)
+        public IEnumerable<SaksmappeType> GetSaksmapper(ODataQueryOptions<SaksmappeType> queryOptions)
         {
            
             //TODO støtte odata filter syntaks
@@ -29,6 +29,25 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
             return testdata.ToArray();
         }
+
+        // NY
+        [Route("api/sakarkiv/Journalpost/{id}")]
+        [HttpGet]
+        public IEnumerable<SaksmappeType> GetSaksmappe(ODataQueryOptions<SaksmappeType> queryOptions)
+        {
+
+            //TODO støtte odata filter syntaks
+            queryOptions.Validate(_validationSettings);
+
+            //Rettinghetsstyring...og alle andre restriksjoner
+            List<SaksmappeType> testdata = new List<SaksmappeType>();
+
+            testdata.Add(GetSaksmappe("12345"));
+            testdata.Add(GetSaksmappe("234"));
+
+            return testdata.ToArray();
+        }
+
 
         [Route("api/sakarkiv/Saksmappe/{id}/utvid-til-saksmappe")]
         [HttpGet]
