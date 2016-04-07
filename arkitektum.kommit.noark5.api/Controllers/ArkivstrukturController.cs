@@ -8,9 +8,16 @@ using System.Web.Http;
 
 namespace arkitektum.kommit.noark5.api.Controllers
 {
+    /// <summary>
+    /// rel.kxml.no/noark5/v4/arkivstruktur
+    /// </summary>
     public class ArkivstrukturController : ApiController
     {
 
+        /// <summary>
+        /// Henter tilgjengelige tjenester under arkivstruktur
+        /// </summary>
+        /// <returns>liste over tjenester</returns>
         public LinkListeType GetArkivstruktur()
         {
             var url = HttpContext.Current.Request.Url;

@@ -13,10 +13,14 @@ namespace arkitektum.kommit.noark5.api.Controllers
     {
         private static ODataValidationSettings _validationSettings = new ODataValidationSettings();
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="queryOptions"></param>
+        /// <returns></returns>
         [Route("api/arkivstruktur/Arkivdel")]
         [HttpGet]
-        public IEnumerable<ArkivdelType> GetArkivdeler(ODataQueryOptions<ArkivdelType> queryOptions)
+        public IEnumerable<ArkivdelType> GetArkivdels(ODataQueryOptions<ArkivdelType> queryOptions)
         {
             //TODO støtte odata filter syntaks
             queryOptions.Validate(_validationSettings);
@@ -54,14 +58,14 @@ namespace arkitektum.kommit.noark5.api.Controllers
             a.opprettetDato = DateTime.Now;
 
             List<LinkType> linker = new List<LinkType>();
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + a.systemID, "self"));
-            linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Arkivdel/" + a.systemID + "/mappe", Set._REL + "/mappe", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + a.systemID + "/ny-mappe", Set._REL + "/ny-mappe"));
-            linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Arkivdel/" + a.systemID + "/registrering", Set._REL + "/registrering", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + a.systemID + "/ny-registrering", Set._REL + "/ny-registrering"));
-            linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Arkivdel/" + a.systemID + "/klassifikasjonssystem", Set._REL + "/klassifikasjonssystem", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + a.systemID + "/ny-klassifikasjonssystem", Set._REL + "/ny-klassifikasjonssystem"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkiv/" + "45345", Set._REL + "/referanseArkiv"));
+            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + m.systemID, "self"));
+            linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Arkivdel/" + m.systemID + "/mappe", Set._REL + "/arkivstruktur/mappe", "?$filter&$orderby&$top&$skip&$search"));
+            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + m.systemID + "/ny-mappe", Set._REL + "/arkivstruktur/ny-mappe"));
+            linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Arkivdel/" + m.systemID + "/registrering", Set._REL + "/arkivstruktur/registrering", "?$filter&$orderby&$top&$skip&$search"));
+            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + m.systemID + "/ny-registrering", Set._REL + "/arkivstruktur/ny-registrering"));
+            linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Arkivdel/" + m.systemID + "/klassifikasjonssystem", Set._REL + "/arkivstruktur/klassifikasjonssystem", "?$filter&$orderby&$top&$skip&$search"));
+            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + m.systemID + "/ny-klassifikasjonssystem", Set._REL + "/arkivstruktur/ny-klassifikasjonssystem"));
+            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkiv/" + "45345", Set._REL + "/arkivstruktur/referanseArkiv"));
 
             a._links = linker.ToArray();
             if (a == null)
@@ -91,7 +95,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, arkivdel);
                 response.Headers.Location = new Uri(baseUri + "api/arkivstruktur/Arkiv/" + arkivdel.systemID);
                 return response;
-            }
+        }
             else
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
@@ -151,13 +155,13 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
                 List<LinkType> linker = new List<LinkType>();
                 linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + arkivdel.systemID, "self"));
-                linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Arkivdel/" + arkivdel.systemID + "/mappe", Set._REL + "/mappe", "?$filter&$orderby&$top&$skip&$search"));
-                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + arkivdel.systemID + "/ny-mappe", Set._REL + "/ny-mappe"));
-                linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Arkivdel/" + arkivdel.systemID + "/registrering", Set._REL + "/registrering", "?$filter&$orderby&$top&$skip&$search"));
-                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + arkivdel.systemID + "/ny-registrering", Set._REL + "/ny-registrering"));
-                linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Arkivdel/" + arkivdel.systemID + "/klassifikasjonssystem", Set._REL + "/klassifikasjonssystem", "?$filter&$orderby&$top&$skip&$search"));
-                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + arkivdel.systemID + "/ny-klassifikasjonssystem", Set._REL + "/ny-klassifikasjonssystem"));
-                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkiv/" + "45345", Set._REL + "/referanseArkiv"));
+                linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Arkivdel/" + arkivdel.systemID + "/mappe", Set._REL + "/arkivstruktur/mappe", "?$filter&$orderby&$top&$skip&$search"));
+                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + arkivdel.systemID + "/ny-mappe", Set._REL + "/arkivstruktur/ny-mappe"));
+                linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Arkivdel/" + arkivdel.systemID + "/registrering", Set._REL + "/arkivstruktur/registrering", "?$filter&$orderby&$top&$skip&$search"));
+                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + arkivdel.systemID + "/ny-registrering", Set._REL + "/arkivstruktur/ny-registrering"));
+                linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Arkivdel/" + arkivdel.systemID + "/klassifikasjonssystem", Set._REL + "/arkivstruktur/klassifikasjonssystem", "?$filter&$orderby&$top&$skip&$search"));
+                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + arkivdel.systemID + "/ny-klassifikasjonssystem", Set._REL + "/arkivstruktur/ny-klassifikasjonssystem"));
+                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkiv/" + "45345", Set._REL + "/arkivstruktur/referanseArkiv"));
 
                 arkivdel._links = linker.ToArray();
 

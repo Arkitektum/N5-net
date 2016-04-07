@@ -31,12 +31,13 @@ namespace arkitektum.kommit.noark5.api
             );
 
 
-
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Clear();
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/vnd.noark5-v4+json"));
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new DefaultContractResolver();
-            config.Formatters.XmlFormatter.UseXmlSerializer = true;
+            config.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
+            config.Formatters.XmlFormatter.UseXmlSerializer = false;
             //config.Formatters.JsonFormatter.SerializerSettings.Re‌ferenceLoopHandling = ReferenceLoopHandling.Ignore;
             config.Formatters.JsonFormatter.SerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
-            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/vnd.noark5-v4+json"));
 
             var cachecow = new CachingHandler(config);
             GlobalConfiguration.Configuration.MessageHandlers.Add(cachecow);

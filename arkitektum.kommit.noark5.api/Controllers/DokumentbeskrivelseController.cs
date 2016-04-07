@@ -13,6 +13,11 @@ namespace arkitektum.kommit.noark5.api.Controllers
     {
         private static ODataValidationSettings _validationSettings = new ODataValidationSettings();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="queryOptions"></param>
+        /// <returns></returns>
         [Route("api/arkivstruktur/Dokumentbeskrivelse")]
         [HttpGet]
         public IEnumerable<DokumentbeskrivelseType> GetDokumentbeskrivelser(ODataQueryOptions<DokumentbeskrivelseType> queryOptions)
