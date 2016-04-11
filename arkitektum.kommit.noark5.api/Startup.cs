@@ -23,6 +23,9 @@ namespace arkitektum.kommit.noark5.api
     {
         public void Configuration(IAppBuilder app)
         {
+
+            /* temporary disable authentication setup
+
             JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();
 
 
@@ -37,7 +40,7 @@ namespace arkitektum.kommit.noark5.api
             {
                 TokenValidationEndpoint = "https://identity.arkitektum.no/core/connect/accessTokenValidation"
             });
-
+            */
        
         }
     }
