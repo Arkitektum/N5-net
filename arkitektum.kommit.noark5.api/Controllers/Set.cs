@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebApi.Hal;
 
 namespace arkitektum.kommit.noark5.api.Controllers
 {
@@ -10,22 +11,14 @@ namespace arkitektum.kommit.noark5.api.Controllers
         public  const string _REL = "http://rel.kxml.no/noark5/v4/api";
 
         
-        public static LinkType addLink(Uri baseUri, string apiUrl, string relUrl)
+        public static LinkType addLink(string baseUri, string apiUrl, string relUrl)
         {
-            LinkType l = new LinkType();
-            l.href = baseUri + apiUrl;
-            l.rel = relUrl;
-            return l;
+            return new LinkType(relUrl, baseUri + apiUrl);
         }
 
-        public static LinkType addTempLink(Uri baseUri, string apiUrl, string relUrl, string template)
+        public static LinkType addTempLink(string baseUri, string apiUrl, string relUrl, string template)
         {
-            LinkType l = new LinkType();
-            l.href = baseUri + apiUrl + "{" + template + "}";
-            l.rel = relUrl;
-            l.templated = true;
-            l.templatedSpecified = true;
-            return l;
+            return new LinkType(relUrl, baseUri + apiUrl + "{" + template + "}");
         }
     }
 }

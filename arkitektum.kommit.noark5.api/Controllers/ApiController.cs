@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Http;
 
 using System.Web.Http.Cors;
+using WebApi.Hal;
 
 namespace arkitektum.kommit.noark5.api.Controllers
 {
@@ -22,37 +23,23 @@ namespace arkitektum.kommit.noark5.api.Controllers
         /// <response code="200">OK</response>
         [Route("api")]
         [HttpGet]
-        public LinkListeType GetApi()
+        public Links GetApi()
         {
-            var url = HttpContext.Current.Request.Url;
-            var baseUri =
-                new UriBuilder(
-                    url.Scheme,
-                    url.Host,
-                    url.Port).Uri;
+            var baseUri = arkitektum.kommit.noark5.api.Properties.Settings.Default.baseUri;
 
             //Rettinghetsstyring...og alle andre restriksjoner
-            List<LinkType> linker = new List<LinkType>();
-
-            linker.Add(addLink(baseUri, "arkivstruktur")); //Obligatorisk
-            linker.Add(addLink(baseUri, "sakarkiv"));
+            Links linker = new Links();
+            linker.Links.Add(Set.addLink(baseUri, "api/arkivstruktur", Set._REL + "/arkivstruktur"));
+            linker.Links.Add(Set.addLink(baseUri, "api/sakarkiv", Set._REL + "/sakarkiv"));
 
             //linker.Add(addLink(baseUri, "moeteogutvalgsbehandling"));
             //linker.Add(addLink(baseUri, "administrasjon"));
             //linker.Add(addLink(baseUri, "Periodisering")); //Funksjoner?
             //linker.Add(addLink(baseUri, "loggingogsporing"));
             //linker.Add(addLink(baseUri, "rapporter"));
-            LinkListeType liste = new LinkListeType();
-            liste._links = linker.ToArray();
-            return liste;
+            
+            return linker;
         }
-
-        private LinkType addLink(Uri baseUri, string rel)
-        {
-            LinkType l2 = new LinkType();
-            l2.href = baseUri.ToString().Remove(baseUri.ToString().Length-1) + Url.Route("DefaultApi", new { controller = rel });
-            l2.rel = Set._REL + "/" + rel;
-            return l2;
-        }
+       
     }
 }

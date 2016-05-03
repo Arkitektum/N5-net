@@ -36,6 +36,8 @@ namespace arkitektum.kommit.noark5.api
                         //
                         c.SingleApiVersion("v4", "Noark5");
 
+
+                
                         // If your API has multiple versions, use "MultipleApiVersions" instead of "SingleApiVersion".
                         // In this case, you must provide a lambda that tells Swashbuckle which actions should be
                         // included in the docs for a given API version. Like "SingleApiVersion", each call to "Version"
@@ -161,6 +163,7 @@ namespace arkitektum.kommit.noark5.api
                         // before using this option.
                         //
                         //c.DocumentFilter<ApplyDocumentVendorExtensions>();
+                        //c.DocumentFilter<ApplyResourceDocumentation>();
 
                         // In contrast to WebApi, Swagger 2.0 does not include the query string component when mapping a URL
                         // to an action. As a result, Swashbuckle will raise an exception if it encounters multiple actions
@@ -173,7 +176,10 @@ namespace arkitektum.kommit.noark5.api
                         // alternative implementation for ISwaggerProvider with the CustomProvider option.
                         //
                         //c.CustomProvider((defaultProvider) => new CachingSwaggerProvider(defaultProvider));
-                        c.CustomProvider(defaultProvider => new ODataSwaggerProvider(defaultProvider, c));
+                        //c.CustomProvider(defaultProvider => new ODataSwaggerProvider(defaultProvider, c).Configure(odataConfig =>
+                        //{
+                        //    odataConfig.IncludeNavigationProperties();
+                        //}));
                     })
                 .EnableSwaggerUi( c =>
                     {

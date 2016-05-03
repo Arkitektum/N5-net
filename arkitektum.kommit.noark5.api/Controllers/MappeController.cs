@@ -1,4 +1,5 @@
-﻿using System;
+﻿using arkitektum.kommit.noark5.api.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -6,6 +7,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.OData.Query;
+using WebApi.Hal;
 
 namespace arkitektum.kommit.noark5.api.Controllers
 {
@@ -25,6 +27,12 @@ namespace arkitektum.kommit.noark5.api.Controllers
                     url.Port).Uri;
 
             //TODO støtte odata filter syntaks
+            _validationSettings.AllowedArithmeticOperators = AllowedArithmeticOperators.None;
+            _validationSettings.AllowedQueryOptions = AllowedQueryOptions.Filter | AllowedQueryOptions.OrderBy | AllowedQueryOptions.Skip | AllowedQueryOptions.Top;
+            _validationSettings.AllowedFunctions = AllowedFunctions.IndexOf;
+            _validationSettings.AllowedLogicalOperators = AllowedLogicalOperators.All;
+            _validationSettings.MaxAnyAllExpressionDepth = 1;
+
             queryOptions.Validate(_validationSettings);
             
             //$orderby=ReleaseDate asc, Rating desc
@@ -85,41 +93,58 @@ namespace arkitektum.kommit.noark5.api.Controllers
             m.gradering.graderingskode = new GraderingskodeType();
             m.gradering.graderingskode.kode = "B";
             m.gradering.graderingsdato = DateTime.Now;
+            m.klasse = new KlasseType() { klasseID = "12/24", tittel = "12/24" }; //klassifikasjonssystem? rekkefølge?
             List<MerknadType> merknader = new List<MerknadType>();
             MerknadType m1= new MerknadType();
             m1.merknadstype = new MerknadstypeType();
             m1.merknadstype.kode = "B";
             m1.merknadstekst = "test";
             merknader.Add(m1);
-            m.merknader = merknader.ToArray();           
+            m.merknad = merknader.ToArray();
+            Byggesak v = new Byggesak();
+            v.bygningsnummer = "12345678";
+            v.systemID = Guid.NewGuid().ToString();
+            Prosess p = new Prosess();
+            p.kategori = "ET";
+            p.medDispensasjon = false;
+            Vedtak vedtak = new Vedtak() { status = "Godkjent", vedtaksdato = DateTime.Now, referanseVedtakDokument= "123456",  referanseUnderlagsdokumenter = new string[2] { "12345", "3454545" } };
 
-            m.virksomhetsspesifikkeMetadata = "";
+            p.resultat = new Vedtak[1] { vedtak };
+            v.saksbehandling = new Prosess[1] { p };
+                      
 
-            List<LinkType> linker = new List<LinkType>();
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID, "self"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/avslutt-mappe", Set._REL + "/avslutt-mappe"));
-            linker.Add(Set.addLink(baseUri, "api/sakarkiv/Saksmappe/" + m.systemID + "/utvid-til-saksmappe", Set._REL + "/utvid-til-saksmappe"));
-            linker.Add(Set.addLink(baseUri, "api/MoeteOgUtvalgsbehandling/" + m.systemID + "/utvid-til-moetemappe", Set._REL + "/utvid-til-moetemappe")); //TODO
-            
-            linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/registrering", Set._REL + "/registrering", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-registrering", Set._REL + "/ny-registrering"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-basisregistrering", Set._REL + "/ny-basisregistrering"));
-            //Skal merknad være innline? pga komposisjon (heleide objekter)
-            linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/merknad", Set._REL + "/merknad", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-merknad", Set._REL + "/ny-merknad"));
-            //Valgfritt tillegg
-            linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/undermappe", Set._REL + "/undermappe", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-undermappe", Set._REL + "/ny-undermappe"));
+            m.virksomhetsspesifikkeMetadata = v;
+            BygningType b = new BygningType();
+            b.systemID = Guid.NewGuid().ToString();
+            b.byggidentifikator = new ByggIdent() { bygningsNummer = "12345678", endringsloepenummer = "0" };
+            m.nasjonalidentifikator = new AbstraktNasjonalidentifikatorType[1] { b };
 
-            linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/kryssreferanse", Set._REL + "/kryssreferanse", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-kryssreferanse", Set._REL + "/ny-kryssreferanse"));
-            
-            //Enten eller? eller Skal begge slik som i 5.4.2 og 5.4.3
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Klasse/23434", Set._REL + "/referanseKlasse"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + "45345", Set._REL + "/referanseArkivdel"));
+            //List<LinkType> linker = new List<LinkType>();
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID, "self"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/avslutt-mappe", Set._REL + "/avslutt-mappe"));
+            //linker.Add(Set.addLink(baseUri, "api/sakarkiv/Saksmappe/" + m.systemID + "/utvid-til-saksmappe", Set._REL + "/utvid-til-saksmappe"));
+            //linker.Add(Set.addLink(baseUri, "api/MoeteOgUtvalgsbehandling/" + m.systemID + "/utvid-til-moetemappe", Set._REL + "/utvid-til-moetemappe")); //TODO
 
-            m._links = linker.ToArray();
+            //linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/registrering", Set._REL + "/registrering", "?$filter&$orderby&$top&$skip&$search"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-registrering", Set._REL + "/ny-registrering"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-basisregistrering", Set._REL + "/ny-basisregistrering"));
+            ////Skal merknad være innline? pga komposisjon (heleide objekter)
+            //linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/merknad", Set._REL + "/merknad", "?$filter&$orderby&$top&$skip&$search"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-merknad", Set._REL + "/ny-merknad"));
+            ////Valgfritt tillegg
+            //linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/undermappe", Set._REL + "/undermappe", "?$filter&$orderby&$top&$skip&$search"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-undermappe", Set._REL + "/ny-undermappe"));
 
+            //linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/kryssreferanse", Set._REL + "/kryssreferanse", "?$filter&$orderby&$top&$skip&$search"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-kryssreferanse", Set._REL + "/ny-kryssreferanse"));
+
+            ////Enten eller? eller Skal begge slik som i 5.4.2 og 5.4.3
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Klasse/23434", Set._REL + "/referanseKlasse"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + "45345", Set._REL + "/referanseArkivdel"));
+
+            ////m._links = linker.ToArray();
+            m.Links.Clear();
+            m.RepopulateHyperMedia();
             if (m == null)
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
@@ -129,10 +154,34 @@ namespace arkitektum.kommit.noark5.api.Controllers
         }
 
         [Route("api/arkivstruktur/Mappe/{id}")]
-        [HttpPost]
-        public MappeType OppdaterMappe(MappeType mappe)
+        [HttpPut]
+        public HttpResponseMessage OppdaterMappe(MappeType mappe)
         {
-            return null;
+            if (mappe != null)
+            {
+                //TODO rettigheter og lagring til DB el.l
+                var url = HttpContext.Current.Request.Url;
+                var baseUri =
+                    new UriBuilder(
+                        url.Scheme,
+                        url.Host,
+                        url.Port).Uri;
+               
+                mappe.oppdatertAv = "pålogget bruker";
+                mappe.oppdatertDato = DateTime.Now;
+                mappe.oppdatertDatoSpecified = true;
+                mappe.referanseOppdatertAv = Guid.NewGuid().ToString();
+                mappe.Links.Clear();
+                mappe.RepopulateHyperMedia();
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, mappe);
+                response.Headers.Location = new Uri(baseUri + "api/arkivstruktur/Mappe/" + mappe.systemID);
+                return response;
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
         }
 
         [Route("api/arkivstruktur/ny-mappe")]
@@ -312,14 +361,12 @@ namespace arkitektum.kommit.noark5.api.Controllers
             MappeType m = new MappeType();
             m.tittel = "angi tittel på mappe";
             m.dokumentmedium = new DokumentmediumType() { kode = "E", beskrivelse = "Elektronisk arkiv" };
+            m.mappetype = new MappetypeType() { kode = "BYGG", beskrivelse = "Byggesak" };
 
+            m.Links.Clear();
+            m.Links.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/administrasjon/dokumentmedium", baseUri + "api/kodelister/Dokumentmedium{?$filter&$orderby&$top&$skip}"));
+            m.Links.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/administrasjon/mappetype", baseUri + "api/kodelister/Mappetype{?$filter&$orderby&$top&$skip}"));
 
-            List<LinkType> linker = new List<LinkType>();
-            linker.Add(Set.addTempLink(baseUri, "api/kodelister/Dokumentmedium", Set._REL + "/administrasjon/dokumentmedium", "?$filter&$orderby&$top&$skip"));
-            linker.Add(Set.addTempLink(baseUri, "api/kodelister/Mappetype", Set._REL + "/administrasjon/mappetype", "?$filter&$orderby&$top&$skip"));
-
-
-            m._links = linker.ToArray();
             if (m == null)
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
@@ -343,12 +390,16 @@ namespace arkitektum.kommit.noark5.api.Controllers
                         url.Host,
                         url.Port).Uri;
                 mappe.systemID = Guid.NewGuid().ToString();
+                mappe.opprettetAv = "pålogget bruker";
+                mappe.opprettetDato = DateTime.Now;
+                mappe.opprettetDatoSpecified = true;
+                mappe.referanseOpprettetAv = Guid.NewGuid().ToString();
+                mappe.mappeID = "123456/2016";
+                mappe.Links.Clear();
+                mappe.RepopulateHyperMedia();
 
-               
-
-
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
-                response.Headers.Location = new Uri(baseUri + "api/arkivstruktur/Arkiv/" + mappe.systemID);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, mappe);
+                response.Headers.Location = new Uri(baseUri + "api/arkivstruktur/Mappe/" + mappe.systemID);
                 return response;
             }
             else
@@ -406,12 +457,12 @@ namespace arkitektum.kommit.noark5.api.Controllers
             m.dokumentmedium = new DokumentmediumType() { kode = "E", beskrivelse = "Elektronisk arkiv" };
 
 
-            List<LinkType> linker = new List<LinkType>();
-            linker.Add(Set.addTempLink(baseUri, "api/kodelister/Dokumentmedium", Set._REL + "/administrasjon/dokumentmedium", "?$filter&$orderby&$top&$skip"));
-            linker.Add(Set.addTempLink(baseUri, "api/kodelister/Mappetype", Set._REL + "/administrasjon/mappetype", "?$filter&$orderby&$top&$skip"));
+            //List<LinkType> linker = new List<LinkType>();
+            //linker.Add(Set.addTempLink(baseUri, "api/kodelister/Dokumentmedium", Set._REL + "/administrasjon/dokumentmedium", "?$filter&$orderby&$top&$skip"));
+            //linker.Add(Set.addTempLink(baseUri, "api/kodelister/Mappetype", Set._REL + "/administrasjon/mappetype", "?$filter&$orderby&$top&$skip"));
 
 
-            m._links = linker.ToArray();
+            //m._links = linker.ToArray();
             if (m == null)
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using WebApi.Hal;
 
 namespace arkitektum.kommit.noark5.api.Controllers
 {
@@ -11,7 +12,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
         [Route("api/secure")]
         [HttpGet]
         [Authorize]
-        public LinkListeType Secure()
+        public Links Secure()
         {
             var url = HttpContext.Current.Request.Url;
             var baseUri =
@@ -21,26 +22,22 @@ namespace arkitektum.kommit.noark5.api.Controllers
                     url.Port).Uri;
 
             //Rettinghetsstyring...og alle andre restriksjoner
-            List<LinkType> linker = new List<LinkType>();
+            Links linker = new Links();
 
-            linker.Add(addLink(baseUri, "arkivstruktur")); //Obligatorisk
-            linker.Add(addLink(baseUri, "sakarkiv"));
-            linker.Add(addLink(baseUri, "moeteogutvalgsbehandling"));
-            linker.Add(addLink(baseUri, "administrasjon"));
+            linker.Links.Add(addLink(baseUri, "arkivstruktur")); //Obligatorisk
+            linker.Links.Add(addLink(baseUri, "sakarkiv"));
+            linker.Links.Add(addLink(baseUri, "moeteogutvalgsbehandling"));
+            linker.Links.Add(addLink(baseUri, "administrasjon"));
             //linker.Add(addLink(baseUri, "Periodisering")); //Funksjoner?
-            linker.Add(addLink(baseUri, "loggingogsporing"));
-            linker.Add(addLink(baseUri, "rapporter"));
-            LinkListeType liste = new LinkListeType();
-            liste._links = linker.ToArray();
-            return liste;
+            linker.Links.Add(addLink(baseUri, "loggingogsporing"));
+            linker.Links.Add(addLink(baseUri, "rapporter"));
+            
+            return linker;
         }
 
         private LinkType addLink(Uri baseUri, string rel)
         {
-            LinkType l2 = new LinkType();
-            l2.href = baseUri + Url.Route("DefaultApi", new { controller = rel });
-            l2.rel = Set._REL + "/" + rel;
-            return l2;
+            return new LinkType(Set._REL + "/" + rel, baseUri + Url.Route("DefaultApi", new { controller = rel }));
         }
     }
 }

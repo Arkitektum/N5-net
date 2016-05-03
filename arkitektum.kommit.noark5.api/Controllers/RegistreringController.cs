@@ -77,12 +77,12 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
 
 
-            List<LinkType> linker = new List<LinkType>();
-            linker.Add(Set.addTempLink(baseUri, "api/kodelister/Dokumentmedium", Set._REL + "/administrasjon/dokumentmedium", "?$filter&$orderby&$top&$skip"));
-            linker.Add(Set.addTempLink(baseUri, "api/kodelister/Arkivstatus", Set._REL + "/administrasjon/arkivstatus", "?$filter&$orderby&$top&$skip"));
+            //List<LinkType> linker = new List<LinkType>();
+            //linker.Add(Set.addTempLink(baseUri, "api/kodelister/Dokumentmedium", Set._REL + "/administrasjon/dokumentmedium", "?$filter&$orderby&$top&$skip"));
+            //linker.Add(Set.addTempLink(baseUri, "api/kodelister/Arkivstatus", Set._REL + "/administrasjon/arkivstatus", "?$filter&$orderby&$top&$skip"));
 
 
-            m._links = linker.ToArray();
+            //m._links = linker.ToArray();
             if (m == null)
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
@@ -110,23 +110,23 @@ namespace arkitektum.kommit.noark5.api.Controllers
                 registrering.opprettetDatoSpecified = true;
                 registrering.opprettetAv = "pålogget bruker";
 
-                List<LinkType> linker = new List<LinkType>();
-                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Registrering/" + registrering.systemID, "self"));
-                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Basisregistrering/" + registrering.systemID, Set._REL + "/arkivstruktur/utvid-til-basisregistrering"));
-                linker.Add(Set.addLink(baseUri, "api/sakarkiv/Journalpost/" + registrering.systemID, Set._REL + "/sakarkiv/utvid-til-journalpost"));
-                linker.Add(Set.addLink(baseUri, "api/MoeteOgUtvalgsbehandling/Moeteregistrering/" + registrering.systemID, Set._REL + "/moeteogutvalgsbehandling/utvid-til-moeteregistrering"));
+                //List<LinkType> linker = new List<LinkType>();
+                //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Registrering/" + registrering.systemID, "self"));
+                //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Basisregistrering/" + registrering.systemID, Set._REL + "/arkivstruktur/utvid-til-basisregistrering"));
+                //linker.Add(Set.addLink(baseUri, "api/sakarkiv/Journalpost/" + registrering.systemID, Set._REL + "/sakarkiv/utvid-til-journalpost"));
+                //linker.Add(Set.addLink(baseUri, "api/MoeteOgUtvalgsbehandling/Moeteregistrering/" + registrering.systemID, Set._REL + "/moeteogutvalgsbehandling/utvid-til-moeteregistrering"));
 
-                linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Registrering/" + registrering.systemID + "/dokumentbeskrivelse", Set._REL + "/arkivstruktur/dokumentbeskrivelse", "?$filter&$orderby&$top&$skip&$search"));
-                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Registrering/" + registrering.systemID + "/ny-dokumentbeskrivelse", Set._REL + "/arkivstruktur/ny-dokumentbeskrivelse"));
-                linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Registrering/" + registrering.systemID + "/dokumentobjekt", Set._REL + "/arkivstruktur/dokumentobjekt", "?$filter&$orderby&$top&$skip&$search"));
-                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Registrering/" + registrering.systemID + "/ny-dokumentobjekt", Set._REL + "/arkivstruktur/ny-dokumentobjekt"));
+                //linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Registrering/" + registrering.systemID + "/dokumentbeskrivelse", Set._REL + "/arkivstruktur/dokumentbeskrivelse", "?$filter&$orderby&$top&$skip&$search"));
+                //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Registrering/" + registrering.systemID + "/ny-dokumentbeskrivelse", Set._REL + "/arkivstruktur/ny-dokumentbeskrivelse"));
+                //linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Registrering/" + registrering.systemID + "/dokumentobjekt", Set._REL + "/arkivstruktur/dokumentobjekt", "?$filter&$orderby&$top&$skip&$search"));
+                //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Registrering/" + registrering.systemID + "/ny-dokumentobjekt", Set._REL + "/arkivstruktur/ny-dokumentobjekt"));
 
-                //Enten eller?
-                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Klasse/234", Set._REL + "/arkivstruktur/referanseKlasse"));
-                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/665", Set._REL + "/arkivstruktur/referanseMappe"));
-                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/6578", Set._REL + "/arkivstruktur/referanseArkivdel"));
+                ////Enten eller?
+                //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Klasse/234", Set._REL + "/arkivstruktur/referanseKlasse"));
+                //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/665", Set._REL + "/arkivstruktur/referanseMappe"));
+                //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/6578", Set._REL + "/arkivstruktur/referanseArkivdel"));
 
-                registrering._links = linker.ToArray();
+                //registrering._links = linker.ToArray();
 
 
 
@@ -159,23 +159,23 @@ namespace arkitektum.kommit.noark5.api.Controllers
             m.oppdatertDato = DateTime.Now;
             m.oppdatertAv = "bruker";
 
-            List<LinkType> linker = new List<LinkType>();
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Registrering/" + m.systemID, "self"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Basisregistrering/" + m.systemID, Set._REL + "/utvid-til-basisregistrering"));
-            linker.Add(Set.addLink(baseUri, "api/sakarkiv/Journalpost/" + m.systemID, Set._REL + "/utvid-til-journalpost"));
-            linker.Add(Set.addLink(baseUri, "api/MoeteOgUtvalgsbehandling/Moeteregistrering/" + m.systemID, Set._REL + "/utvid-til-moeteregistrering"));
+            //List<LinkType> linker = new List<LinkType>();
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Registrering/" + m.systemID, "self"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Basisregistrering/" + m.systemID, Set._REL + "/utvid-til-basisregistrering"));
+            //linker.Add(Set.addLink(baseUri, "api/sakarkiv/Journalpost/" + m.systemID, Set._REL + "/utvid-til-journalpost"));
+            //linker.Add(Set.addLink(baseUri, "api/MoeteOgUtvalgsbehandling/Moeteregistrering/" + m.systemID, Set._REL + "/utvid-til-moeteregistrering"));
 
-            linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Registrering/" + m.systemID + "/dokumentbeskrivelse", Set._REL + "/dokumentbeskrivelse", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Registrering/" + m.systemID + "/ny-dokumentbeskrivelse", Set._REL + "/ny-dokumentbeskrivelse"));
-            linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Registrering/" + m.systemID + "/dokumentobjekt", Set._REL + "/dokumentobjekt", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Registrering/" + m.systemID + "/ny-dokumentobjekt", Set._REL + "/ny-dokumentobjekt"));
+            //linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Registrering/" + m.systemID + "/dokumentbeskrivelse", Set._REL + "/dokumentbeskrivelse", "?$filter&$orderby&$top&$skip&$search"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Registrering/" + m.systemID + "/ny-dokumentbeskrivelse", Set._REL + "/ny-dokumentbeskrivelse"));
+            //linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Registrering/" + m.systemID + "/dokumentobjekt", Set._REL + "/dokumentobjekt", "?$filter&$orderby&$top&$skip&$search"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Registrering/" + m.systemID + "/ny-dokumentobjekt", Set._REL + "/ny-dokumentobjekt"));
 
-            //Enten eller?
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Klasse/234", Set._REL + "/referanseKlasse"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/665", Set._REL + "/referanseMappe"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/6578", Set._REL + "/referanseArkivdel"));
+            ////Enten eller?
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Klasse/234", Set._REL + "/referanseKlasse"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/665", Set._REL + "/referanseMappe"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/6578", Set._REL + "/referanseArkivdel"));
 
-            m._links = linker.ToArray();
+            //m._links = linker.ToArray();
             if (m == null)
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));

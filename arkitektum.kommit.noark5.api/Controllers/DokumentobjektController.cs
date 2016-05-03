@@ -48,25 +48,30 @@ namespace arkitektum.kommit.noark5.api.Controllers
             DokumentobjektType m = new DokumentobjektType();
             m.systemID = id;
             m.versjonsnummer = "1";
-            m.variantformat = new VariantformatType();
-            m.variantformat.kode = "Arkivformat";
-            m.format = new FormatType();
-            m.format.kode = "pdf/a";
+            m.variantformat = new VariantformatType() {kode = "A", beskrivelse = "Arkivformat" };
+            m.format = new FormatType() { kode = "RA-PDF", beskrivelse = "PDF/A - ISO 19005-1:2005" };
             m.opprettetDato = DateTime.Now;
-            m.referanseDokumentfil = "http://..."; //eller som link?
 
-            List<LinkType> linker = new List<LinkType>();
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Dokumentobjekt/" + m.systemID, "self"));
-            linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Dokumentobjekt/" + m.systemID + "/konvertering", Set._REL + "/konvertering", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Dokumentobjekt/" + m.systemID + "/ny-konvertering", Set._REL + "/ny-konvertering"));//Hører egentlig til administrasjon? vises hvis rolle admin?
+            //Url arkivkjerne til intern eller ekstern klient?
+            m.referanseDokumentfil = baseUri + "api/arkivstruktur/Dokumentobjekt/" + m.systemID + "/referanseFil"; //eller som link?
+            m.RepopulateHyperMedia();
 
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Dokumentobjekt/" + m.systemID + "/referanseFil", Set._REL + "/referanseFil")); //POST laster opp og GET laster ned?
+            //Flytte mime type og filnavn til denne? Fjerne Filinnhold og Filreferanse? unødvendig når en kan streame opp eller ned filer
+            //Trenger ikke base64 og opplastingsansvar til kjernen? Stream begrensning på 2GB? OK eller trengs også PULL funksjonene med filreferanse på store filer?
 
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Dokumentbeskrivelse/4663", Set._REL + "/referanseDokumentbeskrivelse"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Registrering/45344", Set._REL + "/referanseRegistrering"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Dokumentbeskrivelse/4663", Set._REL + "/referanseDokumentbeskrivelse"));
 
-            m._links = linker.ToArray();
+            //List<LinkType> linker = new List<LinkType>();
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Dokumentobjekt/" + m.systemID, "self"));
+            //linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Dokumentobjekt/" + m.systemID + "/konvertering", Set._REL + "/konvertering", "?$filter&$orderby&$top&$skip&$search"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Dokumentobjekt/" + m.systemID + "/ny-konvertering", Set._REL + "/ny-konvertering"));//Hører egentlig til administrasjon? vises hvis rolle admin?
+
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Dokumentobjekt/" + m.systemID + "/referanseFil", Set._REL + "/referanseFil")); //POST laster opp, PUT oppdaterer, DELETE sletter og GET laster ned?
+
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Dokumentbeskrivelse/4663", Set._REL + "/referanseDokumentbeskrivelse"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Registrering/45344", Set._REL + "/referanseRegistrering"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Dokumentbeskrivelse/4663", Set._REL + "/referanseDokumentbeskrivelse"));
+
+            //m._links = linker.ToArray();
             if (m == null)
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));

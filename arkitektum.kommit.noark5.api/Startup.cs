@@ -14,6 +14,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.IO;
 using Thinktecture.IdentityModel;
 using System.Reflection;
+using arkitektum.kommit.noark5.api.App_Start;
 
 [assembly: OwinStartup(typeof(arkitektum.kommit.noark5.api.Startup))]
 
@@ -23,24 +24,23 @@ namespace arkitektum.kommit.noark5.api
     {
         public void Configuration(IAppBuilder app)
         {
+            DependencyConfig.Configure(app);
 
-            /* temporary disable authentication setup
-
-            JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();
+            //JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();
 
 
-            app.UseIdentitiyServerSelfContainedToken(new SelfContainedTokenValidationOptions
-            {
-                IssuerName = "https://identity.arkitektum.no",
-                //SigningCertificate = X509.LocalMachine.TrustedPeople.SubjectDistinguishedName.Find("CN=identity.arkitektum.no", false).First()
-                SigningCertificate = Certificate.Get()
-            });
+            //app.UseIdentitiyServerSelfContainedToken(new SelfContainedTokenValidationOptions
+            //{
+            //    IssuerName = "https://identity.arkitektum.no",
+            //    //SigningCertificate = X509.LocalMachine.TrustedPeople.SubjectDistinguishedName.Find("CN=identity.arkitektum.no", false).First()
+            //    SigningCertificate = Certificate.Get()
+            //});
 
-            app.UseIdentitiyServerReferenceToken(new ReferenceTokenValidationOptions
-            {
-                TokenValidationEndpoint = "https://identity.arkitektum.no/core/connect/accessTokenValidation"
-            });
-            */
+            //app.UseIdentitiyServerReferenceToken(new ReferenceTokenValidationOptions
+            //{
+            //    TokenValidationEndpoint = "https://identity.arkitektum.no/core/connect/accessTokenValidation"
+            //});
+
        
         }
     }

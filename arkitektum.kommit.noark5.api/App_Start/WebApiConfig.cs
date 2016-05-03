@@ -7,6 +7,10 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.Http.Dispatcher;
+using System.Web.OData.Extensions;
+using System.Web.OData;
+using WebApi.Hal;
 
 namespace arkitektum.kommit.noark5.api
 {
@@ -14,9 +18,14 @@ namespace arkitektum.kommit.noark5.api
     {
         public static void Register(HttpConfiguration config)
         {
-            
+            ConfigApi(config);
+            ConfigOdata(config);
 
+        }
+        private static void ConfigApi(HttpConfiguration config)
+        {
             // Web API configuration and services
+            
 
             // Web API routes
             config.MapHttpAttributeRoutes();
@@ -30,17 +39,38 @@ namespace arkitektum.kommit.noark5.api
                 defaults: new { id = RouteParameter.Optional }
             );
 
-
             config.Formatters.JsonFormatter.SupportedMediaTypes.Clear();
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/vnd.noark5-v4+json"));
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new DefaultContractResolver();
-            config.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
-            config.Formatters.XmlFormatter.UseXmlSerializer = false;
+            //config.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
+            config.Formatters.XmlFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/vnd.noark5-v4+xml"));
+            config.Formatters.XmlFormatter.UseXmlSerializer = true;
             //config.Formatters.JsonFormatter.SerializerSettings.Re‌ferenceLoopHandling = ReferenceLoopHandling.Ignore;
             config.Formatters.JsonFormatter.SerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
 
             var cachecow = new CachingHandler(config);
             GlobalConfiguration.Configuration.MessageHandlers.Add(cachecow);
+
         }
+
+        private static void ConfigOdata(HttpConfiguration config)
+        {
+            //var controllerSelector = new ODataVersionControllerSelector(config);
+            //config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
+
+            //// Define a versioned route
+            //config.MapODataServiceRoute("V1RouteVersioning", "odata/v1");
+            //controllerSelector.RouteVersionSuffixMapping.Add("V1RouteVersioning", "V1");
+            //ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
+            //builder.EntitySet<Book>("Books");
+            //builder.EntitySet<Customer>("Customers");
+            //var model = builder.GetEdmModel();
+
+            //config.MapODataServiceRoute(
+            //    routeName: "ODataRoute",
+            //    routePrefix: null,
+            //    model: model);
+        }
+
     }
 }

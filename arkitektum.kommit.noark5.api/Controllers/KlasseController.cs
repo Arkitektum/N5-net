@@ -71,19 +71,19 @@ namespace arkitektum.kommit.noark5.api.Controllers
             k.opprettetAv = "Per";
             k.referanseOpprettetAv = "testReferanseOpprettet";
 
-            List<LinkType> linker = new List<LinkType>();
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/ny-klasse/", "self"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/ny-kryssreferanse/", "self"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/klassifikasjonssystem/", "self"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/ny-registrering/", "self"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/underklasser/", "self"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/registreringer/", "self"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/mappe/", "self"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/ny-mappe/", "self"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/kryssreferanse/", "self"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/ny-klassifikasjonssystem/", "self"));           
+            //List<LinkType> linker = new List<LinkType>();
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/ny-klasse/", "self"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/ny-kryssreferanse/", "self"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/klassifikasjonssystem/", "self"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/ny-registrering/", "self"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/underklasser/", "self"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/registreringer/", "self"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/mappe/", "self"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/ny-mappe/", "self"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/kryssreferanse/", "self"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/ny-klassifikasjonssystem/", "self"));           
 
-            k._links = linker.ToArray();
+            //k._links = linker.ToArray();
 
             if (k == null)
             {
@@ -116,14 +116,14 @@ namespace arkitektum.kommit.noark5.api.Controllers
             k.tittel = "angi tittel på klassen";
             k.beskrivelse = "Angi beskrivelse av klassen";
 
-            List<LinkType> linker = new List<LinkType>();
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/kryssreferanse/", "self"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/registreringer/", "self"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/saksmappe/", "self"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/underklasser/", "self"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/mapper/", "self")); 
+            //List<LinkType> linker = new List<LinkType>();
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/kryssreferanse/", "self"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/registreringer/", "self"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/saksmappe/", "self"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/underklasser/", "self"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/mapper/", "self")); 
 
-            k._links = linker.ToArray();
+            //k._links = linker.ToArray();
             if (k == null)
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));

@@ -76,49 +76,52 @@ namespace arkitektum.kommit.noark5.api.Controllers
             m.opprettetDatoSpecified = true;
             m.opprettetAv = "tor";
             m.mappeID = "1234/2014";
-            m.gradering = new GraderingType();
-            m.gradering.graderingskode = new GraderingskodeType();
-            m.gradering.graderingskode.kode = "jepp";
-            m.gradering.graderingsdato = DateTime.Now;
+            //m.gradering = new GraderingType();
+            //m.gradering.graderingskode = new GraderingskodeType();
+            //m.gradering.graderingskode.kode = "jepp";
+            //m.gradering.graderingsdato = DateTime.Now;
             m.saksaar = "2014";
             m.sakssekvensnummer = "1234";
+            SakspartPersonType sp = new SakspartPersonType() { foedselsnummer = "12334566", navn = "fullt navn", sakspartRolle = new SakspartRolleType() { kode = "KLI", beskrivelse = "Klient" } };
 
-            List<LinkType> linker = new List<LinkType>();
-            linker.Add(Set.addLink(baseUri, "api/sakarkiv/Saksmappe/" + m.systemID, "self"));
-            linker.Add(Set.addLink(baseUri, "api/sakarkiv/Mappe/" + m.systemID + "/avslutt-mappe", Set._REL + "/avslutt-mappe"));
+            m.sakspart = new AbstraktSakspartType[1] { sp };
+            //m.sekundaerklassifikasjon = new KlasseType[1] { };
+            //List<LinkType> linker = new List<LinkType>();
+            //linker.Add(Set.addLink(baseUri, "api/sakarkiv/Saksmappe/" + m.systemID, "self"));
+            //linker.Add(Set.addLink(baseUri, "api/sakarkiv/Mappe/" + m.systemID + "/avslutt-mappe", Set._REL + "/avslutt-mappe"));
             
-            linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/registrering", Set._REL + "/registrering", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-registrering", Set._REL + "/ny-registrering"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-basisregistrering", Set._REL + "/ny-basisregistrering"));
-            linker.Add(Set.addLink(baseUri, "api/sakarkiv/Saksmappe/" + m.systemID + "/ny-journalpost", Set._REL + "/ny-journalpost"));
+            //linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/registrering", Set._REL + "/registrering", "?$filter&$orderby&$top&$skip&$search"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-registrering", Set._REL + "/ny-registrering"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-basisregistrering", Set._REL + "/ny-basisregistrering"));
+            //linker.Add(Set.addLink(baseUri, "api/sakarkiv/Saksmappe/" + m.systemID + "/ny-journalpost", Set._REL + "/ny-journalpost"));
 
-            //Skal merknad være innline? pga komposisjon (heleide objekter)
-            linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/merknad", Set._REL + "/merknad", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-merknad", Set._REL + "/ny-merknad"));
+            ////Skal merknad være innline? pga komposisjon (heleide objekter)
+            //linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/merknad", Set._REL + "/merknad", "?$filter&$orderby&$top&$skip&$search"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-merknad", Set._REL + "/ny-merknad"));
 
-            linker.Add(Set.addTempLink(baseUri, "api/sakarkiv/Saksmappe/" + m.systemID + "/sakspart", Set._REL + "/sakspart", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Add(Set.addLink(baseUri, "api/sakarkiv/Saksmappe/" + m.systemID + "/ny-sakspart", Set._REL + "/ny-sakspart"));
-            linker.Add(Set.addTempLink(baseUri, "api/sakarkiv/Saksmappe/" + m.systemID + "/presedens", Set._REL + "/presedens", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Add(Set.addLink(baseUri, "api/sakarkiv/Saksmappe/" + m.systemID + "/ny-presedens", Set._REL + "/ny-presedens"));
+            //linker.Add(Set.addTempLink(baseUri, "api/sakarkiv/Saksmappe/" + m.systemID + "/sakspart", Set._REL + "/sakspart", "?$filter&$orderby&$top&$skip&$search"));
+            //linker.Add(Set.addLink(baseUri, "api/sakarkiv/Saksmappe/" + m.systemID + "/ny-sakspart", Set._REL + "/ny-sakspart"));
+            //linker.Add(Set.addTempLink(baseUri, "api/sakarkiv/Saksmappe/" + m.systemID + "/presedens", Set._REL + "/presedens", "?$filter&$orderby&$top&$skip&$search"));
+            //linker.Add(Set.addLink(baseUri, "api/sakarkiv/Saksmappe/" + m.systemID + "/ny-presedens", Set._REL + "/ny-presedens"));
 
 
-            //Valgfritt tillegg
-            linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/undermappe", Set._REL + "/undermappe", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-undermappe", Set._REL + "/ny-undermappe"));
+            ////Valgfritt tillegg
+            //linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/undermappe", Set._REL + "/undermappe", "?$filter&$orderby&$top&$skip&$search"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-undermappe", Set._REL + "/ny-undermappe"));
 
-            linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/kryssreferanse", Set._REL + "/kryssreferanse", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-kryssreferanse", Set._REL + "/ny-kryssreferanse"));
+            //linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/kryssreferanse", Set._REL + "/kryssreferanse", "?$filter&$orderby&$top&$skip&$search"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-kryssreferanse", Set._REL + "/ny-kryssreferanse"));
 
-            linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/referanseSekundaerKlassifikasjon", Set._REL + "/referanseSekundaerKlassifikasjon", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-sekundaerklassifikasjon", Set._REL + "/ny-sekundaerklassifikasjon"));
+            //linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/referanseSekundaerKlassifikasjon", Set._REL + "/referanseSekundaerKlassifikasjon", "?$filter&$orderby&$top&$skip&$search"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-sekundaerklassifikasjon", Set._REL + "/ny-sekundaerklassifikasjon"));
 
-            //Enten eller? eller Skal begge slik som i 5.4.2 og 5.4.3
+            ////Enten eller? eller Skal begge slik som i 5.4.2 og 5.4.3
             
 
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Klasse/23434", Set._REL + "/referanseKlasse"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + "45345", Set._REL + "/referanseArkivdel"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Klasse/23434", Set._REL + "/referanseKlasse"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + "45345", Set._REL + "/referanseArkivdel"));
 
-            m._links = linker.ToArray();
+            //m._links = linker.ToArray();
 
             if (m == null)
             {

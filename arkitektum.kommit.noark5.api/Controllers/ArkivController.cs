@@ -1,4 +1,6 @@
-﻿using System;
+﻿using arkitektum.kommit.noark5.api.Services;
+using Swashbuckle.Swagger.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -17,6 +19,11 @@ namespace arkitektum.kommit.noark5.api.Controllers
     public class ArkivController : ApiController
     {
         private static ODataValidationSettings _validationSettings = new ODataValidationSettings();
+        private MockNoarkDatalayer _ctx;
+
+        public ArkivController(MockNoarkDatalayer ctx) {
+            _ctx = ctx;
+        }
 
         /// <summary>
         /// Henter tilgjengelige arkiv
@@ -24,59 +31,49 @@ namespace arkitektum.kommit.noark5.api.Controllers
         /// <param name="queryOptions">OData filter</param>
         /// <returns>en liste med arkiv</returns>
         /// <response code="200">OK</response>
+        /// <response code="400">BadRequest - ugyldig forespørsel</response>
+        /// <response code="403">Forbidden - ingen tilgang</response>
+        /// <response code="404">NotFound - ikke funnet</response>
+        /// <response code="501">NotImplemented - ikke implementert</response>
+        /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv">http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv</a>, og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell, restriksjoner og mulige relasjonsnøkler</a></remarks>
+        [Route("api/arkivstruktur/Arkivquery")]
+        [HttpGet]
+        [EnableQuery]
+        public IQueryable<ArkivType> GetArkivs()
+        {
+            //_validationSettings.MaxExpansionDepth = 1;
+            ////støtte odata filter syntaks
+            //queryOptions.Validate(_validationSettings);
+
+            //TODO Rettighetsfiltrering...og alle andre restriksjoner
+            //TODO Links
+
+            return _ctx.arkiver.AsQueryable();
+        }
+        /// <summary>
+        /// Henter tilgjengelige arkiv - filter
+        /// </summary>
+        /// <param name="queryOptions">OData filter</param>
+        /// <returns>en liste med arkiv</returns>
+        /// <response code="200">OK</response>
+        /// <response code="400">BadRequest - ugyldig forespørsel</response>
+        /// <response code="403">Forbidden - ingen tilgang</response>
+        /// <response code="404">NotFound - ikke funnet</response>
+        /// <response code="501">NotImplemented - ikke implementert</response>
         /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv">http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv</a>, og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell, restriksjoner og mulige relasjonsnøkler</a></remarks>
         [Route("api/arkivstruktur/Arkiv")]
         [HttpGet]
         [EnableQuery]
-        public IEnumerable<ArkivType> GetArkivs(string queryOptions)
+        public IEnumerable<ArkivType> GetArkivs2(ODataQueryOptions<ArkivType> queryOptions)
         {
-            //støtte odata filter syntaks
-            //queryOptions.Validate(_validationSettings);
+            //Konformitetsnivå på søk
+            _validationSettings.MaxExpansionDepth = 1;
+            _validationSettings.MaxAnyAllExpressionDepth = 1;
+            ////støtte odata filter syntaks
+            queryOptions.Validate(_validationSettings);
 
-            //Rettighetsstyring...og alle andre restriksjoner
-            List<ArkivType> testdata = new List<ArkivType>();
-
-            //TODO Håndtere filter... 
-
-            //if (queryOptions.Filter != null)
-            //{
-            //    var q = queryOptions.Filter.FilterClause.Expression;
-            //    if (queryOptions.Filter.RawValue.Contains("systemID"))
-            //    {
-            //        var mockarkiv = GetArkiv("fra filter eller ");
-            //        mockarkiv.beskrivelse = "passe filter";
-            //        testdata.Add(GetArkiv(((Microsoft.Data.OData.Query.SemanticAst.ConstantNode)(((Microsoft.Data.OData.Query.SemanticAst.BinaryOperatorNode)(queryOptions.Filter.FilterClause.Expression)).Right)).Value.ToString()));
-            //    }
-            //}
-
-
-            //if (queryOptions.Top == null)
-            //{
-                testdata.Add(GetArkiv("12345"));
-                testdata.Add(GetArkiv("234"));
-                testdata.Add(GetArkiv(Guid.NewGuid().ToString()));
-                testdata.Add(GetArkiv(Guid.NewGuid().ToString()));
-                testdata.Add(GetArkiv(Guid.NewGuid().ToString()));
-                testdata.Add(GetArkiv(Guid.NewGuid().ToString()));
-                testdata.Add(GetArkiv(Guid.NewGuid().ToString()));
-                testdata.Add(GetArkiv(Guid.NewGuid().ToString()));
-                testdata.Add(GetArkiv(Guid.NewGuid().ToString()));
-                    testdata.Add(GetArkiv(Guid.NewGuid().ToString()));
-            //}
-            //else if (queryOptions.Top != null)
-            //{
-            //    while (testdata.Count < queryOptions.Top.Value)
-            //    {
-            //        testdata.Add(GetArkiv(Guid.NewGuid().ToString()));
-            //    }
-
-
-            //}
-
-
-            return testdata.AsEnumerable();
+            return queryOptions.ApplyTo(_ctx.arkiver.AsQueryable()) as IEnumerable<ArkivType>;
         }
-
 
         /// <summary>
         /// Henter et arkiv med gitt id
@@ -84,80 +81,87 @@ namespace arkitektum.kommit.noark5.api.Controllers
         /// <param name="id">systemid for arkiv</param>
         /// <returns>et arkiv eller 404 hvis det ikke finnes</returns>
         /// <response code="200">OK</response>
-        /// <response code="404">NotFound</response>
-        /// <response code="403">Forbidden - ugyldige rettigheter</response>
+        /// <response code="400">BadRequest - ugyldig forespørsel</response>
+        /// <response code="403">Forbidden - ingen tilgang</response>
+        /// <response code="404">NotFound - ikke funnet</response>
+        /// <response code="501">NotImplemented - ikke implementert</response>
         /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv">http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv</a>, og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell, restriksjoner og mulige relasjonsnøkler</a></remarks>
         [Route("api/arkivstruktur/Arkiv/{id}")]
         [HttpGet]
-        public ArkivType GetArkiv(string id)
+        [ResponseType(typeof(ArkivType))]
+        public HttpResponseMessage GetArkiv(string id)
         {
-            var url = HttpContext.Current.Request.Url;
-            var baseUri =
-                new UriBuilder(
-                    url.Scheme,
-                    url.Host,
-                    url.Port).Uri;
+            ArkivType m = _ctx.arkiver.FirstOrDefault(i => i.systemID == id);
 
-            ArkivType m = new ArkivType();
-            m.tittel = "test arkiv " + id;
-            m.systemID = id;
-            m.opprettetDato = DateTime.Now;
-            m.oppdatertDato = DateTime.Now;
-
-            List<LinkType> linker = new List<LinkType>();
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkiv/" + m.systemID, "self"));
-            linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Arkiv/" + m.systemID + "/arkivdel", Set._REL + "/arkivstruktur/arkivdel", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkiv/" + m.systemID + "/ny-arkivdel", Set._REL + "/arkivstruktur/ny-arkivdel"));//Hører egentlig til administrasjon? vises hvis rolle admin?
-            linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Arkiv/" + m.systemID + "/arkivskaper", Set._REL + "/arkivstruktur/arkivskaper", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkiv/" + m.systemID + "/ny-arkivskaper", Set._REL + "/arkivstruktur/ny-arkivskaper"));//Hører egentlig til administrasjon? vises hvis rolle admin?
-
-            m._links = linker.ToArray();
             if (m == null)
             {
-                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound,"Finner ikke objekt");
             }
-            return m;
+            return Request.CreateResponse(HttpStatusCode.OK, m);
         }
 
         /// <summary>
         /// Oppdaterer arkiv
         /// </summary>
-        //[Route("api/arkivstruktur/Arkiv/{id}")]
-        //[HttpPut]
-        //[ResponseType(typeof(ArkivType))]
-        //public HttpResponseMessage OppdaterArkiv(string id, ArkivType arkiv)
-        //{
-        //    if (arkiv != null)
-        //    {
-        //        //TODO rettigheter og lagring til DB el.l
-        //        var url = HttpContext.Current.Request.Url;
-        //        var baseUri =
-        //            new UriBuilder(
-        //                url.Scheme,
-        //                url.Host,
-        //                url.Port).Uri;
-        //        arkiv.opprettetDatoSpecified = true;
+        /// <param name="id"></param>
+        /// <param name="arkiv"></param>
+        /// <returns></returns>
+        /// <response code="200">OK</response>
+        /// <response code="400">BadRequest - ugyldig forespørsel</response>
+        /// <response code="403">Forbidden - ingen tilgang</response>
+        /// <response code="404">NotFound - ikke funnet</response>
+        /// <response code="409">Conflict - objektet kan være endret av andre</response>
+        /// <response code="501">NotImplemented - ikke implementert</response>
+        /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv">http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv</a>, og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell, restriksjoner og mulige relasjonsnøkler</a></remarks>
+        [Route("api/arkivstruktur/Arkiv/{id}")]
+        [HttpPut]
+        [ResponseType(typeof(ArkivType))]
+        public HttpResponseMessage OppdaterArkiv(string id, ArkivType arkiv)
+        {
+            if (arkiv != null)
+            {
+                //TODO rettigheter og lagring til DB el.l
+                var url = HttpContext.Current.Request.Url;
+                var baseUri =
+                    new UriBuilder(
+                        url.Scheme,
+                        url.Host,
+                        url.Port).Uri;
+
+                ArkivType m = _ctx.arkiver.FirstOrDefault(i => i.systemID == arkiv.systemID);
+
+                if (m == null)
+                {
+                    throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
+                }
+
+                m.oppdatertDato = DateTime.Now;
+                m.oppdatertDatoSpecified = true;
+                m.oppdatertAv = "bruker";
+                m.referanseOppdatertAv = Guid.NewGuid().ToString();
 
 
-
-        //        HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, arkiv);
-        //        response.Headers.Location = new Uri(baseUri + "api/arkivstruktur/Arkiv/" + arkiv.systemID);
-        //        return response;
-        //    }
-        //    else
-        //    {
-        //        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-        //    }
-        //}
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, m);
+                response.Headers.Location = new Uri(baseUri + "api/arkivstruktur/Arkiv/" + m.systemID);
+                return response;
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+        }
 
         /// <summary>
         /// Sletter arkiv
         /// </summary>
         /// <param name="id">systemid for gitt arkiv</param>
         /// <returns>statuskode</returns>
-        /// <response code="204">Slettet</response>
-        /// <response code="404">NotFound</response>
-        /// <response code="403">Forbidden - ugyldige rettigheter</response>
+        /// <response code="204">NoContent - Slettet ok</response>
+        /// <response code="400">BadRequest - ugyldig forespørsel</response>
+        /// <response code="403">Forbidden - ingen tilgang</response>
+        /// <response code="404">NotFound - ikke funnet</response>
+        /// <response code="409">Conflict - objektet kan være endret av andre</response>
+        /// <response code="501">NotImplemented - ikke implementert</response>
         /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv">http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv</a>, og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell, restriksjoner og mulige relasjonsnøkler</a></remarks>
         [Route("api/arkivstruktur/Arkiv/{id}")]
         [HttpDelete]
@@ -166,8 +170,16 @@ namespace arkitektum.kommit.noark5.api.Controllers
             if (id != null)
             {
                 //Kan slettes? Har rettighet? Logges mm..
+                //sjekke etag om objektet er endret av andre?
+                ArkivType m = _ctx.arkiver.FirstOrDefault(i => i.systemID == id);
+               
+                if (m == null)
+                {
+                    throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
+                }
+                _ctx.arkiver.Remove(m);
 
-                HttpResponseMessage response = Request.CreateResponse(204);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.NoContent);
                 return response;
             }
             else
@@ -183,8 +195,10 @@ namespace arkitektum.kommit.noark5.api.Controllers
         /// </summary>
         /// <returns>et arkiv</returns>
         /// <response code="200">OK</response>
-        /// <response code="404">NotFound</response>
-        /// <response code="501">NotImplemented</response>
+        /// <response code="400">BadRequest - ugyldig forespørsel</response>
+        /// <response code="403">Forbidden - ingen tilgang</response>
+        /// <response code="404">NotFound - ikke funnet</response>
+        /// <response code="501">NotImplemented - ikke implementert</response>
         /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/ny-arkiv">http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv</a>, og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell, restriksjoner og mulige relasjonsnøkler</a></remarks>
         [Route("api/arkivstruktur/nytt-arkiv")]
         [HttpGet]
@@ -197,24 +211,15 @@ namespace arkitektum.kommit.noark5.api.Controllers
                     url.Host,
                     url.Port).Uri;
             //Legger på standardtekster feks for pålogget bruker
+
             ArkivType m = new ArkivType();
             m.tittel = "angi tittel på arkiv";
             m.dokumentmedium = new DokumentmediumType();
-            m.dokumentmedium.kode = "Elektronisk arkiv";
+            m.dokumentmedium.kode = "E";
             m.arkivstatus = new ArkivstatusType();
             m.arkivstatus.kode = "O";
-            
-            List<LinkType> linker = new List<LinkType>();
-            linker.Add(Set.addTempLink(baseUri, "api/kodelister/Dokumentmedium", Set._REL + "/administrasjon/dokumentmedium", "?$filter&$orderby&$top&$skip"));
-            linker.Add(Set.addTempLink(baseUri, "api/kodelister/Arkivstatus", Set._REL + "/administrasjon/arkivstatus", "?$filter&$orderby&$top&$skip"));
-
-
-            m._links = linker.ToArray();
-            if (m == null)
-            {
-                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
-            }
-
+            m.Links.Clear();
+            //m.Links.Add(new WebApi.Hal.Link("","")) kodelister som er relevante 
             return m;
         }
 
@@ -223,9 +228,12 @@ namespace arkitektum.kommit.noark5.api.Controllers
         /// </summary>
         /// <returns>url til nytt arkiv i location header</returns>
         /// <response code="200">ok</response>
-        /// <response code="201">Created</response>
-        /// <response code="403">Forbidden - ugyldige rettigheter</response>
-        /// <response code="501">NotImplemented</response>
+        /// <response code="201">Created - opprettet</response>
+        /// <response code="400">BadRequest - ugyldig forespørsel</response>
+        /// <response code="403">Forbidden - ingen tilgang</response>
+        /// <response code="404">NotFound - ikke funnet</response>
+        /// <response code="409">Conflict - objektet kan være endret av andre</response>
+        /// <response code="501">NotImplemented - ikke implementert</response>
         /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/ny-arkiv">http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv</a>, og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell, restriksjoner og mulige relasjonsnøkler</a></remarks>
         [Route("api/arkivstruktur/nytt-arkiv")]
         [HttpPost]
@@ -245,17 +253,8 @@ namespace arkitektum.kommit.noark5.api.Controllers
                 arkiv.opprettetDato = DateTime.Now;
                 arkiv.opprettetDatoSpecified = true;
                 arkiv.opprettetAv = "pålogget bruker";
-                
-                List<LinkType> linker = new List<LinkType>();
-                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkiv/" + arkiv.systemID, "self"));
-                linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Arkiv/" + arkiv.systemID + "/arkivdel", Set._REL + "/arkivdel", "?$filter&$orderby&$top&$skip&$search"));
-                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkiv/" + arkiv.systemID + "/ny-arkivdel", Set._REL + "/ny-arkivdel"));//Hører egentlig til administrasjon? vises hvis rolle admin?
-                linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Arkiv/" + arkiv.systemID + "/arkivskaper", Set._REL + "/arkivskaper", "?$filter&$orderby&$top&$skip&$search"));
-                linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkiv/" + arkiv.systemID + "/ny-arkivskaper", Set._REL + "/ny-arkivskaper"));//Hører egentlig til administrasjon? vises hvis rolle admin?
 
-                arkiv._links = linker.ToArray();
-
-                
+                _ctx.arkiver.Add(arkiv);
 
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, arkiv);
                 response.Headers.Location = new Uri(baseUri + "api/arkivstruktur/Arkiv/" + arkiv.systemID);
@@ -272,54 +271,32 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
         // ****    ARKIVSKAPER
 
-        // NY
+        /// <summary>
+        /// Henter arkivskapere innenfor arkiv
+        /// </summary>
+        /// <param name="arkivId"></param>
+        /// <returns></returns>
         [Route("api/arkivstruktur/Arkiv/{arkivId}/arkivskaper")]
         [HttpGet]
-        public IEnumerable<ArkivskaperType> GetArkivskapere(ODataQueryOptions<ArkivskaperType> queryOptions, string arkivId)
+        public IQueryable<ArkivskaperType> GetArkivskapereIArkiv(string arkivId)
         {
-            //TODO støtte odata filter syntaks
-            queryOptions.Validate(_validationSettings);
-
             //Rettinghetsstyring...og alle andre restriksjoner
-            List<ArkivskaperType> testdata = new List<ArkivskaperType>();
 
-            if (queryOptions.Filter != null)
-            {
-                // TODO
-            }
-
-            testdata.Add(GetArkivskaperIArkiv("12345", "123456"));
-            testdata.Add(GetArkivskaperIArkiv("1235", "9876"));
-
-            return testdata.AsEnumerable();
+            return _ctx.arkivskaper.AsQueryable();
         }
 
-        // NY
-        [Route("api/arkivstruktur/Arkiv/{arkivId}/arkivskaper/{arkivskaperId}")]
+        /// <summary>
+        /// Henter arkivskaper
+        /// </summary>
+        /// <param name="arkivskaperId"></param>
+        /// <returns></returns>
+        [Route("api/arkivstruktur/arkivskaper/{arkivskaperId}")]
         [HttpGet]
-        public ArkivskaperType GetArkivskaperIArkiv(string arkivId, string arkivskaperId)
+        public ArkivskaperType GetArkivskaper(string arkivskaperId)
         {
-            var url = HttpContext.Current.Request.Url;
-            var baseUri =
-                new UriBuilder(
-                    url.Scheme,
-                    url.Host,
-                    url.Port).Uri;
 
-            ArkivskaperType a = new ArkivskaperType();
+            ArkivskaperType a = _ctx.arkivskaper.First();
 
-            a.systemID = arkivskaperId + "_Id";
-            a.arkivskaperNavn = arkivskaperId;
-            a.beskrivelse = "testbeskrivelse til " + arkivskaperId;
-            a.opprettetAv = "Ola";
-            a.opprettetDato = DateTime.Now;
-            a.referanseOpprettetAv = "Arkiv " + arkivId;
-            
-            List<LinkType> linker = new List<LinkType>();
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkiv/" + arkivId, Set._REL + "/referanseArkiv"));
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkiv/" + arkivId + "/ny-arkivskaper", Set._REL + "/referanseArkiv"));
-
-            a._links = linker.ToArray();
             if (a == null)
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
@@ -329,9 +306,9 @@ namespace arkitektum.kommit.noark5.api.Controllers
         }
 
         //NY
-        [Route("api/arkivstruktur/Arkiv/{arkivId}/ny-arkivskaper")]
+        [Route("api/arkivstruktur/ny-arkivskaper")]
         [HttpGet]
-        public ArkivskaperType InitialiserArkivskaper(string arkivId)
+        public ArkivskaperType InitialiserArkivskaper()
         {
             var url = HttpContext.Current.Request.Url;
             var baseUri =
@@ -343,13 +320,9 @@ namespace arkitektum.kommit.noark5.api.Controllers
             ArkivskaperType m = new ArkivskaperType();
             m.arkivskaperNavn = "angi navn på arkivskaper";
             m.beskrivelse = "angi beskrivelse";
-            m.opprettetAv = "Angi hvem som opprettet";
-            m.referanseOpprettetAv = "Arkiv: " + arkivId;
-
-            List<LinkType> linker = new List<LinkType>();
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkiv/" + arkivId, Set._REL + "/referanseArkiv"));
-
-            m._links = linker.ToArray();
+           
+           
+           
             if (m == null)
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
@@ -359,13 +332,13 @@ namespace arkitektum.kommit.noark5.api.Controllers
         }
         
         //NY
-        [Route("api/arkivstruktur/Arkiv/{arkivId}/ny-arkivskaper")]
+        [Route("api/arkivstruktur/ny-arkivskaper")]
         [HttpPost]
-        public HttpResponseMessage PostArkivskaper(ArkivskaperType arkivskaper, string arkivId)
+        public HttpResponseMessage PostArkivskaper(ArkivskaperType arkivskaper)
         {
             if (arkivskaper != null)
             {
-                //TODO rettigheter og lagring til DB el.l
+
                 var url = HttpContext.Current.Request.Url;
                 var baseUri =
                     new UriBuilder(
@@ -373,10 +346,12 @@ namespace arkitektum.kommit.noark5.api.Controllers
                         url.Host,
                         url.Port).Uri;
 
-                //arkivdel.systemID = Guid.NewGuid().ToString();
-                //arkivdel.opprettetDato = DateTime.Now;
-                //arkivdel.opprettetDatoSpecified = true;
-                //arkivdel.opprettetAv = "pålogget bruker";
+                arkivskaper.systemID = Guid.NewGuid().ToString();
+                arkivskaper.opprettetAv = "pålogget bruker";
+                arkivskaper.opprettetDato = DateTime.Now;
+                arkivskaper.opprettetDatoSpecified = true;
+
+                _ctx.arkivskaper.Add(arkivskaper);
 
                 //List<LinkType> linker = new List<LinkType>();
                 //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + arkivdel.systemID, "self"));

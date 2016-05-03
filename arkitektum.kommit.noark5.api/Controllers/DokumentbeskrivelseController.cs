@@ -52,15 +52,15 @@ namespace arkitektum.kommit.noark5.api.Controllers
             m.beskrivelse = "beksrivelse";
             m.opprettetDato = DateTime.Now;
 
-            List<LinkType> linker = new List<LinkType>();
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Dokumentbeskrivelse/" + m.systemID, "self"));
+            //List<LinkType> linker = new List<LinkType>();
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Dokumentbeskrivelse/" + m.systemID, "self"));
 
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Dokumentbeskrivelse/" + m.systemID + "/referanseFil", Set._REL + "/arkivstruktur/referanseFil")); //POST laster opp og GET laster ned?
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Dokumentbeskrivelse/" + m.systemID + "/referanseFil", Set._REL + "/arkivstruktur/referanseFil")); //POST laster opp og GET laster ned?
 
-            linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Dokumentbeskrivelse/4663", Set._REL + "/arkivstruktur/referanseDokumentbeskrivelse"));
+            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Dokumentbeskrivelse/4663", Set._REL + "/arkivstruktur/referanseDokumentbeskrivelse"));
 
 
-            m._links = linker.ToArray();
+            //m._links = linker.ToArray();
             if (m == null)
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
