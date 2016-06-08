@@ -38,7 +38,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
         /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv">http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv</a>, og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell, restriksjoner og mulige relasjonsnøkler</a></remarks>
         [Route("api/arkivstruktur/Arkivquery")]
         [HttpGet]
-        [EnableQuery]
+        [EnableQuery(PageSize = 10)]
         public IQueryable<ArkivType> GetArkivs()
         {
             //_validationSettings.MaxExpansionDepth = 1;
@@ -63,7 +63,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
         /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv">http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv</a>, og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell, restriksjoner og mulige relasjonsnøkler</a></remarks>
         [Route("api/arkivstruktur/Arkiv")]
         [HttpGet]
-        [EnableQuery]
+        [EnableQuery(PageSize = 2)]
         public IEnumerable<ArkivType> GetArkivs2(ODataQueryOptions<ArkivType> queryOptions)
         {
             //Konformitetsnivå på søk
@@ -71,7 +71,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
             _validationSettings.MaxAnyAllExpressionDepth = 1;
             ////støtte odata filter syntaks
             queryOptions.Validate(_validationSettings);
-
+            //TODO Må returnere next link når resultat er større enn pagesize
             return queryOptions.ApplyTo(_ctx.arkiver.AsQueryable()) as IEnumerable<ArkivType>;
         }
 

@@ -320,6 +320,7 @@
     <Compile Include="Controllers\KlasseController.cs" />
     <Compile Include="Controllers\KlassifikasjonssystemController.cs" />
     <Compile Include="Controllers\MappeController.cs" />
+    <Compile Include="Controllers\JournalpostController.cs" />
     <Compile Include="Controllers\RegistreringController.cs" />
     <Compile Include="Controllers\SaksmappeController.cs" />
     <Compile Include="Controllers\SecureApiController.cs" />

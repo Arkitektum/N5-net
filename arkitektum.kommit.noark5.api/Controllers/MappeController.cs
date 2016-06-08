@@ -27,12 +27,12 @@ namespace arkitektum.kommit.noark5.api.Controllers
                     url.Port).Uri;
 
             //TODO støtte odata filter syntaks
-            _validationSettings.AllowedArithmeticOperators = AllowedArithmeticOperators.None;
-            _validationSettings.AllowedQueryOptions = AllowedQueryOptions.Filter | AllowedQueryOptions.OrderBy | AllowedQueryOptions.Skip | AllowedQueryOptions.Top;
-            _validationSettings.AllowedFunctions = AllowedFunctions.IndexOf;
-            _validationSettings.AllowedLogicalOperators = AllowedLogicalOperators.All;
-            _validationSettings.MaxAnyAllExpressionDepth = 1;
-
+            //_validationSettings.AllowedArithmeticOperators = AllowedArithmeticOperators.None;
+            //_validationSettings.AllowedQueryOptions = AllowedQueryOptions.Filter | AllowedQueryOptions.OrderBy | AllowedQueryOptions.Skip | AllowedQueryOptions.Top;
+            //_validationSettings.AllowedFunctions = AllowedFunctions.All;
+            //_validationSettings.AllowedLogicalOperators = AllowedLogicalOperators.All;
+            //_validationSettings.MaxAnyAllExpressionDepth = 5;
+            //_validationSettings.MaxExpansionDepth = 5;
             queryOptions.Validate(_validationSettings);
             
             //$orderby=ReleaseDate asc, Rating desc
