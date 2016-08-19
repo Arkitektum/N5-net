@@ -49,18 +49,10 @@ namespace arkitektum.kommit.noark5.api.Controllers
             DokumentbeskrivelseType m = new DokumentbeskrivelseType();
             m.systemID = id;
             m.tittel = "angitt tittel " + id;
-            m.beskrivelse = "beksrivelse";
+            m.beskrivelse = "beskrivelse";
             m.opprettetDato = DateTime.Now;
-
-            //List<LinkType> linker = new List<LinkType>();
-            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Dokumentbeskrivelse/" + m.systemID, "self"));
-
-            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Dokumentbeskrivelse/" + m.systemID + "/referanseFil", Set._REL + "/arkivstruktur/referanseFil")); //POST laster opp og GET laster ned?
-
-            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Dokumentbeskrivelse/4663", Set._REL + "/arkivstruktur/referanseDokumentbeskrivelse"));
-
-
-            //m._links = linker.ToArray();
+            m.RepopulateHyperMedia();
+           
             if (m == null)
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
@@ -90,37 +82,9 @@ namespace arkitektum.kommit.noark5.api.Controllers
             return null;
         }
 
-        // NY  ??? Dokumentobjekt??
-        [Route("api/arkivstruktur/Dokumentbeskrivelse/{Id}/referansefil")]
-        [HttpGet]
-        public IEnumerable<FilreferanseType> GetReferansefiler(string Id)
-        {
-            return null;
-        }
+        
 
-        // NY  ??? Dokumentobjekt??
-        [Route("api/arkivstruktur/Dokumentbeskrivelse/{Id}/referansefil/{referanseFilId}")]
-        [HttpGet]
-        public FilreferanseType GetReferansefil(string Id)
-        {
-            return null;
-        }
-
-        //NY
-        [Route("api/arkivstruktur/Dokumentbeskrivelse/{arkivId}/ny-referansefil")]
-        [HttpGet]
-        public FilreferanseType InitialiserReferansefil()
-        {
-            return null;
-        }
-
-        //NY
-        [Route("api/arkivstruktur/Dokumentbeskrivelse/{id}/ny-referansefil")]
-        [HttpPost]
-        public HttpResponseMessage PostReferansefil()
-        {
-            return null;
-        }
+       
 
         [Route("api/arkivstruktur/Registrering/{Id}/dokumentbeskrivelse")]
         [HttpGet]
@@ -137,13 +101,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
             return testdata.AsEnumerable();
         }
 
-        //NY
-        [Route("api/arkivstruktur/Registrering/{arkivId}/ny-dokumentbeskrivelse")]
-        [HttpGet]
-        public FilreferanseType InitialiserReferansefilIRegistrering()
-        {
-            return null;
-        }
+        
 
         //NY
         [Route("api/arkivstruktur/Registrering/{id}/ny-dokumentbeskrivelse")]

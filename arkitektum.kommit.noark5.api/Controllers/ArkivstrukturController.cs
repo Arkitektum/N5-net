@@ -25,17 +25,17 @@ namespace arkitektum.kommit.noark5.api.Controllers
             Links linker = new Links();
             ////Rettinghetsstyring...og alle andre restriksjoner
 
-            linker.Links.Add(Set.addTempLink(baseUri, "api/arkivstruktur/arkiv", Set._REL + "/arkivstruktur/arkiv", "?$filter&$orderby&$top&$skip&$search")); //Obligatorisk
-            linker.Links.Add(Set.addLink(baseUri, "api/arkivstruktur/ny-arkivskaper", Set._REL + "/administrasjon/ny-arkivskaper")); //Hører egentlig til administrasjon? vises hvis rolle admin?
-            linker.Links.Add(Set.addTempLink(baseUri, "api/arkivstruktur/arkivskaper", Set._REL + "/arkivstruktur/arkivskaper", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Links.Add(Set.addTempLink(baseUri, "api/arkivstruktur/arkivdel", Set._REL + "/arkivstruktur/arkivdel", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Links.Add(Set.addTempLink(baseUri, "api/arkivstruktur/klassifikasjonssystem", Set._REL + "/arkivstruktur/klassifikasjonssystem", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Links.Add(Set.addTempLink(baseUri, "api/arkivstruktur/klasse", Set._REL + "/arkivstruktur/klasse", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Links.Add(Set.addTempLink(baseUri, "api/arkivstruktur/mappe", Set._REL + "/arkivstruktur/mappe", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Links.Add(Set.addTempLink(baseUri, "api/arkivstruktur/registrering", Set._REL + "/arkivstruktur/registrering", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Links.Add(Set.addTempLink(baseUri, "api/arkivstruktur/basisregistrering", Set._REL + "/arkivstruktur/basisregistrering", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Links.Add(Set.addTempLink(baseUri, "api/arkivstruktur/dokumentbeskrivelse", Set._REL + "/arkivstruktur/dokumentbeskrivelse", "?$filter&$orderby&$top&$skip&$search"));
-            linker.Links.Add(Set.addTempLink(baseUri, "api/arkivstruktur/dokumentobjekt", Set._REL + "/arkivstruktur/dokumentobjekt", "?$filter&$orderby&$top&$skip&$search"));
+            linker.LinkList.Add(Set.addTempLink(baseUri, "api/arkivstruktur/arkiv", Set._REL + "/arkivstruktur/arkiv", "?$filter&$orderby&$top&$skip&$search")); //Obligatorisk
+            linker.LinkList.Add(Set.addLink(baseUri, "api/arkivstruktur/ny-arkivskaper", Set._REL + "/administrasjon/ny-arkivskaper")); //Hører egentlig til administrasjon? vises hvis rolle admin?
+            linker.LinkList.Add(Set.addTempLink(baseUri, "api/arkivstruktur/arkivskaper", Set._REL + "/arkivstruktur/arkivskaper", "?$filter&$orderby&$top&$skip&$search"));
+            linker.LinkList.Add(Set.addTempLink(baseUri, "api/arkivstruktur/arkivdel", Set._REL + "/arkivstruktur/arkivdel", "?$filter&$orderby&$top&$skip&$search"));
+            linker.LinkList.Add(Set.addTempLink(baseUri, "api/arkivstruktur/klassifikasjonssystem", Set._REL + "/arkivstruktur/klassifikasjonssystem", "?$filter&$orderby&$top&$skip&$search"));
+            linker.LinkList.Add(Set.addTempLink(baseUri, "api/arkivstruktur/klasse", Set._REL + "/arkivstruktur/klasse", "?$filter&$orderby&$top&$skip&$search"));
+            linker.LinkList.Add(Set.addTempLink(baseUri, "api/arkivstruktur/mappe", Set._REL + "/arkivstruktur/mappe", "?$filter&$orderby&$top&$skip&$search"));
+            linker.LinkList.Add(Set.addTempLink(baseUri, "api/arkivstruktur/registrering", Set._REL + "/arkivstruktur/registrering", "?$filter&$orderby&$top&$skip&$search"));
+            linker.LinkList.Add(Set.addTempLink(baseUri, "api/arkivstruktur/basisregistrering", Set._REL + "/arkivstruktur/basisregistrering", "?$filter&$orderby&$top&$skip&$search"));
+            linker.LinkList.Add(Set.addTempLink(baseUri, "api/arkivstruktur/dokumentbeskrivelse", Set._REL + "/arkivstruktur/dokumentbeskrivelse", "?$filter&$orderby&$top&$skip&$search"));
+            linker.LinkList.Add(Set.addTempLink(baseUri, "api/arkivstruktur/dokumentobjekt", Set._REL + "/arkivstruktur/dokumentobjekt", "?$filter&$orderby&$top&$skip&$search"));
 
 
             return linker;

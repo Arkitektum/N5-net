@@ -8,6 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 
 // 
@@ -131,8 +134,7 @@ public partial class ArkivType : AbstraktArkivenhetType
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    [Newtonsoft.Json.JsonIgnore]
+    [System.Xml.Serialization.XmlIgnoreAttribute()] [Newtonsoft.Json.JsonIgnore]
     public bool avsluttetDatoSpecified
     {
         get
@@ -369,7 +371,7 @@ public partial class Koordinat
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()] [Newtonsoft.Json.JsonIgnore]
+    [System.Xml.Serialization.XmlIgnoreAttribute()] [Newtonsoft.Json.JsonIgnore] 
     public bool zSpecified
     {
         get
@@ -806,47 +808,6 @@ public partial class MoeteregistreringsstatusType
 [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
 [System.Xml.Serialization.XmlRootAttribute("MoetedeltakerFunksjon", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
 public partial class MoetedeltakerFunksjonType
-{
-
-    private string kodeField;
-
-    private string beskrivelseField;
-
-    /// <remarks/>
-    public string kode
-    {
-        get
-        {
-            return this.kodeField;
-        }
-        set
-        {
-            this.kodeField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string beskrivelse
-    {
-        get
-        {
-            return this.beskrivelseField;
-        }
-        set
-        {
-            this.beskrivelseField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
-[System.Xml.Serialization.XmlRootAttribute("Klassifikasjonstype", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
-public partial class KlassifikasjonstypeType
 {
 
     private string kodeField;
@@ -1393,6 +1354,1675 @@ public partial class SakspartRolleType
 }
 
 /// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
+[System.Xml.Serialization.XmlRootAttribute("Saksstatus", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
+public partial class SaksstatusType
+{
+
+    private string kodeField;
+
+    private string beskrivelseField;
+
+    /// <remarks/>
+    public string kode
+    {
+        get
+        {
+            return this.kodeField;
+        }
+        set
+        {
+            this.kodeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string beskrivelse
+    {
+        get
+        {
+            return this.beskrivelseField;
+        }
+        set
+        {
+            this.beskrivelseField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
+[System.Xml.Serialization.XmlRootAttribute("Presedensstatus", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
+public partial class PresedensstatusType
+{
+
+    private string kodeField;
+
+    private string beskrivelseField;
+
+    /// <remarks/>
+    public string kode
+    {
+        get
+        {
+            return this.kodeField;
+        }
+        set
+        {
+            this.kodeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string beskrivelse
+    {
+        get
+        {
+            return this.beskrivelseField;
+        }
+        set
+        {
+            this.beskrivelseField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
+[System.Xml.Serialization.XmlRootAttribute("Avskrivningsmaate", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
+public partial class AvskrivningsmaateType
+{
+
+    private string kodeField;
+
+    private string beskrivelseField;
+
+    /// <remarks/>
+    public string kode
+    {
+        get
+        {
+            return this.kodeField;
+        }
+        set
+        {
+            this.kodeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string beskrivelse
+    {
+        get
+        {
+            return this.beskrivelseField;
+        }
+        set
+        {
+            this.beskrivelseField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
+[System.Xml.Serialization.XmlRootAttribute("FlytStatus", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
+public partial class FlytStatusType
+{
+
+    private string kodeField;
+
+    private string beskrivelseField;
+
+    /// <remarks/>
+    public string kode
+    {
+        get
+        {
+            return this.kodeField;
+        }
+        set
+        {
+            this.kodeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string beskrivelse
+    {
+        get
+        {
+            return this.beskrivelseField;
+        }
+        set
+        {
+            this.beskrivelseField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
+[System.Xml.Serialization.XmlRootAttribute("Land", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
+public partial class LandType
+{
+
+    private string kodeField;
+
+    private string beskrivelseField;
+
+    /// <remarks/>
+    public string kode
+    {
+        get
+        {
+            return this.kodeField;
+        }
+        set
+        {
+            this.kodeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string beskrivelse
+    {
+        get
+        {
+            return this.beskrivelseField;
+        }
+        set
+        {
+            this.beskrivelseField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
+[System.Xml.Serialization.XmlRootAttribute("Postnummer", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
+public partial class PostnummerType
+{
+
+    private string kodeField;
+
+    private string beskrivelseField;
+
+    /// <remarks/>
+    public string kode
+    {
+        get
+        {
+            return this.kodeField;
+        }
+        set
+        {
+            this.kodeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string beskrivelse
+    {
+        get
+        {
+            return this.beskrivelseField;
+        }
+        set
+        {
+            this.beskrivelseField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
+[System.Xml.Serialization.XmlRootAttribute("Korrespondanseparttype", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
+public partial class KorrespondanseparttypeType
+{
+
+    private string kodeField;
+
+    private string beskrivelseField;
+
+    /// <remarks/>
+    public string kode
+    {
+        get
+        {
+            return this.kodeField;
+        }
+        set
+        {
+            this.kodeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string beskrivelse
+    {
+        get
+        {
+            return this.beskrivelseField;
+        }
+        set
+        {
+            this.beskrivelseField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
+[System.Xml.Serialization.XmlRootAttribute("ElektroniskSignaturVerifisert", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
+public partial class ElektroniskSignaturVerifisertType
+{
+
+    private string kodeField;
+
+    private string beskrivelseField;
+
+    /// <remarks/>
+    public string kode
+    {
+        get
+        {
+            return this.kodeField;
+        }
+        set
+        {
+            this.kodeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string beskrivelse
+    {
+        get
+        {
+            return this.beskrivelseField;
+        }
+        set
+        {
+            this.beskrivelseField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
+[System.Xml.Serialization.XmlRootAttribute("ElektroniskSignaturSikkerhetsnivaa", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
+public partial class ElektroniskSignaturSikkerhetsnivaaType
+{
+
+    private string kodeField;
+
+    private string beskrivelseField;
+
+    /// <remarks/>
+    public string kode
+    {
+        get
+        {
+            return this.kodeField;
+        }
+        set
+        {
+            this.kodeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string beskrivelse
+    {
+        get
+        {
+            return this.beskrivelseField;
+        }
+        set
+        {
+            this.beskrivelseField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
+[System.Xml.Serialization.XmlRootAttribute("Journalstatus", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
+public partial class JournalstatusType
+{
+
+    private string kodeField;
+
+    private string beskrivelseField;
+
+    /// <remarks/>
+    public string kode
+    {
+        get
+        {
+            return this.kodeField;
+        }
+        set
+        {
+            this.kodeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string beskrivelse
+    {
+        get
+        {
+            return this.beskrivelseField;
+        }
+        set
+        {
+            this.beskrivelseField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
+[System.Xml.Serialization.XmlRootAttribute("Journalposttype", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
+public partial class JournalposttypeType
+{
+
+    private string kodeField;
+
+    private string beskrivelseField;
+
+    /// <remarks/>
+    public string kode
+    {
+        get
+        {
+            return this.kodeField;
+        }
+        set
+        {
+            this.kodeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string beskrivelse
+    {
+        get
+        {
+            return this.beskrivelseField;
+        }
+        set
+        {
+            this.beskrivelseField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
+[System.Xml.Serialization.XmlRootAttribute("Merknadstype", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
+public partial class MerknadstypeType
+{
+
+    private string kodeField;
+
+    private string beskrivelseField;
+
+    /// <remarks/>
+    public string kode
+    {
+        get
+        {
+            return this.kodeField;
+        }
+        set
+        {
+            this.kodeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string beskrivelse
+    {
+        get
+        {
+            return this.beskrivelseField;
+        }
+        set
+        {
+            this.beskrivelseField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
+[System.Xml.Serialization.XmlRootAttribute("Klassifikasjonstype", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
+public partial class KlassifikasjonstypeType
+{
+
+    private string kodeField;
+
+    private string beskrivelseField;
+
+    /// <remarks/>
+    public string kode
+    {
+        get
+        {
+            return this.kodeField;
+        }
+        set
+        {
+            this.kodeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string beskrivelse
+    {
+        get
+        {
+            return this.beskrivelseField;
+        }
+        set
+        {
+            this.beskrivelseField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
+[System.Xml.Serialization.XmlRootAttribute("Mappetype", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
+public partial class MappetypeType
+{
+
+    private string kodeField;
+
+    private string beskrivelseField;
+
+    /// <remarks/>
+    public string kode
+    {
+        get
+        {
+            return this.kodeField;
+        }
+        set
+        {
+            this.kodeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string beskrivelse
+    {
+        get
+        {
+            return this.beskrivelseField;
+        }
+        set
+        {
+            this.beskrivelseField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
+[System.Xml.Serialization.XmlRootAttribute("Graderingskode", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
+public partial class GraderingskodeType
+{
+
+    private string kodeField;
+
+    private string beskrivelseField;
+
+    /// <remarks/>
+    public string kode
+    {
+        get
+        {
+            return this.kodeField;
+        }
+        set
+        {
+            this.kodeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string beskrivelse
+    {
+        get
+        {
+            return this.beskrivelseField;
+        }
+        set
+        {
+            this.beskrivelseField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
+[System.Xml.Serialization.XmlRootAttribute("SkjermingDokument", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
+public partial class SkjermingDokumentType
+{
+
+    private string kodeField;
+
+    private string beskrivelseField;
+
+    /// <remarks/>
+    public string kode
+    {
+        get
+        {
+            return this.kodeField;
+        }
+        set
+        {
+            this.kodeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string beskrivelse
+    {
+        get
+        {
+            return this.beskrivelseField;
+        }
+        set
+        {
+            this.beskrivelseField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
+[System.Xml.Serialization.XmlRootAttribute("SkjermingMetadata", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
+public partial class SkjermingMetadataType
+{
+
+    private string kodeField;
+
+    private string beskrivelseField;
+
+    /// <remarks/>
+    public string kode
+    {
+        get
+        {
+            return this.kodeField;
+        }
+        set
+        {
+            this.kodeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string beskrivelse
+    {
+        get
+        {
+            return this.beskrivelseField;
+        }
+        set
+        {
+            this.beskrivelseField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
+[System.Xml.Serialization.XmlRootAttribute("Tilgangsrestriksjon", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
+public partial class TilgangsrestriksjonType
+{
+
+    private string kodeField;
+
+    private string beskrivelseField;
+
+    /// <remarks/>
+    public string kode
+    {
+        get
+        {
+            return this.kodeField;
+        }
+        set
+        {
+            this.kodeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string beskrivelse
+    {
+        get
+        {
+            return this.beskrivelseField;
+        }
+        set
+        {
+            this.beskrivelseField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
+[System.Xml.Serialization.XmlRootAttribute("Slettingstype", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
+public partial class SlettingstypeType
+{
+
+    private string kodeField;
+
+    private string beskrivelseField;
+
+    /// <remarks/>
+    public string kode
+    {
+        get
+        {
+            return this.kodeField;
+        }
+        set
+        {
+            this.kodeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string beskrivelse
+    {
+        get
+        {
+            return this.beskrivelseField;
+        }
+        set
+        {
+            this.beskrivelseField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
+[System.Xml.Serialization.XmlRootAttribute("Kassasjonsvedtak", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
+public partial class KassasjonsvedtakType
+{
+
+    private string kodeField;
+
+    private string beskrivelseField;
+
+    /// <remarks/>
+    public string kode
+    {
+        get
+        {
+            return this.kodeField;
+        }
+        set
+        {
+            this.kodeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string beskrivelse
+    {
+        get
+        {
+            return this.beskrivelseField;
+        }
+        set
+        {
+            this.beskrivelseField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
+[System.Xml.Serialization.XmlRootAttribute("Arkivdelstatus", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
+public partial class ArkivdelstatusType
+{
+
+    private string kodeField;
+
+    private string beskrivelseField;
+
+    /// <remarks/>
+    public string kode
+    {
+        get
+        {
+            return this.kodeField;
+        }
+        set
+        {
+            this.kodeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string beskrivelse
+    {
+        get
+        {
+            return this.beskrivelseField;
+        }
+        set
+        {
+            this.beskrivelseField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
+[System.Xml.Serialization.XmlRootAttribute("Dokumentmedium", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
+public partial class DokumentmediumType
+{
+
+    private string kodeField;
+
+    private string beskrivelseField;
+
+    /// <remarks/>
+    public string kode
+    {
+        get
+        {
+            return this.kodeField;
+        }
+        set
+        {
+            this.kodeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string beskrivelse
+    {
+        get
+        {
+            return this.beskrivelseField;
+        }
+        set
+        {
+            this.beskrivelseField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
+[System.Xml.Serialization.XmlRootAttribute("Hendelsetype", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
+public partial class HendelsetypeType
+{
+
+    private string kodeField;
+
+    private string beskrivelseField;
+
+    /// <remarks/>
+    public string kode
+    {
+        get
+        {
+            return this.kodeField;
+        }
+        set
+        {
+            this.kodeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string beskrivelse
+    {
+        get
+        {
+            return this.beskrivelseField;
+        }
+        set
+        {
+            this.beskrivelseField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.kxml.no/rest/1.0")]
+[System.Xml.Serialization.XmlRootAttribute("Link", Namespace = "http://www.kxml.no/rest/1.0", IsNullable = false)]
+public partial class LinkType
+{
+    public LinkType(string rel, string href)
+    {
+        relField = rel;
+        hrefField = href;
+    }
+    public LinkType() { }
+
+
+    private string relField;
+
+    private string hrefField;
+
+    private System.Nullable<bool> templatedField;
+
+    private bool templatedFieldSpecified;
+
+    private string typeField;
+
+    private string deprecationField;
+
+    private string nameField;
+
+    private string titleField;
+
+    /// <remarks/>
+    public string rel
+    {
+        get
+        {
+            return this.relField;
+        }
+        set
+        {
+            this.relField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string href
+    {
+        get
+        {
+            return this.hrefField;
+        }
+        set
+        {
+            this.hrefField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public System.Nullable<bool> templated
+    {
+        get { return !string.IsNullOrEmpty(hrefField) && IsTemplatedRegex.IsMatch(hrefField); }
+    }
+
+    private static readonly Regex IsTemplatedRegex = new Regex(@"{.+}", RegexOptions.Compiled);
+    //public System.Nullable<bool> templated
+    //{
+    //    get
+    //    {
+    //        return this.templatedField;
+    //    }
+    //    set
+    //    {
+    //        this.templatedField = value;
+    //    }
+    //}
+
+    ///// <remarks/>
+    //[System.Xml.Serialization.XmlIgnoreAttribute()] [Newtonsoft.Json.JsonIgnore]
+    //public bool templatedSpecified
+    //{
+    //    get
+    //    {
+    //        return this.templatedFieldSpecified;
+    //    }
+    //    set
+    //    {
+    //        this.templatedFieldSpecified = value;
+    //    }
+    //}
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string type
+    {
+        get
+        {
+            return this.typeField;
+        }
+        set
+        {
+            this.typeField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string deprecation
+    {
+        get
+        {
+            return this.deprecationField;
+        }
+        set
+        {
+            this.deprecationField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string name
+    {
+        get
+        {
+            return this.nameField;
+        }
+        set
+        {
+            this.nameField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string title
+    {
+        get
+        {
+            return this.titleField;
+        }
+        set
+        {
+            this.titleField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(TilgangType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(BrukerType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(AdministrativEnhetType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(KonverteringType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(DokumentobjektType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(AbstraktSakspartType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(SakspartPersonType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(SakspartEnhetType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(PresedensType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(AvskrivningType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(DokumentflytType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(KontaktinformasjonType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(EnkelAdresseType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(AbstraktKorrespondansepartType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(KorrespondansepartPersonType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(KorrespondansepartInternType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(KorrespondansepartEnhetType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(ElektroniskSignaturType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(MerknadType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(KryssreferanseType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(GraderingType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(SkjermingType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(SlettingType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(UtfoertKassasjonType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(KassasjonType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(EndringsloggType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(HendelsesloggType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(AbstraktArkivenhetType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(DokumentbeskrivelseType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(KlassifikasjonssystemType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(KlasseType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(RegistreringType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(BasisregistreringType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(JournalpostType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(MappeType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(SaksmappeType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(ArkivdelType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(ArkivskaperType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(ArkivType))]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.kxml.no/rest/1.0")]
+[System.Xml.Serialization.XmlRootAttribute("AbstraktResource", Namespace = "http://www.kxml.no/rest/1.0", IsNullable = false)]
+public abstract partial class AbstraktResourceType
+{
+
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    [Newtonsoft.Json.JsonIgnore]
+    public IList<LinkType> LinkList { get; set; }
+    private LinkType[] Links2field;
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
+    [System.Xml.Serialization.XmlArrayItemAttribute("link", IsNullable = false)]
+    [Newtonsoft.Json.JsonProperty("_links")]
+    public LinkType[] Links
+    {
+        get
+        {
+            return this.LinkList.ToArray();
+        }
+        set {
+            this.Links2field = value;
+        }
+       
+    }
+    protected AbstraktResourceType()
+    {
+        LinkList = new List<LinkType>();
+    }
+    public void RepopulateHyperMedia()
+    {
+        if (LinkList == null)
+            LinkList = new List<LinkType>();
+
+        CreateHypermedia();
+
+
+        if ((LinkList != null) && !LinkList.Any())
+            LinkList = null;
+    }
+    protected virtual void CreateHypermedia()
+    {
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/admin")]
+[System.Xml.Serialization.XmlRootAttribute("Tilgang", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/admin", IsNullable = false)]
+public partial class TilgangType : AbstraktResourceType
+{
+
+    private string systemIDField;
+
+    private string rolleField;
+
+    private TilgangskategoriType tilgangskategoriField;
+
+    private string referanseArkivenhetField;
+
+    private TilgangsrestriksjonType tilgangsrestriksjonField;
+
+    private bool lesField;
+
+    private bool nyField;
+
+    private bool endreField;
+
+    private bool slettField;
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string systemID
+    {
+        get
+        {
+            return this.systemIDField;
+        }
+        set
+        {
+            this.systemIDField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string rolle
+    {
+        get
+        {
+            return this.rolleField;
+        }
+        set
+        {
+            this.rolleField = value;
+        }
+    }
+
+    /// <remarks/>
+    public TilgangskategoriType tilgangskategori
+    {
+        get
+        {
+            return this.tilgangskategoriField;
+        }
+        set
+        {
+            this.tilgangskategoriField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string referanseArkivenhet
+    {
+        get
+        {
+            return this.referanseArkivenhetField;
+        }
+        set
+        {
+            this.referanseArkivenhetField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public TilgangsrestriksjonType tilgangsrestriksjon
+    {
+        get
+        {
+            return this.tilgangsrestriksjonField;
+        }
+        set
+        {
+            this.tilgangsrestriksjonField = value;
+        }
+    }
+
+    /// <remarks/>
+    public bool les
+    {
+        get
+        {
+            return this.lesField;
+        }
+        set
+        {
+            this.lesField = value;
+        }
+    }
+
+    /// <remarks/>
+    public bool ny
+    {
+        get
+        {
+            return this.nyField;
+        }
+        set
+        {
+            this.nyField = value;
+        }
+    }
+
+    /// <remarks/>
+    public bool endre
+    {
+        get
+        {
+            return this.endreField;
+        }
+        set
+        {
+            this.endreField = value;
+        }
+    }
+
+    /// <remarks/>
+    public bool slett
+    {
+        get
+        {
+            return this.slettField;
+        }
+        set
+        {
+            this.slettField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/admin")]
+[System.Xml.Serialization.XmlRootAttribute("Bruker", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/admin", IsNullable = false)]
+public partial class BrukerType : AbstraktResourceType
+{
+
+    private string systemIDField;
+
+    private string brukerNavnField;
+
+    private System.DateTime opprettetDatoField;
+
+    private string opprettetAvField;
+
+    private System.Nullable<System.DateTime> avsluttetDatoField;
+
+    private bool avsluttetDatoFieldSpecified;
+
+    private object virksomhetsspesifikkeMetadataField;
+
+    private string kortnavnField;
+
+    private AdministrativEnhetType[] enhetField;
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string systemID
+    {
+        get
+        {
+            return this.systemIDField;
+        }
+        set
+        {
+            this.systemIDField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string brukerNavn
+    {
+        get
+        {
+            return this.brukerNavnField;
+        }
+        set
+        {
+            this.brukerNavnField = value;
+        }
+    }
+
+    /// <remarks/>
+    public System.DateTime opprettetDato
+    {
+        get
+        {
+            return this.opprettetDatoField;
+        }
+        set
+        {
+            this.opprettetDatoField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string opprettetAv
+    {
+        get
+        {
+            return this.opprettetAvField;
+        }
+        set
+        {
+            this.opprettetAvField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public System.Nullable<System.DateTime> avsluttetDato
+    {
+        get
+        {
+            return this.avsluttetDatoField;
+        }
+        set
+        {
+            this.avsluttetDatoField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()] [Newtonsoft.Json.JsonIgnore]
+    public bool avsluttetDatoSpecified
+    {
+        get
+        {
+            return this.avsluttetDatoFieldSpecified;
+        }
+        set
+        {
+            this.avsluttetDatoFieldSpecified = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public object virksomhetsspesifikkeMetadata
+    {
+        get
+        {
+            return this.virksomhetsspesifikkeMetadataField;
+        }
+        set
+        {
+            this.virksomhetsspesifikkeMetadataField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string kortnavn
+    {
+        get
+        {
+            return this.kortnavnField;
+        }
+        set
+        {
+            this.kortnavnField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
+    [System.Xml.Serialization.XmlArrayItemAttribute("administrativenhet", IsNullable = false)]
+    public AdministrativEnhetType[] enhet
+    {
+        get
+        {
+            return this.enhetField;
+        }
+        set
+        {
+            this.enhetField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/admin")]
+[System.Xml.Serialization.XmlRootAttribute("AdministrativEnhet", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/admin", IsNullable = false)]
+public partial class AdministrativEnhetType : AbstraktResourceType
+{
+
+    private string systemIDField;
+
+    private string administrativEnhetNavnField;
+
+    private string kortnavnField;
+
+    private System.DateTime opprettetDatoField;
+
+    private string opprettetAvField;
+
+    private System.Nullable<System.DateTime> avsluttetDatoField;
+
+    private bool avsluttetDatoFieldSpecified;
+
+    private string administrativEnhetsstatusField;
+
+    private string referanseOverordnetEnhetField;
+
+    private object virksomhetsspesifikkeMetadataField;
+
+    private BrukerType[] brukerField;
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string systemID
+    {
+        get
+        {
+            return this.systemIDField;
+        }
+        set
+        {
+            this.systemIDField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string administrativEnhetNavn
+    {
+        get
+        {
+            return this.administrativEnhetNavnField;
+        }
+        set
+        {
+            this.administrativEnhetNavnField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string kortnavn
+    {
+        get
+        {
+            return this.kortnavnField;
+        }
+        set
+        {
+            this.kortnavnField = value;
+        }
+    }
+
+    /// <remarks/>
+    public System.DateTime opprettetDato
+    {
+        get
+        {
+            return this.opprettetDatoField;
+        }
+        set
+        {
+            this.opprettetDatoField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string opprettetAv
+    {
+        get
+        {
+            return this.opprettetAvField;
+        }
+        set
+        {
+            this.opprettetAvField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public System.Nullable<System.DateTime> avsluttetDato
+    {
+        get
+        {
+            return this.avsluttetDatoField;
+        }
+        set
+        {
+            this.avsluttetDatoField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()] [Newtonsoft.Json.JsonIgnore]
+    public bool avsluttetDatoSpecified
+    {
+        get
+        {
+            return this.avsluttetDatoFieldSpecified;
+        }
+        set
+        {
+            this.avsluttetDatoFieldSpecified = value;
+        }
+    }
+
+    /// <remarks/>
+    public string administrativEnhetsstatus
+    {
+        get
+        {
+            return this.administrativEnhetsstatusField;
+        }
+        set
+        {
+            this.administrativEnhetsstatusField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string referanseOverordnetEnhet
+    {
+        get
+        {
+            return this.referanseOverordnetEnhetField;
+        }
+        set
+        {
+            this.referanseOverordnetEnhetField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public object virksomhetsspesifikkeMetadata
+    {
+        get
+        {
+            return this.virksomhetsspesifikkeMetadataField;
+        }
+        set
+        {
+            this.virksomhetsspesifikkeMetadataField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
+    [System.Xml.Serialization.XmlArrayItemAttribute("bruker", IsNullable = false)]
+    public BrukerType[] bruker
+    {
+        get
+        {
+            return this.brukerField;
+        }
+        set
+        {
+            this.brukerField = value;
+        }
+    }
+}
+
+/// <remarks/>
 [System.Xml.Serialization.XmlIncludeAttribute(typeof(SakspartPersonType))]
 [System.Xml.Serialization.XmlIncludeAttribute(typeof(SakspartEnhetType))]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
@@ -1401,7 +3031,7 @@ public partial class SakspartRolleType
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/sakarkiv")]
 [System.Xml.Serialization.XmlRootAttribute("AbstraktSakspart", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/sakarkiv", IsNullable = false)]
-public abstract partial class AbstraktSakspartType
+public abstract partial class AbstraktSakspartType : AbstraktResourceType
 {
 
     private string systemIDField;
@@ -1565,7 +3195,7 @@ public partial class SakspartPersonType : AbstraktSakspartType
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/sakarkiv")]
 [System.Xml.Serialization.XmlRootAttribute("EnkelAdresse", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/sakarkiv", IsNullable = false)]
-public partial class EnkelAdresseType
+public partial class EnkelAdresseType : AbstraktResourceType
 {
 
     private string adresselinje1Field;
@@ -1669,91 +3299,9 @@ public partial class EnkelAdresseType
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
-[System.Xml.Serialization.XmlRootAttribute("Postnummer", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
-public partial class PostnummerType
-{
-
-    private string kodeField;
-
-    private string beskrivelseField;
-
-    /// <remarks/>
-    public string kode
-    {
-        get
-        {
-            return this.kodeField;
-        }
-        set
-        {
-            this.kodeField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string beskrivelse
-    {
-        get
-        {
-            return this.beskrivelseField;
-        }
-        set
-        {
-            this.beskrivelseField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
-[System.Xml.Serialization.XmlRootAttribute("Land", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
-public partial class LandType
-{
-
-    private string kodeField;
-
-    private string beskrivelseField;
-
-    /// <remarks/>
-    public string kode
-    {
-        get
-        {
-            return this.kodeField;
-        }
-        set
-        {
-            this.kodeField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string beskrivelse
-    {
-        get
-        {
-            return this.beskrivelseField;
-        }
-        set
-        {
-            this.beskrivelseField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/sakarkiv")]
 [System.Xml.Serialization.XmlRootAttribute("Kontaktinformasjon", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/sakarkiv", IsNullable = false)]
-public partial class KontaktinformasjonType
+public partial class KontaktinformasjonType : AbstraktResourceType
 {
 
     private string epostadresseField;
@@ -1916,91 +3464,9 @@ public partial class SakspartEnhetType : AbstraktSakspartType
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
-[System.Xml.Serialization.XmlRootAttribute("Saksstatus", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
-public partial class SaksstatusType
-{
-
-    private string kodeField;
-
-    private string beskrivelseField;
-
-    /// <remarks/>
-    public string kode
-    {
-        get
-        {
-            return this.kodeField;
-        }
-        set
-        {
-            this.kodeField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string beskrivelse
-    {
-        get
-        {
-            return this.beskrivelseField;
-        }
-        set
-        {
-            this.beskrivelseField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
-[System.Xml.Serialization.XmlRootAttribute("Presedensstatus", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
-public partial class PresedensstatusType
-{
-
-    private string kodeField;
-
-    private string beskrivelseField;
-
-    /// <remarks/>
-    public string kode
-    {
-        get
-        {
-            return this.kodeField;
-        }
-        set
-        {
-            this.kodeField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string beskrivelse
-    {
-        get
-        {
-            return this.beskrivelseField;
-        }
-        set
-        {
-            this.beskrivelseField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/sakarkiv")]
 [System.Xml.Serialization.XmlRootAttribute("Presedens", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/sakarkiv", IsNullable = false)]
-public partial class PresedensType
+public partial class PresedensType : AbstraktResourceType
 {
 
     private string systemIDField;
@@ -2390,6 +3856,8 @@ public partial class JournalpostType : BasisregistreringType
 
     private string utlaantTilField;
 
+    private string referanseUtlaantTilField;
+
     private string journalenhetField;
 
     private ElektroniskSignaturType elektroniskSignaturField;
@@ -2682,6 +4150,20 @@ public partial class JournalpostType : BasisregistreringType
 
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string referanseUtlaantTil
+    {
+        get
+        {
+            return this.referanseUtlaantTilField;
+        }
+        set
+        {
+            this.referanseUtlaantTilField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
     public string journalenhet
     {
         get
@@ -2774,91 +4256,9 @@ public partial class JournalpostType : BasisregistreringType
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
-[System.Xml.Serialization.XmlRootAttribute("Journalposttype", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
-public partial class JournalposttypeType
-{
-
-    private string kodeField;
-
-    private string beskrivelseField;
-
-    /// <remarks/>
-    public string kode
-    {
-        get
-        {
-            return this.kodeField;
-        }
-        set
-        {
-            this.kodeField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string beskrivelse
-    {
-        get
-        {
-            return this.beskrivelseField;
-        }
-        set
-        {
-            this.beskrivelseField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
-[System.Xml.Serialization.XmlRootAttribute("Journalstatus", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
-public partial class JournalstatusType
-{
-
-    private string kodeField;
-
-    private string beskrivelseField;
-
-    /// <remarks/>
-    public string kode
-    {
-        get
-        {
-            return this.kodeField;
-        }
-        set
-        {
-            this.kodeField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string beskrivelse
-    {
-        get
-        {
-            return this.beskrivelseField;
-        }
-        set
-        {
-            this.beskrivelseField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur")]
 [System.Xml.Serialization.XmlRootAttribute("ElektroniskSignatur", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur", IsNullable = false)]
-public partial class ElektroniskSignaturType
+public partial class ElektroniskSignaturType : AbstraktResourceType
 {
 
     private ElektroniskSignaturSikkerhetsnivaaType elektroniskSignaturSikkerhetsnivaaField;
@@ -2868,6 +4268,8 @@ public partial class ElektroniskSignaturType
     private System.DateTime verifisertDatoField;
 
     private string verifisertAvField;
+
+    private string referanseVerifisertAvField;
 
     /// <remarks/>
     public ElektroniskSignaturSikkerhetsnivaaType elektroniskSignaturSikkerhetsnivaa
@@ -2921,86 +4323,18 @@ public partial class ElektroniskSignaturType
             this.verifisertAvField = value;
         }
     }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
-[System.Xml.Serialization.XmlRootAttribute("ElektroniskSignaturSikkerhetsnivaa", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
-public partial class ElektroniskSignaturSikkerhetsnivaaType
-{
-
-    private string kodeField;
-
-    private string beskrivelseField;
 
     /// <remarks/>
-    public string kode
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string referanseVerifisertAv
     {
         get
         {
-            return this.kodeField;
+            return this.referanseVerifisertAvField;
         }
         set
         {
-            this.kodeField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string beskrivelse
-    {
-        get
-        {
-            return this.beskrivelseField;
-        }
-        set
-        {
-            this.beskrivelseField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
-[System.Xml.Serialization.XmlRootAttribute("ElektroniskSignaturVerifisert", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
-public partial class ElektroniskSignaturVerifisertType
-{
-
-    private string kodeField;
-
-    private string beskrivelseField;
-
-    /// <remarks/>
-    public string kode
-    {
-        get
-        {
-            return this.kodeField;
-        }
-        set
-        {
-            this.kodeField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string beskrivelse
-    {
-        get
-        {
-            return this.beskrivelseField;
-        }
-        set
-        {
-            this.beskrivelseField = value;
+            this.referanseVerifisertAvField = value;
         }
     }
 }
@@ -3015,7 +4349,7 @@ public partial class ElektroniskSignaturVerifisertType
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/sakarkiv")]
 [System.Xml.Serialization.XmlRootAttribute("AbstraktKorrespondansepart", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/sakarkiv", IsNullable = false)]
-public abstract partial class AbstraktKorrespondansepartType
+public abstract partial class AbstraktKorrespondansepartType : AbstraktResourceType
 {
 
     private string systemIDField;
@@ -3062,47 +4396,6 @@ public abstract partial class AbstraktKorrespondansepartType
         set
         {
             this.virksomhetsspesifikkeMetadataField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
-[System.Xml.Serialization.XmlRootAttribute("Korrespondanseparttype", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
-public partial class KorrespondanseparttypeType
-{
-
-    private string kodeField;
-
-    private string beskrivelseField;
-
-    /// <remarks/>
-    public string kode
-    {
-        get
-        {
-            return this.kodeField;
-        }
-        set
-        {
-            this.kodeField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string beskrivelse
-    {
-        get
-        {
-            return this.beskrivelseField;
-        }
-        set
-        {
-            this.beskrivelseField = value;
         }
     }
 }
@@ -3401,7 +4694,7 @@ public partial class KorrespondansepartEnhetType : AbstraktKorrespondansepartTyp
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/sakarkiv")]
 [System.Xml.Serialization.XmlRootAttribute("Dokumentflyt", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/sakarkiv", IsNullable = false)]
-public partial class DokumentflytType
+public partial class DokumentflytType : AbstraktResourceType
 {
 
     private string systemIDField;
@@ -3549,50 +4842,9 @@ public partial class DokumentflytType
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
-[System.Xml.Serialization.XmlRootAttribute("FlytStatus", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
-public partial class FlytStatusType
-{
-
-    private string kodeField;
-
-    private string beskrivelseField;
-
-    /// <remarks/>
-    public string kode
-    {
-        get
-        {
-            return this.kodeField;
-        }
-        set
-        {
-            this.kodeField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string beskrivelse
-    {
-        get
-        {
-            return this.beskrivelseField;
-        }
-        set
-        {
-            this.beskrivelseField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/sakarkiv")]
 [System.Xml.Serialization.XmlRootAttribute("Avskrivning", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/sakarkiv", IsNullable = false)]
-public partial class AvskrivningType
+public partial class AvskrivningType : AbstraktResourceType
 {
 
     private string systemIDField;
@@ -3702,47 +4954,6 @@ public partial class AvskrivningType
         set
         {
             this.referanseAvskrivesAvKorrespondansepartField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
-[System.Xml.Serialization.XmlRootAttribute("Avskrivningsmaate", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
-public partial class AvskrivningsmaateType
-{
-
-    private string kodeField;
-
-    private string beskrivelseField;
-
-    /// <remarks/>
-    public string kode
-    {
-        get
-        {
-            return this.kodeField;
-        }
-        set
-        {
-            this.kodeField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string beskrivelse
-    {
-        get
-        {
-            return this.beskrivelseField;
-        }
-        set
-        {
-            this.beskrivelseField = value;
         }
     }
 }
@@ -3941,50 +5152,9 @@ public partial class BasisregistreringType : RegistreringType
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
-[System.Xml.Serialization.XmlRootAttribute("Dokumentmedium", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
-public partial class DokumentmediumType
-{
-
-    private string kodeField;
-
-    private string beskrivelseField;
-
-    /// <remarks/>
-    public string kode
-    {
-        get
-        {
-            return this.kodeField;
-        }
-        set
-        {
-            this.kodeField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string beskrivelse
-    {
-        get
-        {
-            return this.beskrivelseField;
-        }
-        set
-        {
-            this.beskrivelseField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur")]
 [System.Xml.Serialization.XmlRootAttribute("Kryssreferanse", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur", IsNullable = false)]
-public partial class KryssreferanseType
+public partial class KryssreferanseType : AbstraktResourceType
 {
 
     private string referanseTilMappeField;
@@ -4124,8 +5294,6 @@ public partial class MappeType : AbstraktArkivenhetType
     private SkjermingType skjermingField;
 
     private GraderingType graderingField;
-
-    private string referanseArkivdelField;
 
     private string referanseForelderMappeField;
 
@@ -4354,20 +5522,6 @@ public partial class MappeType : AbstraktArkivenhetType
 
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public string referanseArkivdel
-    {
-        get
-        {
-            return this.referanseArkivdelField;
-        }
-        set
-        {
-            this.referanseArkivdelField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
     public string referanseForelderMappe
     {
         get
@@ -4454,6 +5608,7 @@ public partial class MappeType : AbstraktArkivenhetType
     }
 
     /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
     public ArkivdelType arkivdel
     {
         get
@@ -4487,50 +5642,9 @@ public partial class MappeType : AbstraktArkivenhetType
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
-[System.Xml.Serialization.XmlRootAttribute("Mappetype", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
-public partial class MappetypeType
-{
-
-    private string kodeField;
-
-    private string beskrivelseField;
-
-    /// <remarks/>
-    public string kode
-    {
-        get
-        {
-            return this.kodeField;
-        }
-        set
-        {
-            this.kodeField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string beskrivelse
-    {
-        get
-        {
-            return this.beskrivelseField;
-        }
-        set
-        {
-            this.beskrivelseField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur")]
 [System.Xml.Serialization.XmlRootAttribute("Kassasjon", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur", IsNullable = false)]
-public partial class KassasjonType
+public partial class KassasjonType : AbstraktResourceType
 {
 
     private KassasjonsvedtakType kassasjonsvedtakField;
@@ -4602,50 +5716,9 @@ public partial class KassasjonType
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
-[System.Xml.Serialization.XmlRootAttribute("Kassasjonsvedtak", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
-public partial class KassasjonsvedtakType
-{
-
-    private string kodeField;
-
-    private string beskrivelseField;
-
-    /// <remarks/>
-    public string kode
-    {
-        get
-        {
-            return this.kodeField;
-        }
-        set
-        {
-            this.kodeField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string beskrivelse
-    {
-        get
-        {
-            return this.beskrivelseField;
-        }
-        set
-        {
-            this.beskrivelseField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur")]
 [System.Xml.Serialization.XmlRootAttribute("Skjerming", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur", IsNullable = false)]
-public partial class SkjermingType
+public partial class SkjermingType : AbstraktResourceType
 {
 
     private TilgangsrestriksjonType tilgangsrestriksjonField;
@@ -4765,132 +5838,9 @@ public partial class SkjermingType
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
-[System.Xml.Serialization.XmlRootAttribute("Tilgangsrestriksjon", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
-public partial class TilgangsrestriksjonType
-{
-
-    private string kodeField;
-
-    private string beskrivelseField;
-
-    /// <remarks/>
-    public string kode
-    {
-        get
-        {
-            return this.kodeField;
-        }
-        set
-        {
-            this.kodeField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string beskrivelse
-    {
-        get
-        {
-            return this.beskrivelseField;
-        }
-        set
-        {
-            this.beskrivelseField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
-[System.Xml.Serialization.XmlRootAttribute("SkjermingMetadata", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
-public partial class SkjermingMetadataType
-{
-
-    private string kodeField;
-
-    private string beskrivelseField;
-
-    /// <remarks/>
-    public string kode
-    {
-        get
-        {
-            return this.kodeField;
-        }
-        set
-        {
-            this.kodeField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string beskrivelse
-    {
-        get
-        {
-            return this.beskrivelseField;
-        }
-        set
-        {
-            this.beskrivelseField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
-[System.Xml.Serialization.XmlRootAttribute("SkjermingDokument", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
-public partial class SkjermingDokumentType
-{
-
-    private string kodeField;
-
-    private string beskrivelseField;
-
-    /// <remarks/>
-    public string kode
-    {
-        get
-        {
-            return this.kodeField;
-        }
-        set
-        {
-            this.kodeField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string beskrivelse
-    {
-        get
-        {
-            return this.beskrivelseField;
-        }
-        set
-        {
-            this.beskrivelseField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur")]
 [System.Xml.Serialization.XmlRootAttribute("Gradering", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur", IsNullable = false)]
-public partial class GraderingType
+public partial class GraderingType : AbstraktResourceType
 {
 
     private GraderingskodeType graderingskodeField;
@@ -5023,50 +5973,9 @@ public partial class GraderingType
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
-[System.Xml.Serialization.XmlRootAttribute("Graderingskode", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
-public partial class GraderingskodeType
-{
-
-    private string kodeField;
-
-    private string beskrivelseField;
-
-    /// <remarks/>
-    public string kode
-    {
-        get
-        {
-            return this.kodeField;
-        }
-        set
-        {
-            this.kodeField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string beskrivelse
-    {
-        get
-        {
-            return this.beskrivelseField;
-        }
-        set
-        {
-            this.beskrivelseField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur")]
 [System.Xml.Serialization.XmlRootAttribute("Merknad", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur", IsNullable = false)]
-public partial class MerknadType
+public partial class MerknadType : AbstraktResourceType
 {
 
     private string systemIDField;
@@ -5160,47 +6069,6 @@ public partial class MerknadType
         set
         {
             this.referanseMerknadRegistrertAvField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
-[System.Xml.Serialization.XmlRootAttribute("Merknadstype", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
-public partial class MerknadstypeType
-{
-
-    private string kodeField;
-
-    private string beskrivelseField;
-
-    /// <remarks/>
-    public string kode
-    {
-        get
-        {
-            return this.kodeField;
-        }
-        set
-        {
-            this.kodeField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string beskrivelse
-    {
-        get
-        {
-            return this.beskrivelseField;
-        }
-        set
-        {
-            this.beskrivelseField = value;
         }
     }
 }
@@ -5458,6 +6326,8 @@ public partial class KlasseType : AbstraktArkivenhetType
 
     private KassasjonType kassasjonField;
 
+    private KlassifikasjonssystemType klassifikasjonssystemField;
+
     private RegistreringType[] registreringField;
 
     private MappeType[] mappeField;
@@ -5603,6 +6473,20 @@ public partial class KlasseType : AbstraktArkivenhetType
     }
 
     /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public KlassifikasjonssystemType klassifikasjonssystem
+    {
+        get
+        {
+            return this.klassifikasjonssystemField;
+        }
+        set
+        {
+            this.klassifikasjonssystemField = value;
+        }
+    }
+
+    /// <remarks/>
     [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
     [System.Xml.Serialization.XmlArrayItemAttribute("registrering", IsNullable = false)]
     public RegistreringType[] registrering
@@ -5649,496 +6533,44 @@ public partial class KlasseType : AbstraktArkivenhetType
 }
 
 /// <remarks/>
-[System.Xml.Serialization.XmlIncludeAttribute(typeof(KlassifikasjonssystemType))]
-[System.Xml.Serialization.XmlIncludeAttribute(typeof(DokumentbeskrivelseType))]
-[System.Xml.Serialization.XmlIncludeAttribute(typeof(KlasseType))]
-[System.Xml.Serialization.XmlIncludeAttribute(typeof(RegistreringType))]
-[System.Xml.Serialization.XmlIncludeAttribute(typeof(BasisregistreringType))]
-[System.Xml.Serialization.XmlIncludeAttribute(typeof(JournalpostType))]
-[System.Xml.Serialization.XmlIncludeAttribute(typeof(MappeType))]
-[System.Xml.Serialization.XmlIncludeAttribute(typeof(SaksmappeType))]
-[System.Xml.Serialization.XmlIncludeAttribute(typeof(ArkivdelType))]
-[System.Xml.Serialization.XmlIncludeAttribute(typeof(ArkivskaperType))]
-[System.Xml.Serialization.XmlIncludeAttribute(typeof(ArkivType))]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur")]
-[System.Xml.Serialization.XmlRootAttribute("AbstraktArkivenhet", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur", IsNullable = false)]
-public abstract partial class AbstraktArkivenhetType
+[System.Xml.Serialization.XmlRootAttribute("Klassifikasjonssystem", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur", IsNullable = false)]
+public partial class KlassifikasjonssystemType : AbstraktArkivenhetType
 {
 
-    private string systemIDField;
-
-    private System.Nullable<System.DateTime> oppdatertDatoField;
-
-    private bool oppdatertDatoFieldSpecified;
-
-    private System.Nullable<System.DateTime> opprettetDatoField;
-
-    private bool opprettetDatoFieldSpecified;
-
-    private string opprettetAvField;
-
-    private string oppdatertAvField;
-
-    private string referanseOppdatertAvField;
-
-    private string referanseOpprettetAvField;
-
-    private HendelsesloggType[] loggField;
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public string systemID
-    {
-        get
-        {
-            return this.systemIDField;
-        }
-        set
-        {
-            this.systemIDField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public System.Nullable<System.DateTime> oppdatertDato
-    {
-        get
-        {
-            return this.oppdatertDatoField;
-        }
-        set
-        {
-            this.oppdatertDatoField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()] [Newtonsoft.Json.JsonIgnore]
-    public bool oppdatertDatoSpecified
-    {
-        get
-        {
-            return this.oppdatertDatoFieldSpecified;
-        }
-        set
-        {
-            this.oppdatertDatoFieldSpecified = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public System.Nullable<System.DateTime> opprettetDato
-    {
-        get
-        {
-            return this.opprettetDatoField;
-        }
-        set
-        {
-            this.opprettetDatoField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()] [Newtonsoft.Json.JsonIgnore]
-    public bool opprettetDatoSpecified
-    {
-        get
-        {
-            return this.opprettetDatoFieldSpecified;
-        }
-        set
-        {
-            this.opprettetDatoFieldSpecified = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public string opprettetAv
-    {
-        get
-        {
-            return this.opprettetAvField;
-        }
-        set
-        {
-            this.opprettetAvField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public string oppdatertAv
-    {
-        get
-        {
-            return this.oppdatertAvField;
-        }
-        set
-        {
-            this.oppdatertAvField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public string referanseOppdatertAv
-    {
-        get
-        {
-            return this.referanseOppdatertAvField;
-        }
-        set
-        {
-            this.referanseOppdatertAvField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public string referanseOpprettetAv
-    {
-        get
-        {
-            return this.referanseOpprettetAvField;
-        }
-        set
-        {
-            this.referanseOpprettetAvField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
-    [System.Xml.Serialization.XmlArrayItemAttribute("hendelseslogg", IsNullable = false)]
-    public HendelsesloggType[] logg
-    {
-        get
-        {
-            return this.loggField;
-        }
-        set
-        {
-            this.loggField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur")]
-[System.Xml.Serialization.XmlRootAttribute("Hendelseslogg", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur", IsNullable = false)]
-public partial class HendelsesloggType : EndringsloggType
-{
-
-    private HendelsetypeType hendelsetypeField;
-
-    private string beskrivelseField;
-
-    private System.DateTime hendelseDatoField;
-
-    /// <remarks/>
-    public HendelsetypeType hendelsetype
-    {
-        get
-        {
-            return this.hendelsetypeField;
-        }
-        set
-        {
-            this.hendelsetypeField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public string beskrivelse
-    {
-        get
-        {
-            return this.beskrivelseField;
-        }
-        set
-        {
-            this.beskrivelseField = value;
-        }
-    }
-
-    /// <remarks/>
-    public System.DateTime hendelseDato
-    {
-        get
-        {
-            return this.hendelseDatoField;
-        }
-        set
-        {
-            this.hendelseDatoField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
-[System.Xml.Serialization.XmlRootAttribute("Hendelsetype", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
-public partial class HendelsetypeType
-{
-
-    private string kodeField;
-
-    private string beskrivelseField;
-
-    /// <remarks/>
-    public string kode
-    {
-        get
-        {
-            return this.kodeField;
-        }
-        set
-        {
-            this.kodeField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string beskrivelse
-    {
-        get
-        {
-            return this.beskrivelseField;
-        }
-        set
-        {
-            this.beskrivelseField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.Xml.Serialization.XmlIncludeAttribute(typeof(HendelsesloggType))]
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/loggingogsporing")]
-[System.Xml.Serialization.XmlRootAttribute("Endringslogg", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/loggingogsporing", IsNullable = false)]
-public partial class EndringsloggType
-{
-
-    private string systemIDField;
-
-    private string referanseArkivenhetField;
-
-    private string referanseMetadataField;
-
-    private System.DateTime endretDatoField;
-
-    private string endretAvField;
-
-    private string referanseEndretAvField;
-
-    private string tidligereVerdiField;
-
-    private string nyVerdiField;
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public string systemID
-    {
-        get
-        {
-            return this.systemIDField;
-        }
-        set
-        {
-            this.systemIDField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public string referanseArkivenhet
-    {
-        get
-        {
-            return this.referanseArkivenhetField;
-        }
-        set
-        {
-            this.referanseArkivenhetField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public string referanseMetadata
-    {
-        get
-        {
-            return this.referanseMetadataField;
-        }
-        set
-        {
-            this.referanseMetadataField = value;
-        }
-    }
-
-    /// <remarks/>
-    public System.DateTime endretDato
-    {
-        get
-        {
-            return this.endretDatoField;
-        }
-        set
-        {
-            this.endretDatoField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string endretAv
-    {
-        get
-        {
-            return this.endretAvField;
-        }
-        set
-        {
-            this.endretAvField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string referanseEndretAv
-    {
-        get
-        {
-            return this.referanseEndretAvField;
-        }
-        set
-        {
-            this.referanseEndretAvField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public string tidligereVerdi
-    {
-        get
-        {
-            return this.tidligereVerdiField;
-        }
-        set
-        {
-            this.tidligereVerdiField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public string nyVerdi
-    {
-        get
-        {
-            return this.nyVerdiField;
-        }
-        set
-        {
-            this.nyVerdiField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur")]
-[System.Xml.Serialization.XmlRootAttribute("Dokumentbeskrivelse", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur", IsNullable = false)]
-public partial class DokumentbeskrivelseType : AbstraktArkivenhetType
-{
-
-    private DokumenttypeType dokumenttypeField;
-
-    private DokumentstatusType dokumentstatusField;
+    private KlassifikasjonstypeType klassifikasjonstypeField;
 
     private string tittelField;
 
     private string beskrivelseField;
 
-    private string[] forfatterField;
+    private System.Nullable<System.DateTime> avsluttetDatoField;
 
-    private DokumentmediumType dokumentmediumField;
+    private bool avsluttetDatoFieldSpecified;
 
-    private string oppbevaringsstedField;
+    private string avsluttetAvField;
 
-    private TilknyttetRegistreringSomType tilknyttetRegistreringSomField;
+    private string referanseAvsluttetAvField;
 
-    private string dokumentnummerField;
+    private KlasseType[] klasseField;
 
-    private System.DateTime tilknyttetDatoField;
-
-    private string tilknyttetAvField;
-
-    private KassasjonType kassasjonField;
-
-    private UtfoertKassasjonType utfoertKassasjonField;
-
-    private SlettingType slettingField;
-
-    private SkjermingType skjermingField;
-
-    private GraderingType graderingField;
-
-    private ElektroniskSignaturType elektroniskSignaturField;
-
-    private object virksomhetsspesifikkeMetadataField;
-
-    private MerknadType[] merknadField;
-
-    private DokumentobjektType[] dokumentobjektField;
+    private ArkivdelType arkivdelField;
 
     /// <remarks/>
-    public DokumenttypeType dokumenttype
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public KlassifikasjonstypeType klassifikasjonstype
     {
         get
         {
-            return this.dokumenttypeField;
+            return this.klassifikasjonstypeField;
         }
         set
         {
-            this.dokumenttypeField = value;
-        }
-    }
-
-    /// <remarks/>
-    public DokumentstatusType dokumentstatus
-    {
-        get
-        {
-            return this.dokumentstatusField;
-        }
-        set
-        {
-            this.dokumentstatusField = value;
+            this.klassifikasjonstypeField = value;
         }
     }
 
@@ -6170,806 +6602,87 @@ public partial class DokumentbeskrivelseType : AbstraktArkivenhetType
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("forfatter", IsNullable = true)]
-    public string[] forfatter
-    {
-        get
-        {
-            return this.forfatterField;
-        }
-        set
-        {
-            this.forfatterField = value;
-        }
-    }
-
-    /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public DokumentmediumType dokumentmedium
+    public System.Nullable<System.DateTime> avsluttetDato
     {
         get
         {
-            return this.dokumentmediumField;
+            return this.avsluttetDatoField;
         }
         set
         {
-            this.dokumentmediumField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public string oppbevaringssted
-    {
-        get
-        {
-            return this.oppbevaringsstedField;
-        }
-        set
-        {
-            this.oppbevaringsstedField = value;
-        }
-    }
-
-    /// <remarks/>
-    public TilknyttetRegistreringSomType tilknyttetRegistreringSom
-    {
-        get
-        {
-            return this.tilknyttetRegistreringSomField;
-        }
-        set
-        {
-            this.tilknyttetRegistreringSomField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(DataType = "integer")]
-    public string dokumentnummer
-    {
-        get
-        {
-            return this.dokumentnummerField;
-        }
-        set
-        {
-            this.dokumentnummerField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(DataType = "date")]
-    public System.DateTime tilknyttetDato
-    {
-        get
-        {
-            return this.tilknyttetDatoField;
-        }
-        set
-        {
-            this.tilknyttetDatoField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string tilknyttetAv
-    {
-        get
-        {
-            return this.tilknyttetAvField;
-        }
-        set
-        {
-            this.tilknyttetAvField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public KassasjonType kassasjon
-    {
-        get
-        {
-            return this.kassasjonField;
-        }
-        set
-        {
-            this.kassasjonField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public UtfoertKassasjonType utfoertKassasjon
-    {
-        get
-        {
-            return this.utfoertKassasjonField;
-        }
-        set
-        {
-            this.utfoertKassasjonField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public SlettingType sletting
-    {
-        get
-        {
-            return this.slettingField;
-        }
-        set
-        {
-            this.slettingField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public SkjermingType skjerming
-    {
-        get
-        {
-            return this.skjermingField;
-        }
-        set
-        {
-            this.skjermingField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public GraderingType gradering
-    {
-        get
-        {
-            return this.graderingField;
-        }
-        set
-        {
-            this.graderingField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public ElektroniskSignaturType elektroniskSignatur
-    {
-        get
-        {
-            return this.elektroniskSignaturField;
-        }
-        set
-        {
-            this.elektroniskSignaturField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public object virksomhetsspesifikkeMetadata
-    {
-        get
-        {
-            return this.virksomhetsspesifikkeMetadataField;
-        }
-        set
-        {
-            this.virksomhetsspesifikkeMetadataField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
-    [System.Xml.Serialization.XmlArrayItemAttribute("merknad", IsNullable = false)]
-    public MerknadType[] merknad
-    {
-        get
-        {
-            return this.merknadField;
-        }
-        set
-        {
-            this.merknadField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
-    [System.Xml.Serialization.XmlArrayItemAttribute("dokumentobjekt", IsNullable = false)]
-    public DokumentobjektType[] dokumentobjekt
-    {
-        get
-        {
-            return this.dokumentobjektField;
-        }
-        set
-        {
-            this.dokumentobjektField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur")]
-[System.Xml.Serialization.XmlRootAttribute("UtfoertKassasjon", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur", IsNullable = false)]
-public partial class UtfoertKassasjonType
-{
-
-    private System.DateTime kassertDatoField;
-
-    private string kassertAvField;
-
-    private string referanseKassertAvField;
-
-    /// <remarks/>
-    public System.DateTime kassertDato
-    {
-        get
-        {
-            return this.kassertDatoField;
-        }
-        set
-        {
-            this.kassertDatoField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string kassertAv
-    {
-        get
-        {
-            return this.kassertAvField;
-        }
-        set
-        {
-            this.kassertAvField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string referanseKassertAv
-    {
-        get
-        {
-            return this.referanseKassertAvField;
-        }
-        set
-        {
-            this.referanseKassertAvField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur")]
-[System.Xml.Serialization.XmlRootAttribute("Sletting", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur", IsNullable = false)]
-public partial class SlettingType
-{
-
-    private SlettingstypeType slettingstypeField;
-
-    private System.DateTime slettetDatoField;
-
-    private string slettetAvField;
-
-    private string referanseSlettetAvField;
-
-    /// <remarks/>
-    public SlettingstypeType slettingstype
-    {
-        get
-        {
-            return this.slettingstypeField;
-        }
-        set
-        {
-            this.slettingstypeField = value;
-        }
-    }
-
-    /// <remarks/>
-    public System.DateTime slettetDato
-    {
-        get
-        {
-            return this.slettetDatoField;
-        }
-        set
-        {
-            this.slettetDatoField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string slettetAv
-    {
-        get
-        {
-            return this.slettetAvField;
-        }
-        set
-        {
-            this.slettetAvField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string referanseSlettetAv
-    {
-        get
-        {
-            return this.referanseSlettetAvField;
-        }
-        set
-        {
-            this.referanseSlettetAvField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
-[System.Xml.Serialization.XmlRootAttribute("Slettingstype", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
-public partial class SlettingstypeType
-{
-
-    private string kodeField;
-
-    private string beskrivelseField;
-
-    /// <remarks/>
-    public string kode
-    {
-        get
-        {
-            return this.kodeField;
-        }
-        set
-        {
-            this.kodeField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string beskrivelse
-    {
-        get
-        {
-            return this.beskrivelseField;
-        }
-        set
-        {
-            this.beskrivelseField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur")]
-[System.Xml.Serialization.XmlRootAttribute("Dokumentobjekt", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur", IsNullable = false)]
-public partial class DokumentobjektType
-{
-
-    private string systemIDField;
-
-    private string versjonsnummerField;
-
-    private VariantformatType variantformatField;
-
-    private FormatType formatField;
-
-    private string formatDetaljerField;
-
-    private System.Nullable<System.DateTime> opprettetDatoField;
-
-    private bool opprettetDatoFieldSpecified;
-
-    private string opprettetAvField;
-
-    private string referanseDokumentfilField;
-
-    private string sjekksumField;
-
-    private string sjekksumAlgoritmeField;
-
-    private string filstoerrelseField;
-
-    private ElektroniskSignaturType elektroniskSignaturField;
-
-    private AbstraktFilType dokumentfilField;
-
-    private KonverteringType[] konverteringField;
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public string systemID
-    {
-        get
-        {
-            return this.systemIDField;
-        }
-        set
-        {
-            this.systemIDField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(DataType = "integer")]
-    public string versjonsnummer
-    {
-        get
-        {
-            return this.versjonsnummerField;
-        }
-        set
-        {
-            this.versjonsnummerField = value;
-        }
-    }
-
-    /// <remarks/>
-    public VariantformatType variantformat
-    {
-        get
-        {
-            return this.variantformatField;
-        }
-        set
-        {
-            this.variantformatField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public FormatType format
-    {
-        get
-        {
-            return this.formatField;
-        }
-        set
-        {
-            this.formatField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public string formatDetaljer
-    {
-        get
-        {
-            return this.formatDetaljerField;
-        }
-        set
-        {
-            this.formatDetaljerField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public System.Nullable<System.DateTime> opprettetDato
-    {
-        get
-        {
-            return this.opprettetDatoField;
-        }
-        set
-        {
-            this.opprettetDatoField = value;
+            this.avsluttetDatoField = value;
         }
     }
 
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()] [Newtonsoft.Json.JsonIgnore]
-    public bool opprettetDatoSpecified
+    public bool avsluttetDatoSpecified
     {
         get
         {
-            return this.opprettetDatoFieldSpecified;
+            return this.avsluttetDatoFieldSpecified;
         }
         set
         {
-            this.opprettetDatoFieldSpecified = value;
+            this.avsluttetDatoFieldSpecified = value;
         }
     }
 
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public string opprettetAv
+    public string avsluttetAv
     {
         get
         {
-            return this.opprettetAvField;
+            return this.avsluttetAvField;
         }
         set
         {
-            this.opprettetAvField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string referanseDokumentfil
-    {
-        get
-        {
-            return this.referanseDokumentfilField;
-        }
-        set
-        {
-            this.referanseDokumentfilField = value;
+            this.avsluttetAvField = value;
         }
     }
 
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public string sjekksum
+    public string referanseAvsluttetAv
     {
         get
         {
-            return this.sjekksumField;
+            return this.referanseAvsluttetAvField;
         }
         set
         {
-            this.sjekksumField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public string sjekksumAlgoritme
-    {
-        get
-        {
-            return this.sjekksumAlgoritmeField;
-        }
-        set
-        {
-            this.sjekksumAlgoritmeField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public string filstoerrelse
-    {
-        get
-        {
-            return this.filstoerrelseField;
-        }
-        set
-        {
-            this.filstoerrelseField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public ElektroniskSignaturType elektroniskSignatur
-    {
-        get
-        {
-            return this.elektroniskSignaturField;
-        }
-        set
-        {
-            this.elektroniskSignaturField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public AbstraktFilType dokumentfil
-    {
-        get
-        {
-            return this.dokumentfilField;
-        }
-        set
-        {
-            this.dokumentfilField = value;
+            this.referanseAvsluttetAvField = value;
         }
     }
 
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
-    [System.Xml.Serialization.XmlArrayItemAttribute("konvertering", IsNullable = false)]
-    public KonverteringType[] konvertering
+    [System.Xml.Serialization.XmlArrayItemAttribute("klasse", IsNullable = false)]
+    public KlasseType[] klasse
     {
         get
         {
-            return this.konverteringField;
+            return this.klasseField;
         }
         set
         {
-            this.konverteringField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.Xml.Serialization.XmlIncludeAttribute(typeof(FilreferanseType))]
-[System.Xml.Serialization.XmlIncludeAttribute(typeof(FilinnholdType))]
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur")]
-[System.Xml.Serialization.XmlRootAttribute("AbstraktFil", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur", IsNullable = false)]
-public abstract partial class AbstraktFilType
-{
-
-    private string filnavnField;
-
-    private string mimeTypeField;
-
-    /// <remarks/>
-    public string filnavn
-    {
-        get
-        {
-            return this.filnavnField;
-        }
-        set
-        {
-            this.filnavnField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string mimeType
-    {
-        get
-        {
-            return this.mimeTypeField;
-        }
-        set
-        {
-            this.mimeTypeField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur")]
-[System.Xml.Serialization.XmlRootAttribute("Konvertering", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur", IsNullable = false)]
-public partial class KonverteringType
-{
-
-    private string systemIDField;
-
-    private System.DateTime konvertertDatoField;
-
-    private string konvertertAvField;
-
-    private string konvertertFraFormatField;
-
-    private string konvertertTilFormatField;
-
-    private string konverteringsverktoeyField;
-
-    private string konverteringskommentarField;
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public string systemID
-    {
-        get
-        {
-            return this.systemIDField;
-        }
-        set
-        {
-            this.systemIDField = value;
-        }
-    }
-
-    /// <remarks/>
-    public System.DateTime konvertertDato
-    {
-        get
-        {
-            return this.konvertertDatoField;
-        }
-        set
-        {
-            this.konvertertDatoField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string konvertertAv
-    {
-        get
-        {
-            return this.konvertertAvField;
-        }
-        set
-        {
-            this.konvertertAvField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string konvertertFraFormat
-    {
-        get
-        {
-            return this.konvertertFraFormatField;
-        }
-        set
-        {
-            this.konvertertFraFormatField = value;
-        }
-    }
-
-    /// <remarks/>
-    public string konvertertTilFormat
-    {
-        get
-        {
-            return this.konvertertTilFormatField;
-        }
-        set
-        {
-            this.konvertertTilFormatField = value;
+            this.klasseField = value;
         }
     }
 
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public string konverteringsverktoey
+    public ArkivdelType arkivdel
     {
         get
         {
-            return this.konverteringsverktoeyField;
+            return this.arkivdelField;
         }
         set
         {
-            this.konverteringsverktoeyField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public string konverteringskommentar
-    {
-        get
-        {
-            return this.konverteringskommentarField;
-        }
-        set
-        {
-            this.konverteringskommentarField = value;
+            this.arkivdelField = value;
         }
     }
 }
@@ -7028,9 +6741,11 @@ public partial class ArkivdelType : AbstraktArkivenhetType
 
     private ArkivType arkivField;
 
-    private KlassifikasjonssystemType[] klassifikasjonssystemField;
+    private KlassifikasjonssystemType klassifikasjonssystemField;
 
     private RegistreringType[] registreringField;
+
+    private KlassifikasjonssystemType[] sekundaerklassifikasjonssystemField;
 
     /// <remarks/>
     public string tittel
@@ -7339,9 +7054,8 @@ public partial class ArkivdelType : AbstraktArkivenhetType
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
-    [System.Xml.Serialization.XmlArrayItemAttribute("klassifikasjonssystem", IsNullable = false)]
-    public KlassifikasjonssystemType[] klassifikasjonssystem
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public KlassifikasjonssystemType klassifikasjonssystem
     {
         get
         {
@@ -7367,6 +7081,21 @@ public partial class ArkivdelType : AbstraktArkivenhetType
             this.registreringField = value;
         }
     }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
+    [System.Xml.Serialization.XmlArrayItemAttribute("klassifikasjonssystem", IsNullable = false)]
+    public KlassifikasjonssystemType[] sekundaerklassifikasjonssystem
+    {
+        get
+        {
+            return this.sekundaerklassifikasjonssystemField;
+        }
+        set
+        {
+            this.sekundaerklassifikasjonssystemField = value;
+        }
+    }
 }
 
 /// <remarks/>
@@ -7374,29 +7103,342 @@ public partial class ArkivdelType : AbstraktArkivenhetType
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata")]
-[System.Xml.Serialization.XmlRootAttribute("Arkivdelstatus", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/metadata", IsNullable = false)]
-public partial class ArkivdelstatusType
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur")]
+[System.Xml.Serialization.XmlRootAttribute("UtfoertKassasjon", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur", IsNullable = false)]
+public partial class UtfoertKassasjonType : AbstraktResourceType
 {
 
-    private string kodeField;
+    private System.DateTime kassertDatoField;
 
-    private string beskrivelseField;
+    private string kassertAvField;
+
+    private string referanseKassertAvField;
 
     /// <remarks/>
-    public string kode
+    public System.DateTime kassertDato
     {
         get
         {
-            return this.kodeField;
+            return this.kassertDatoField;
         }
         set
         {
-            this.kodeField = value;
+            this.kassertDatoField = value;
         }
     }
 
     /// <remarks/>
+    public string kassertAv
+    {
+        get
+        {
+            return this.kassertAvField;
+        }
+        set
+        {
+            this.kassertAvField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string referanseKassertAv
+    {
+        get
+        {
+            return this.referanseKassertAvField;
+        }
+        set
+        {
+            this.referanseKassertAvField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur")]
+[System.Xml.Serialization.XmlRootAttribute("Sletting", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur", IsNullable = false)]
+public partial class SlettingType : AbstraktResourceType
+{
+
+    private SlettingstypeType slettingstypeField;
+
+    private System.DateTime slettetDatoField;
+
+    private string slettetAvField;
+
+    private string referanseSlettetAvField;
+
+    /// <remarks/>
+    public SlettingstypeType slettingstype
+    {
+        get
+        {
+            return this.slettingstypeField;
+        }
+        set
+        {
+            this.slettingstypeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public System.DateTime slettetDato
+    {
+        get
+        {
+            return this.slettetDatoField;
+        }
+        set
+        {
+            this.slettetDatoField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string slettetAv
+    {
+        get
+        {
+            return this.slettetAvField;
+        }
+        set
+        {
+            this.slettetAvField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string referanseSlettetAv
+    {
+        get
+        {
+            return this.referanseSlettetAvField;
+        }
+        set
+        {
+            this.referanseSlettetAvField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(DokumentbeskrivelseType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(KlassifikasjonssystemType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(KlasseType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(RegistreringType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(BasisregistreringType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(JournalpostType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(MappeType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(SaksmappeType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(ArkivdelType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(ArkivskaperType))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(ArkivType))]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur")]
+[System.Xml.Serialization.XmlRootAttribute("AbstraktArkivenhet", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur", IsNullable = false)]
+public abstract partial class AbstraktArkivenhetType : AbstraktResourceType
+{
+
+    private string systemIDField;
+
+    private System.Nullable<System.DateTime> oppdatertDatoField;
+
+    private bool oppdatertDatoFieldSpecified;
+
+    private System.Nullable<System.DateTime> opprettetDatoField;
+
+    private bool opprettetDatoFieldSpecified;
+
+    private string opprettetAvField;
+
+    private string oppdatertAvField;
+
+    private string referanseOppdatertAvField;
+
+    private string referanseOpprettetAvField;
+
+    private HendelsesloggType[] loggField;
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string systemID
+    {
+        get
+        {
+            return this.systemIDField;
+        }
+        set
+        {
+            this.systemIDField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public System.Nullable<System.DateTime> oppdatertDato
+    {
+        get
+        {
+            return this.oppdatertDatoField;
+        }
+        set
+        {
+            this.oppdatertDatoField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()] [Newtonsoft.Json.JsonIgnore]
+    public bool oppdatertDatoSpecified
+    {
+        get
+        {
+            return this.oppdatertDatoFieldSpecified;
+        }
+        set
+        {
+            this.oppdatertDatoFieldSpecified = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public System.Nullable<System.DateTime> opprettetDato
+    {
+        get
+        {
+            return this.opprettetDatoField;
+        }
+        set
+        {
+            this.opprettetDatoField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()] [Newtonsoft.Json.JsonIgnore]
+    public bool opprettetDatoSpecified
+    {
+        get
+        {
+            return this.opprettetDatoFieldSpecified;
+        }
+        set
+        {
+            this.opprettetDatoFieldSpecified = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string opprettetAv
+    {
+        get
+        {
+            return this.opprettetAvField;
+        }
+        set
+        {
+            this.opprettetAvField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string oppdatertAv
+    {
+        get
+        {
+            return this.oppdatertAvField;
+        }
+        set
+        {
+            this.oppdatertAvField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string referanseOppdatertAv
+    {
+        get
+        {
+            return this.referanseOppdatertAvField;
+        }
+        set
+        {
+            this.referanseOppdatertAvField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string referanseOpprettetAv
+    {
+        get
+        {
+            return this.referanseOpprettetAvField;
+        }
+        set
+        {
+            this.referanseOpprettetAvField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
+    [System.Xml.Serialization.XmlArrayItemAttribute("hendelseslogg", IsNullable = false)]
+    public HendelsesloggType[] logg
+    {
+        get
+        {
+            return this.loggField;
+        }
+        set
+        {
+            this.loggField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur")]
+[System.Xml.Serialization.XmlRootAttribute("Hendelseslogg", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur", IsNullable = false)]
+public partial class HendelsesloggType : EndringsloggType
+{
+
+    private HendelsetypeType hendelsetypeField;
+
+    private string beskrivelseField;
+
+    private System.DateTime hendelseDatoField;
+
+    /// <remarks/>
+    public HendelsetypeType hendelsetype
+    {
+        get
+        {
+            return this.hendelsetypeField;
+        }
+        set
+        {
+            this.hendelsetypeField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
     public string beskrivelse
     {
         get
@@ -7408,6 +7450,156 @@ public partial class ArkivdelstatusType
             this.beskrivelseField = value;
         }
     }
+
+    /// <remarks/>
+    public System.DateTime hendelseDato
+    {
+        get
+        {
+            return this.hendelseDatoField;
+        }
+        set
+        {
+            this.hendelseDatoField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(HendelsesloggType))]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/loggingogsporing")]
+[System.Xml.Serialization.XmlRootAttribute("Endringslogg", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/loggingogsporing", IsNullable = false)]
+public partial class EndringsloggType : AbstraktResourceType
+{
+
+    private string systemIDField;
+
+    private string referanseArkivenhetField;
+
+    private string referanseMetadataField;
+
+    private System.DateTime endretDatoField;
+
+    private string endretAvField;
+
+    private string referanseEndretAvField;
+
+    private string tidligereVerdiField;
+
+    private string nyVerdiField;
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string systemID
+    {
+        get
+        {
+            return this.systemIDField;
+        }
+        set
+        {
+            this.systemIDField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string referanseArkivenhet
+    {
+        get
+        {
+            return this.referanseArkivenhetField;
+        }
+        set
+        {
+            this.referanseArkivenhetField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string referanseMetadata
+    {
+        get
+        {
+            return this.referanseMetadataField;
+        }
+        set
+        {
+            this.referanseMetadataField = value;
+        }
+    }
+
+    /// <remarks/>
+    public System.DateTime endretDato
+    {
+        get
+        {
+            return this.endretDatoField;
+        }
+        set
+        {
+            this.endretDatoField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string endretAv
+    {
+        get
+        {
+            return this.endretAvField;
+        }
+        set
+        {
+            this.endretAvField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string referanseEndretAv
+    {
+        get
+        {
+            return this.referanseEndretAvField;
+        }
+        set
+        {
+            this.referanseEndretAvField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string tidligereVerdi
+    {
+        get
+        {
+            return this.tidligereVerdiField;
+        }
+        set
+        {
+            this.tidligereVerdiField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string nyVerdi
+    {
+        get
+        {
+            return this.nyVerdiField;
+        }
+        set
+        {
+            this.nyVerdiField = value;
+        }
+    }
 }
 
 /// <remarks/>
@@ -7416,37 +7608,77 @@ public partial class ArkivdelstatusType
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur")]
-[System.Xml.Serialization.XmlRootAttribute("Klassifikasjonssystem", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur", IsNullable = false)]
-public partial class KlassifikasjonssystemType : AbstraktArkivenhetType
+[System.Xml.Serialization.XmlRootAttribute("Dokumentbeskrivelse", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur", IsNullable = false)]
+public partial class DokumentbeskrivelseType : AbstraktArkivenhetType
 {
 
-    private KlassifikasjonstypeType klassifikasjonstypeField;
+    private DokumenttypeType dokumenttypeField;
+
+    private DokumentstatusType dokumentstatusField;
 
     private string tittelField;
 
     private string beskrivelseField;
 
-    private System.Nullable<System.DateTime> avsluttetDatoField;
+    private string[] forfatterField;
 
-    private bool avsluttetDatoFieldSpecified;
+    private DokumentmediumType dokumentmediumField;
 
-    private string avsluttetAvField;
+    private string oppbevaringsstedField;
 
-    private string referanseAvsluttetAvField;
+    private TilknyttetRegistreringSomType tilknyttetRegistreringSomField;
 
-    private KlasseType[] klasseField;
+    private string dokumentnummerField;
+
+    private System.DateTime tilknyttetDatoField;
+
+    private string tilknyttetAvField;
+
+    private string referanseTilknyttetAvField;
+
+    private KassasjonType kassasjonField;
+
+    private UtfoertKassasjonType utfoertKassasjonField;
+
+    private SlettingType slettingField;
+
+    private SkjermingType skjermingField;
+
+    private GraderingType graderingField;
+
+    private ElektroniskSignaturType elektroniskSignaturField;
+
+    private object virksomhetsspesifikkeMetadataField;
+
+    private MerknadType[] merknadField;
+
+    private RegistreringType registreringField;
+
+    private DokumentobjektType[] dokumentobjektField;
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public KlassifikasjonstypeType klassifikasjonstype
+    public DokumenttypeType dokumenttype
     {
         get
         {
-            return this.klassifikasjonstypeField;
+            return this.dokumenttypeField;
         }
         set
         {
-            this.klassifikasjonstypeField = value;
+            this.dokumenttypeField = value;
+        }
+    }
+
+    /// <remarks/>
+    public DokumentstatusType dokumentstatus
+    {
+        get
+        {
+            return this.dokumentstatusField;
+        }
+        set
+        {
+            this.dokumentstatusField = value;
         }
     }
 
@@ -7478,73 +7710,656 @@ public partial class KlassifikasjonssystemType : AbstraktArkivenhetType
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public System.Nullable<System.DateTime> avsluttetDato
+    [System.Xml.Serialization.XmlElementAttribute("forfatter", IsNullable = true)]
+    public string[] forfatter
     {
         get
         {
-            return this.avsluttetDatoField;
+            return this.forfatterField;
         }
         set
         {
-            this.avsluttetDatoField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()] [Newtonsoft.Json.JsonIgnore]
-    public bool avsluttetDatoSpecified
-    {
-        get
-        {
-            return this.avsluttetDatoFieldSpecified;
-        }
-        set
-        {
-            this.avsluttetDatoFieldSpecified = value;
+            this.forfatterField = value;
         }
     }
 
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public string avsluttetAv
+    public DokumentmediumType dokumentmedium
     {
         get
         {
-            return this.avsluttetAvField;
+            return this.dokumentmediumField;
         }
         set
         {
-            this.avsluttetAvField = value;
+            this.dokumentmediumField = value;
         }
     }
 
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-    public string referanseAvsluttetAv
+    public string oppbevaringssted
     {
         get
         {
-            return this.referanseAvsluttetAvField;
+            return this.oppbevaringsstedField;
         }
         set
         {
-            this.referanseAvsluttetAvField = value;
+            this.oppbevaringsstedField = value;
+        }
+    }
+
+    /// <remarks/>
+    public TilknyttetRegistreringSomType tilknyttetRegistreringSom
+    {
+        get
+        {
+            return this.tilknyttetRegistreringSomField;
+        }
+        set
+        {
+            this.tilknyttetRegistreringSomField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(DataType = "integer")]
+    public string dokumentnummer
+    {
+        get
+        {
+            return this.dokumentnummerField;
+        }
+        set
+        {
+            this.dokumentnummerField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(DataType = "date")]
+    public System.DateTime tilknyttetDato
+    {
+        get
+        {
+            return this.tilknyttetDatoField;
+        }
+        set
+        {
+            this.tilknyttetDatoField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string tilknyttetAv
+    {
+        get
+        {
+            return this.tilknyttetAvField;
+        }
+        set
+        {
+            this.tilknyttetAvField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string referanseTilknyttetAv
+    {
+        get
+        {
+            return this.referanseTilknyttetAvField;
+        }
+        set
+        {
+            this.referanseTilknyttetAvField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public KassasjonType kassasjon
+    {
+        get
+        {
+            return this.kassasjonField;
+        }
+        set
+        {
+            this.kassasjonField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public UtfoertKassasjonType utfoertKassasjon
+    {
+        get
+        {
+            return this.utfoertKassasjonField;
+        }
+        set
+        {
+            this.utfoertKassasjonField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public SlettingType sletting
+    {
+        get
+        {
+            return this.slettingField;
+        }
+        set
+        {
+            this.slettingField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public SkjermingType skjerming
+    {
+        get
+        {
+            return this.skjermingField;
+        }
+        set
+        {
+            this.skjermingField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public GraderingType gradering
+    {
+        get
+        {
+            return this.graderingField;
+        }
+        set
+        {
+            this.graderingField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public ElektroniskSignaturType elektroniskSignatur
+    {
+        get
+        {
+            return this.elektroniskSignaturField;
+        }
+        set
+        {
+            this.elektroniskSignaturField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public object virksomhetsspesifikkeMetadata
+    {
+        get
+        {
+            return this.virksomhetsspesifikkeMetadataField;
+        }
+        set
+        {
+            this.virksomhetsspesifikkeMetadataField = value;
         }
     }
 
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
-    [System.Xml.Serialization.XmlArrayItemAttribute("klasse", IsNullable = false)]
-    public KlasseType[] klasse
+    [System.Xml.Serialization.XmlArrayItemAttribute("merknad", IsNullable = false)]
+    public MerknadType[] merknad
     {
         get
         {
-            return this.klasseField;
+            return this.merknadField;
         }
         set
         {
-            this.klasseField = value;
+            this.merknadField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public RegistreringType registrering
+    {
+        get
+        {
+            return this.registreringField;
+        }
+        set
+        {
+            this.registreringField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
+    [System.Xml.Serialization.XmlArrayItemAttribute("dokumentobjekt", IsNullable = false)]
+    public DokumentobjektType[] dokumentobjekt
+    {
+        get
+        {
+            return this.dokumentobjektField;
+        }
+        set
+        {
+            this.dokumentobjektField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur")]
+[System.Xml.Serialization.XmlRootAttribute("Dokumentobjekt", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur", IsNullable = false)]
+public partial class DokumentobjektType : AbstraktResourceType
+{
+
+    private string systemIDField;
+
+    private string versjonsnummerField;
+
+    private VariantformatType variantformatField;
+
+    private FormatType formatField;
+
+    private string formatDetaljerField;
+
+    private System.Nullable<System.DateTime> opprettetDatoField;
+
+    private bool opprettetDatoFieldSpecified;
+
+    private string opprettetAvField;
+
+    private string referanseDokumentfilField;
+
+    private string filnavnField;
+
+    private string sjekksumField;
+
+    private string mimeTypeField;
+
+    private string sjekksumAlgoritmeField;
+
+    private string filstoerrelseField;
+
+    private ElektroniskSignaturType elektroniskSignaturField;
+
+    private KonverteringType[] konverteringField;
+
+    private DokumentbeskrivelseType dokumentbeskrivelseField;
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string systemID
+    {
+        get
+        {
+            return this.systemIDField;
+        }
+        set
+        {
+            this.systemIDField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(DataType = "integer")]
+    public string versjonsnummer
+    {
+        get
+        {
+            return this.versjonsnummerField;
+        }
+        set
+        {
+            this.versjonsnummerField = value;
+        }
+    }
+
+    /// <remarks/>
+    public VariantformatType variantformat
+    {
+        get
+        {
+            return this.variantformatField;
+        }
+        set
+        {
+            this.variantformatField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public FormatType format
+    {
+        get
+        {
+            return this.formatField;
+        }
+        set
+        {
+            this.formatField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string formatDetaljer
+    {
+        get
+        {
+            return this.formatDetaljerField;
+        }
+        set
+        {
+            this.formatDetaljerField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public System.Nullable<System.DateTime> opprettetDato
+    {
+        get
+        {
+            return this.opprettetDatoField;
+        }
+        set
+        {
+            this.opprettetDatoField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()] [Newtonsoft.Json.JsonIgnore]
+    public bool opprettetDatoSpecified
+    {
+        get
+        {
+            return this.opprettetDatoFieldSpecified;
+        }
+        set
+        {
+            this.opprettetDatoFieldSpecified = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string opprettetAv
+    {
+        get
+        {
+            return this.opprettetAvField;
+        }
+        set
+        {
+            this.opprettetAvField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string referanseDokumentfil
+    {
+        get
+        {
+            return this.referanseDokumentfilField;
+        }
+        set
+        {
+            this.referanseDokumentfilField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string filnavn
+    {
+        get
+        {
+            return this.filnavnField;
+        }
+        set
+        {
+            this.filnavnField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string sjekksum
+    {
+        get
+        {
+            return this.sjekksumField;
+        }
+        set
+        {
+            this.sjekksumField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string mimeType
+    {
+        get
+        {
+            return this.mimeTypeField;
+        }
+        set
+        {
+            this.mimeTypeField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string sjekksumAlgoritme
+    {
+        get
+        {
+            return this.sjekksumAlgoritmeField;
+        }
+        set
+        {
+            this.sjekksumAlgoritmeField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string filstoerrelse
+    {
+        get
+        {
+            return this.filstoerrelseField;
+        }
+        set
+        {
+            this.filstoerrelseField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public ElektroniskSignaturType elektroniskSignatur
+    {
+        get
+        {
+            return this.elektroniskSignaturField;
+        }
+        set
+        {
+            this.elektroniskSignaturField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
+    [System.Xml.Serialization.XmlArrayItemAttribute("konvertering", IsNullable = false)]
+    public KonverteringType[] konvertering
+    {
+        get
+        {
+            return this.konverteringField;
+        }
+        set
+        {
+            this.konverteringField = value;
+        }
+    }
+
+    /// <remarks/>
+    public DokumentbeskrivelseType dokumentbeskrivelse
+    {
+        get
+        {
+            return this.dokumentbeskrivelseField;
+        }
+        set
+        {
+            this.dokumentbeskrivelseField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur")]
+[System.Xml.Serialization.XmlRootAttribute("Konvertering", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur", IsNullable = false)]
+public partial class KonverteringType : AbstraktResourceType
+{
+
+    private string systemIDField;
+
+    private System.DateTime konvertertDatoField;
+
+    private string konvertertAvField;
+
+    private string konvertertFraFormatField;
+
+    private string konvertertTilFormatField;
+
+    private string konverteringsverktoeyField;
+
+    private string konverteringskommentarField;
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string systemID
+    {
+        get
+        {
+            return this.systemIDField;
+        }
+        set
+        {
+            this.systemIDField = value;
+        }
+    }
+
+    /// <remarks/>
+    public System.DateTime konvertertDato
+    {
+        get
+        {
+            return this.konvertertDatoField;
+        }
+        set
+        {
+            this.konvertertDatoField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string konvertertAv
+    {
+        get
+        {
+            return this.konvertertAvField;
+        }
+        set
+        {
+            this.konvertertAvField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string konvertertFraFormat
+    {
+        get
+        {
+            return this.konvertertFraFormatField;
+        }
+        set
+        {
+            this.konvertertFraFormatField = value;
+        }
+    }
+
+    /// <remarks/>
+    public string konvertertTilFormat
+    {
+        get
+        {
+            return this.konvertertTilFormatField;
+        }
+        set
+        {
+            this.konvertertTilFormatField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string konverteringsverktoey
+    {
+        get
+        {
+            return this.konverteringsverktoeyField;
+        }
+        set
+        {
+            this.konverteringsverktoeyField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+    public string konverteringskommentar
+    {
+        get
+        {
+            return this.konverteringskommentarField;
+        }
+        set
+        {
+            this.konverteringskommentarField = value;
         }
     }
 }
@@ -7683,6 +8498,7 @@ public partial class SaksmappeType : MappeType
     }
 
     /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
     public string administrativEnhet
     {
         get
@@ -7935,76 +8751,6 @@ public partial class ArkivskaperType : AbstraktArkivenhetType
         set
         {
             this.arkivField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur")]
-[System.Xml.Serialization.XmlRootAttribute("Filinnhold", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur", IsNullable = false)]
-public partial class FilinnholdType : AbstraktFilType
-{
-
-    private byte[] base64Field;
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")]
-    public byte[] base64
-    {
-        get
-        {
-            return this.base64Field;
-        }
-        set
-        {
-            this.base64Field = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur")]
-[System.Xml.Serialization.XmlRootAttribute("Filreferanse", Namespace = "http://skjema.kxml.no/arkivverket/noark5/v4.0/arkivstruktur", IsNullable = false)]
-public partial class FilreferanseType : AbstraktFilType
-{
-
-    private string uriField;
-
-    private string kvitteringUriField;
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(DataType = "anyURI")]
-    public string uri
-    {
-        get
-        {
-            return this.uriField;
-        }
-        set
-        {
-            this.uriField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(DataType = "anyURI", IsNullable = true)]
-    public string kvitteringUri
-    {
-        get
-        {
-            return this.kvitteringUriField;
-        }
-        set
-        {
-            this.kvitteringUriField = value;
         }
     }
 }

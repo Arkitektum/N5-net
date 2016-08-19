@@ -218,7 +218,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
             m.dokumentmedium.kode = "E";
             m.arkivstatus = new ArkivstatusType();
             m.arkivstatus.kode = "O";
-            m.Links.Clear();
+            m.LinkList.Clear();
             //m.Links.Add(new WebApi.Hal.Link("","")) kodelister som er relevante 
             return m;
         }

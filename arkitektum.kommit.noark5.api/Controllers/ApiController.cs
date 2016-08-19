@@ -29,8 +29,8 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
             //Rettinghetsstyring...og alle andre restriksjoner
             Links linker = new Links();
-            linker.Links.Add(Set.addLink(baseUri, "api/arkivstruktur", Set._REL + "/arkivstruktur"));
-            linker.Links.Add(Set.addLink(baseUri, "api/sakarkiv", Set._REL + "/sakarkiv"));
+            linker.LinkList.Add(Set.addLink(baseUri, "api/arkivstruktur", Set._REL + "/arkivstruktur"));
+            linker.LinkList.Add(Set.addLink(baseUri, "api/sakarkiv", Set._REL + "/sakarkiv"));
 
             //linker.Add(addLink(baseUri, "moeteogutvalgsbehandling"));
             //linker.Add(addLink(baseUri, "administrasjon"));

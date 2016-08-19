@@ -25,7 +25,7 @@ namespace arkitektum.kommit.noark5.api.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://noark5testapi.arkivverket.no/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:49708/")]
         public string baseUri {
             get {
                 return ((string)(this["baseUri"]));

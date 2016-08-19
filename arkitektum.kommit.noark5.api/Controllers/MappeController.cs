@@ -93,7 +93,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
             m.gradering.graderingskode = new GraderingskodeType();
             m.gradering.graderingskode.kode = "B";
             m.gradering.graderingsdato = DateTime.Now;
-            m.klasse = new KlasseType() { klasseID = "12/24", tittel = "12/24" }; //klassifikasjonssystem? rekkefølge?
+            m.klasse = new KlasseType() { klasseID = "12345678901", tittel = "12345678901", klassifikasjonssystem = new KlassifikasjonssystemType { klassifikasjonstype = new KlassifikasjonstypeType { kode="PNR", beskrivelse = "Personnr" } } }; //klassifikasjonssystem? rekkefølge?
             List<MerknadType> merknader = new List<MerknadType>();
             MerknadType m1= new MerknadType();
             m1.merknadstype = new MerknadstypeType();
@@ -113,11 +113,11 @@ namespace arkitektum.kommit.noark5.api.Controllers
             v.saksbehandling = new Prosess[1] { p };
                       
 
-            m.virksomhetsspesifikkeMetadata = v;
-            BygningType b = new BygningType();
-            b.systemID = Guid.NewGuid().ToString();
-            b.byggidentifikator = new ByggIdent() { bygningsNummer = "12345678", endringsloepenummer = "0" };
-            m.nasjonalidentifikator = new AbstraktNasjonalidentifikatorType[1] { b };
+            //m.virksomhetsspesifikkeMetadata = v;
+            //BygningType b = new BygningType();
+            //b.systemID = Guid.NewGuid().ToString();
+            //b.byggidentifikator = new ByggIdent() { bygningsNummer = "12345678", endringsloepenummer = "0" };
+            //m.nasjonalidentifikator = new AbstraktNasjonalidentifikatorType[1] { b };
 
             //List<LinkType> linker = new List<LinkType>();
             //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID, "self"));
@@ -143,7 +143,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
             //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + "45345", Set._REL + "/referanseArkivdel"));
 
             ////m._links = linker.ToArray();
-            m.Links.Clear();
+            m.LinkList.Clear();
             m.RepopulateHyperMedia();
             if (m == null)
             {
@@ -171,7 +171,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
                 mappe.oppdatertDato = DateTime.Now;
                 mappe.oppdatertDatoSpecified = true;
                 mappe.referanseOppdatertAv = Guid.NewGuid().ToString();
-                mappe.Links.Clear();
+                mappe.LinkList.Clear();
                 mappe.RepopulateHyperMedia();
 
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, mappe);
@@ -363,9 +363,9 @@ namespace arkitektum.kommit.noark5.api.Controllers
             m.dokumentmedium = new DokumentmediumType() { kode = "E", beskrivelse = "Elektronisk arkiv" };
             m.mappetype = new MappetypeType() { kode = "BYGG", beskrivelse = "Byggesak" };
 
-            m.Links.Clear();
-            m.Links.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/administrasjon/dokumentmedium", baseUri + "api/kodelister/Dokumentmedium{?$filter&$orderby&$top&$skip}"));
-            m.Links.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/administrasjon/mappetype", baseUri + "api/kodelister/Mappetype{?$filter&$orderby&$top&$skip}"));
+            m.LinkList.Clear();
+            m.LinkList.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/administrasjon/dokumentmedium", baseUri + "api/kodelister/Dokumentmedium{?$filter&$orderby&$top&$skip}"));
+            m.LinkList.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/administrasjon/mappetype", baseUri + "api/kodelister/Mappetype{?$filter&$orderby&$top&$skip}"));
 
             if (m == null)
             {
@@ -395,7 +395,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
                 mappe.opprettetDatoSpecified = true;
                 mappe.referanseOpprettetAv = Guid.NewGuid().ToString();
                 mappe.mappeID = "123456/2016";
-                mappe.Links.Clear();
+                mappe.LinkList.Clear();
                 mappe.RepopulateHyperMedia();
 
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, mappe);

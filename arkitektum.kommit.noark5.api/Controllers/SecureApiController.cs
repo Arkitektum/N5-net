@@ -24,13 +24,13 @@ namespace arkitektum.kommit.noark5.api.Controllers
             //Rettinghetsstyring...og alle andre restriksjoner
             Links linker = new Links();
 
-            linker.Links.Add(addLink(baseUri, "arkivstruktur")); //Obligatorisk
-            linker.Links.Add(addLink(baseUri, "sakarkiv"));
-            linker.Links.Add(addLink(baseUri, "moeteogutvalgsbehandling"));
-            linker.Links.Add(addLink(baseUri, "administrasjon"));
+            linker.LinkList.Add(addLink(baseUri, "arkivstruktur")); //Obligatorisk
+            linker.LinkList.Add(addLink(baseUri, "sakarkiv"));
+            linker.LinkList.Add(addLink(baseUri, "moeteogutvalgsbehandling"));
+            linker.LinkList.Add(addLink(baseUri, "administrasjon"));
             //linker.Add(addLink(baseUri, "Periodisering")); //Funksjoner?
-            linker.Links.Add(addLink(baseUri, "loggingogsporing"));
-            linker.Links.Add(addLink(baseUri, "rapporter"));
+            linker.LinkList.Add(addLink(baseUri, "loggingogsporing"));
+            linker.LinkList.Add(addLink(baseUri, "rapporter"));
             
             return linker;
         }

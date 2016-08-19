@@ -38,14 +38,16 @@ namespace arkitektum.kommit.noark5.api
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-
+            
             config.Formatters.JsonFormatter.SupportedMediaTypes.Clear();
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/vnd.noark5-v4+json"));
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new DefaultContractResolver();
-            //config.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
+            config.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
             config.Formatters.XmlFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/vnd.noark5-v4+xml"));
             config.Formatters.XmlFormatter.UseXmlSerializer = true;
-            //config.Formatters.JsonFormatter.SerializerSettings.Re‌ferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            config.Formatters.XmlFormatter.MaxDepth = 5;
+            //config.Formatters.XmlFormatter.WriterSettings.ConformanceLevel= System.Xml.ConformanceLevel.
+            config.Formatters.JsonFormatter.SerializerSettings.Re‌ferenceLoopHandling = ReferenceLoopHandling.Ignore;
             config.Formatters.JsonFormatter.SerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
 
             var cachecow = new CachingHandler(config);
