@@ -1,6 +1,6 @@
 N5-net
 ======
 
-.Net C# MVC NOARK5 prototype
+Testprosjekt for REST api på NOARK5 v4 kjerne, utviklet med .NET ASP MVC 5
 
-Testprosjekt for REST api på NOARK5 v4 kjerne
+Prosjektet imiterer en NOARK 5 kjerne med fiktive data, og kan brukes til initiell utvikling og testing av klienter samt være utgangspunkt for implementering av tjenestegrensesnitt på egen NOARK kjerne.
