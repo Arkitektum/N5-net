@@ -36,7 +36,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
             ////støtte odata filter syntaks
             queryOptions.Validate(_validationSettings);
 
-            return queryOptions.ApplyTo(_ctx.arkivdeler.AsQueryable()) as IEnumerable<ArkivdelType>;
+            return queryOptions.ApplyTo(_ctx.Arkivdeler.AsQueryable()) as IEnumerable<ArkivdelType>;
 
         }
 
@@ -47,7 +47,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
         public HttpResponseMessage GetArkivdel(string id)
         {
 
-            ArkivdelType m = _ctx.arkivdeler.FirstOrDefault(i => i.systemID == id);
+            ArkivdelType m = _ctx.Arkivdeler.FirstOrDefault(i => i.systemID == id);
 
             if (m == null)
             {
@@ -114,7 +114,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
                 //Kan slettes? Har rettighet? Logges mm..
                 //Hva er forskjellen på datatype sletting?
                 //sjekke etag om objektet er endret av andre?
-                ArkivdelType m = _ctx.arkivdeler.FirstOrDefault(i => i.systemID == id);
+                ArkivdelType m = _ctx.Arkivdeler.FirstOrDefault(i => i.systemID == id);
                 
 
                 if (m == null)
@@ -246,7 +246,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
         [HttpGet]
         public IEnumerable<ArkivdelType> GetArkivdelerFraArkiv(string Id)
         {
-            IEnumerable<ArkivdelType> m = _ctx.arkivdeler.Where(i => i.arkiv.systemID == Id);
+            IEnumerable<ArkivdelType> m = _ctx.Arkivdeler.Where(i => i.arkiv.systemID == Id);
             return m;
         }
 

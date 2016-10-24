@@ -10,9 +10,11 @@ namespace arkitektum.kommit.noark5.api.Services
 {
     public class MockNoarkDatalayer
     {
-        public List<ArkivskaperType> arkivskaper;
-        public List<ArkivType> arkiver;
-        public List<ArkivdelType> arkivdeler;
+        public List<ArkivskaperType> Arkivskaper = new List<ArkivskaperType>();
+        public List<ArkivType> Arkiver = new List<ArkivType>();
+        public List<ArkivdelType> Arkivdeler = new List<ArkivdelType>();
+
+        /*
         public List<KlassifikasjonssystemType> klassifikasjonssystemer;
         public List<KlasseType> klasser;
         public List<MappeType> mapper;
@@ -20,9 +22,43 @@ namespace arkitektum.kommit.noark5.api.Services
         public List<BasisregistreringType> basisregistreringer; // ??? bare som er spesialisering av registreringer? 
         public List<DokumentbeskrivelseType> dokumentbeskrivelser;
         public List<DokumentobjektType> dokumentobjekter;
+        */
+        public static DokumentmediumType ElektroniskDokumentmedium = new DokumentmediumType
+        {
+            kode = "E",
+            beskrivelse = "Elektronisk arkiv"
+        };
+
+        public static ArkivstatusType AvsluttetArkivstatus = new ArkivstatusType
+        {
+            kode = "A",
+            beskrivelse = "Avsluttet"
+        };
+
+        public static KlassifikasjonstypeType GbnKlassifikasjonstype = new KlassifikasjonstypeType
+        {
+            kode = "GBN",
+            beskrivelse = "Gårds- og bruksnummer"
+        };
+
+        public static FormatType PdfFormat = new FormatType
+        {
+            kode = "RA-PDF",
+            beskrivelse = "PDF/A - ISO 19005-1:2005"
+        };
+
+        public static VariantformatType ArkivFormat = new VariantformatType
+        {
+            kode = "A",
+            beskrivelse = "Arkivformat"
+        };
 
         public MockNoarkDatalayer()
         {
+            Arkiver.Add(OpprettArkiv());
+            Arkiver.Add(OpprettArkiv());
+            Arkiver.Add(OpprettArkiv());
+
             //IGenerationSessionFactory factory = AutoPocoContainer.Configure(x =>
             //{
             //    x.Conventions(c =>
@@ -32,22 +68,8 @@ namespace arkitektum.kommit.noark5.api.Services
             //    x.AddFromAssemblyContainingType<ArkivType>();
             //});
             //IGenerationSession session = factory.CreateSession();
-            //DokumentmediumType d = new DokumentmediumType();
-            //d.kode = "E";
-            //d.beskrivelse = "Elektronisk arkiv";
-            //ArkivstatusType a = new ArkivstatusType();
-            //a.kode = "A";
-            //a.beskrivelse = "Avsluttet";
 
-            //KlassifikasjonstypeType k = new KlassifikasjonstypeType();
-            //k.kode = "GBN";
-            //k.beskrivelse = "Gårds- og bruksnummer";
-            //FormatType f = new FormatType();
-            //f.kode = "RA-PDF";
-            //f.beskrivelse = "PDF/A - ISO 19005-1:2005";
-            //VariantformatType v = new VariantformatType();
-            //v.kode = "A";
-            //v.beskrivelse = "Arkivformat";
+
 
             //arkivskaper = session.List<ArkivskaperType>(3)
             //    .Impose(x => x.systemID, Guid.NewGuid().ToString())
@@ -60,29 +82,8 @@ namespace arkitektum.kommit.noark5.api.Services
             //    .Impose(x => x.referanseOpprettetAv, Guid.NewGuid().ToString())
             //    .Get().ToList();
 
-            //arkiver = session.List<ArkivType>(10)
-            //      .Random(3)
-            //          .Impose(x => x.tittel, "Arkiv ePhorte")
-            //          .Impose(x => x.arkivstatus, a)
-            //      .Next(5)
-            //          .Impose(x => x.tittel, "Arkiv fagsystem X")
-            //          .Impose(x => x.arkivstatus, a)
-            //          .Impose(x => x.dokumentmedium, d)
-            //          .Impose(x=> x.avsluttetDato, DateTime.Now)
-            //          .Impose(x => x.avsluttetDatoSpecified, true)
-            //      .Next(2)
-            //          .Impose(x => x.tittel, "Arkiv fagsystem Y")
-            //    .All()
-            //        .Impose(x => x.systemID, Guid.NewGuid().ToString())
-            //        .Impose(x => x.beskrivelse, "Lorem ipsum")
-            //        .Impose(x => x.arkivskaper, arkivskaper[0])
-            //        .Impose(x => x.oppdatertAv, null)
-            //        .Impose(x => x.referanseOppdatertAv, null)
-            //        .Impose(x => x.avsluttetAv, "Brukernavn")
-            //        .Impose(x => x.referanseAvsluttetAv, Guid.NewGuid().ToString())
-            //        .Impose(x => x.opprettetAv, "Brukernavn")
-            //        .Impose(x => x.referanseOpprettetAv, Guid.NewGuid().ToString())
-            //    .Get().ToList();
+
+
 
             //arkivdeler = session.List<ArkivdelType>(10)
             //    .Random(3)
@@ -167,7 +168,76 @@ namespace arkitektum.kommit.noark5.api.Services
         }
 
 
+        private ArkivskaperType OpprettArkivskaper()
+        {
+            var arkivskaper = new ArkivskaperType
+            {
+                systemID = GenerateUuuid(),
+                arkivskaperID = RandomNumber(100, 1000).ToString(),
+                arkivskaperNavn = GetRandomKommune(),
+                beskrivelse = "Lorem ipsum",
+                opprettetAv = "brukernavn",
+                referanseOppdatertAv = GenerateUuuid()
+            };
+
+            Arkivskaper.Add(arkivskaper); // add to global list
+
+            return arkivskaper;
+        }
+
+        private ArkivType OpprettArkiv()
+        {
+            return new ArkivType()
+            {
+                tittel = FirstLetterToUpper(GetRandomAdjective()) + " arkiv",
+                arkivstatus = AvsluttetArkivstatus,
+                dokumentmedium = ElektroniskDokumentmedium,
+                avsluttetDato = DateTime.Now,
+                avsluttetDatoSpecified = true,
+                systemID = GenerateUuuid(),
+                beskrivelse = "lorem ipsum " + GetRandomAdjective(),
+                arkivskaper = OpprettArkivskaper(),
+                avsluttetAv = "brukernavn",
+                referanseAvsluttetAv = GenerateUuuid(),
+                opprettetAv = "brukernavn",
+                referanseOpprettetAv = GenerateUuuid()
+            };
+        }
 
 
+
+        private string GenerateUuuid()
+        {
+            return Guid.NewGuid().ToString();
+        }
+
+        private int RandomNumber(int min, int max)
+        {
+            var random = new Random(DateTime.Now.Millisecond);
+            return random.Next(min, max);
+        }
+
+        private string GetRandomKommune()
+        {
+            return FirstLetterToUpper(GetRandomAdjective()) + " kommune";
+        }
+
+        private string GetRandomAdjective()
+        {
+            return Adjectives[RandomNumber(0, Adjectives.Length-1)];
+        }
+
+        private static readonly string[] Adjectives = {"allergisk", "begeistret", "bred", "flink", "fremmed", "høflig", "irritert", "klok" };
+
+        private static string FirstLetterToUpper(string str)
+        {
+            if (str == null)
+                return null;
+
+            if (str.Length > 1)
+                return char.ToUpper(str[0]) + str.Substring(1);
+
+            return str.ToUpper();
+        }
     }
 }

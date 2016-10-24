@@ -30,7 +30,8 @@ namespace arkitektum.kommit.noark5.api.App_Start
             // Register your Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             datalayer = new MockNoarkDatalayer();
-            builder.RegisterInstance(datalayer);
+            builder.RegisterInstance(datalayer).SingleInstance();
+            builder.RegisterType<ArkivService>().AsSelf();
 
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();
