@@ -17,8 +17,12 @@ namespace arkitektum.kommit.noark5.api.Controllers
         [HttpGet]
         public IEnumerable<KlassifikasjonssystemType> GetKlassifikasjonssystemer(ODataQueryOptions<KlassifikasjonssystemType> queryOptions)
         {
-            
-            return null;
+            queryOptions.Validate(_validationSettings);
+      
+            List<KlassifikasjonssystemType> testdata = new List<KlassifikasjonssystemType>();
+            testdata.Add(new KlassifikasjonssystemType() { systemID = Guid.NewGuid().ToString(), tittel = "Ordningsprisnsipp 1" });
+            testdata.Add(new KlassifikasjonssystemType() { systemID = Guid.NewGuid().ToString(), tittel = "Ordningsprisnsipp 2" });
+            return testdata.ToArray();
         }
 
 

@@ -276,7 +276,12 @@ namespace arkitektum.kommit.noark5.api.Controllers
         [Route("api/arkivstruktur/Basisregistrering")]
         public IEnumerable<BasisregistreringType> GetBasisregistrering(ODataQueryOptions<BasisregistreringType> queryOptions)
         {
-            return null;
+            queryOptions.Validate(_validationSettings);
+
+            List<BasisregistreringType> testdata = new List<BasisregistreringType>();
+            testdata.Add(new BasisregistreringType() { systemID = Guid.NewGuid().ToString(), tittel = "Basisregistrering 1" });
+            testdata.Add(new BasisregistreringType() { systemID = Guid.NewGuid().ToString(), tittel = "Basisregistrering 2" });
+            return testdata.ToArray();
         }
 
 
