@@ -132,3 +132,18 @@ public partial class MappeType
     }
 
 }
+
+public partial class AbstraktSakspartType
+{
+
+
+    protected override void CreateHypermedia()
+    {
+        var baseUri = arkitektum.kommit.noark5.api.Properties.Settings.Default.baseUri;
+
+        this.LinkList.Clear();
+        this.LinkList.Add(new LinkType("self", baseUri + "api/sakarkiv/sakspart/" + this.systemID));
+        this.LinkList.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/sakarkiv/sakspart", baseUri + "api/sakarkiv/sakspart/" + this.systemID));
+    }
+
+}

@@ -77,7 +77,11 @@ namespace arkitektum.kommit.noark5.api.Controllers
             m.opprettetDato = DateTime.Now;
             m.opprettetDatoSpecified = true;
             m.oppdatertDato = DateTime.Now;
+            m.journaldato = DateTime.Now;
+            m.tittel = "journalpost - " + m.systemID;
             m.oppdatertAv = "bruker";
+            m.LinkList.Clear();
+            m.RepopulateHyperMedia();
 
             if (m == null)
             {

@@ -112,37 +112,6 @@ namespace arkitektum.kommit.noark5.api.Controllers
             p.resultat = new Vedtak[1] { vedtak };
             v.saksbehandling = new Prosess[1] { p };
                       
-
-            //m.virksomhetsspesifikkeMetadata = v;
-            //BygningType b = new BygningType();
-            //b.systemID = Guid.NewGuid().ToString();
-            //b.byggidentifikator = new ByggIdent() { bygningsNummer = "12345678", endringsloepenummer = "0" };
-            //m.nasjonalidentifikator = new AbstraktNasjonalidentifikatorType[1] { b };
-
-            //List<LinkType> linker = new List<LinkType>();
-            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID, "self"));
-            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/avslutt-mappe", Set._REL + "/avslutt-mappe"));
-            //linker.Add(Set.addLink(baseUri, "api/sakarkiv/Saksmappe/" + m.systemID + "/utvid-til-saksmappe", Set._REL + "/utvid-til-saksmappe"));
-            //linker.Add(Set.addLink(baseUri, "api/MoeteOgUtvalgsbehandling/" + m.systemID + "/utvid-til-moetemappe", Set._REL + "/utvid-til-moetemappe")); //TODO
-
-            //linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/registrering", Set._REL + "/registrering", "?$filter&$orderby&$top&$skip&$search"));
-            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-registrering", Set._REL + "/ny-registrering"));
-            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-basisregistrering", Set._REL + "/ny-basisregistrering"));
-            ////Skal merknad være innline? pga komposisjon (heleide objekter)
-            //linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/merknad", Set._REL + "/merknad", "?$filter&$orderby&$top&$skip&$search"));
-            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-merknad", Set._REL + "/ny-merknad"));
-            ////Valgfritt tillegg
-            //linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/undermappe", Set._REL + "/undermappe", "?$filter&$orderby&$top&$skip&$search"));
-            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-undermappe", Set._REL + "/ny-undermappe"));
-
-            //linker.Add(Set.addTempLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/kryssreferanse", Set._REL + "/kryssreferanse", "?$filter&$orderby&$top&$skip&$search"));
-            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Mappe/" + m.systemID + "/ny-kryssreferanse", Set._REL + "/ny-kryssreferanse"));
-
-            ////Enten eller? eller Skal begge slik som i 5.4.2 og 5.4.3
-            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Klasse/23434", Set._REL + "/referanseKlasse"));
-            //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + "45345", Set._REL + "/referanseArkivdel"));
-
-            ////m._links = linker.ToArray();
             m.LinkList.Clear();
             m.RepopulateHyperMedia();
             if (m == null)

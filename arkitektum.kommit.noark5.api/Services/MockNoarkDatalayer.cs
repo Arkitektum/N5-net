@@ -179,7 +179,7 @@ namespace arkitektum.kommit.noark5.api.Services
                 opprettetAv = "brukernavn",
                 referanseOppdatertAv = GenerateUuuid()
             };
-
+            arkivskaper.RepopulateHyperMedia();
             Arkivskaper.Add(arkivskaper); // add to global list
 
             return arkivskaper;
@@ -187,7 +187,7 @@ namespace arkitektum.kommit.noark5.api.Services
 
         private ArkivType OpprettArkiv()
         {
-            return new ArkivType()
+            var arkiv =  new ArkivType()
             {
                 tittel = FirstLetterToUpper(GetRandomAdjective()) + " arkiv",
                 arkivstatus = AvsluttetArkivstatus,
@@ -201,7 +201,10 @@ namespace arkitektum.kommit.noark5.api.Services
                 referanseAvsluttetAv = GenerateUuuid(),
                 opprettetAv = "brukernavn",
                 referanseOpprettetAv = GenerateUuuid()
+                
             };
+            arkiv.RepopulateHyperMedia();
+            return arkiv;
         }
 
 
