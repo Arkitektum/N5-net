@@ -41,14 +41,10 @@ namespace arkitektum.kommit.noark5.api.Controllers
         /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv">http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv</a>, og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell, restriksjoner og mulige relasjonsnøkler</a></remarks>
         [Route("api/arkivstruktur/Arkivquery")]
         [HttpGet]
-        [EnableQuery(PageSize = 10)]
+        [EnableQuery(PageSize = 1, MaxExpansionDepth =1)]
         public IQueryable<ArkivType> GetArkivs()
         {
-            //_validationSettings.MaxExpansionDepth = 1;
-            ////støtte odata filter syntaks
-            //queryOptions.Validate(_validationSettings);
-
-            //TODO Rettighetsfiltrering...og alle andre restriksjoner
+           
             //TODO Links
 
             return _ctx.Arkiver.AsQueryable();
@@ -66,16 +62,28 @@ namespace arkitektum.kommit.noark5.api.Controllers
         /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv">http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv</a>, og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell, restriksjoner og mulige relasjonsnøkler</a></remarks>
         [Route("api/arkivstruktur/Arkiv")]
         [HttpGet]
-        [EnableQuery(PageSize = 2)]
-        public IEnumerable<ArkivType> GetArkivs2(ODataQueryOptions<ArkivType> queryOptions)
+        [EnableQuery()]
+        public PageResult<ArkivType> GetArkivs2(ODataQueryOptions<ArkivType> queryOptions)
         {
             //Konformitetsnivå på søk
             _validationSettings.MaxExpansionDepth = 1;
             _validationSettings.MaxAnyAllExpressionDepth = 1;
+
             ////støtte odata filter syntaks
             queryOptions.Validate(_validationSettings);
-            //TODO Må returnere next link når resultat er større enn pagesize
-            return queryOptions.ApplyTo(_ctx.Arkiver.AsQueryable()) as IEnumerable<ArkivType>;
+            //Må returnere next link når resultat er større enn pagesize
+            ODataQuerySettings settings = new ODataQuerySettings()
+            {
+                PageSize = 2
+            };
+
+            IQueryable results = queryOptions.ApplyTo(_ctx.Arkiver.AsQueryable(), settings);
+
+            return new PageResult<ArkivType>(
+                results as IEnumerable<ArkivType>,
+                Request.GetNextPageLink(),
+                Request.GetInlineCount());
+        
         }
 
         /// <summary>
