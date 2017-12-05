@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Description;
 using System.Web.Http.OData.Query;
 using arkitektum.kommit.noark5.api.Services;
 using WebApi.Hal;
@@ -22,113 +23,33 @@ namespace arkitektum.kommit.noark5.api.Controllers
         [HttpGet]
         public IEnumerable<MappeType> GetMappes(ODataQueryOptions<MappeType> queryOptions)
         {
-            var url = HttpContext.Current.Request.Url;
-            var baseUri =
-                new UriBuilder(
-                    url.Scheme,
-                    url.Host,
-                    url.Port).Uri;
-
-            
-            //TODO støtte odata filter syntaks
-            //_validationSettings.AllowedArithmeticOperators = AllowedArithmeticOperators.None;
-            //_validationSettings.AllowedQueryOptions = AllowedQueryOptions.Filter | AllowedQueryOptions.OrderBy | AllowedQueryOptions.Skip | AllowedQueryOptions.Top;
-            //_validationSettings.AllowedFunctions = AllowedFunctions.Substring;
-            //_validationSettings.AllowedLogicalOperators = AllowedLogicalOperators.All;
-            //_validationSettings.MaxAnyAllExpressionDepth = 5;
-            //_validationSettings.MaxExpansionDepth = 5;
             queryOptions.Validate(_validationSettings);
             
-            //$orderby=ReleaseDate asc, Rating desc
-            //$filter=Price lt 10.00
-            //$top=5&$skip=2
-
-
-            //Rettinghetsstyring...og alle andre restriksjoner
-            List<MappeType> testdata = new List<MappeType>();
-
-            //TODO Håndtere filter... 
-            if (queryOptions.Top == null)
-            {
-                testdata.Add(GetMappe("12345"));
-                testdata.Add(GetMappe("234"));
-                testdata.Add(GetMappe(Guid.NewGuid().ToString()));
-                testdata.Add(GetMappe(Guid.NewGuid().ToString()));
-                testdata.Add(GetMappe(Guid.NewGuid().ToString()));
-                testdata.Add(GetMappe(Guid.NewGuid().ToString()));
-                testdata.Add(GetMappe(Guid.NewGuid().ToString()));
-                testdata.Add(GetMappe(Guid.NewGuid().ToString()));
-                testdata.Add(GetMappe(Guid.NewGuid().ToString()));
-                testdata.Add(GetMappe(Guid.NewGuid().ToString()));
-            }
-            else if (queryOptions.Top.Value == 5)
-            {
-                testdata.Add(GetMappe("12345"));
-                testdata.Add(GetMappe("234"));
-                testdata.Add(GetMappe(Guid.NewGuid().ToString()));
-                testdata.Add(GetMappe(Guid.NewGuid().ToString()));
-                testdata.Add(GetMappe(Guid.NewGuid().ToString()));
-
-            }
             var results = new List<MappeType>();
 
-            var filtered = queryOptions.ApplyTo(testdata.AsQueryable()) as IEnumerable<MappeType>;
+            var filtered = queryOptions.ApplyTo(Datalayer.Mapper.AsQueryable()) as IEnumerable<MappeType>;
             if (filtered != null)
                 results.AddRange(filtered);
 
             return  results;
         }
 
+        /// <summary>
+        /// Returns a single mappe by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Route("api/arkivstruktur/Mappe/{id}")]
         [HttpGet]
-        public MappeType GetMappe(string id)
+        [ResponseType(typeof(MappeType))]
+        public IHttpActionResult GetMappe(string id)
         {
-            var url = HttpContext.Current.Request.Url;
-            var baseUri =
-                new UriBuilder(
-                    url.Scheme,
-                    url.Host,
-                    url.Port).Uri;
+            var mappe = Datalayer.GetMappeById(id);
 
-            MappeType m = new MappeType();
-            m.tittel = "testmappe " + id;
-            m.offentligTittel = "Regler for offentlig tittel ****";
-            m.systemID = id;
-            m.opprettetDato = DateTime.Now;
-            m.opprettetDatoSpecified = true;
-            m.opprettetAv = "tor";
-            m.mappeID = "1234/2014";
-            m.gradering = new GraderingType();
-            m.gradering.graderingskode = new GraderingskodeType();
-            m.gradering.graderingskode.kode = "B";
-            m.gradering.graderingsdato = DateTime.Now;
-            m.klasse = new KlasseType() { klasseID = "12345678901", tittel = "12345678901", klassifikasjonssystem = new KlassifikasjonssystemType { klassifikasjonstype = new KlassifikasjonstypeType { kode="PNR", beskrivelse = "Personnr" } } }; //klassifikasjonssystem? rekkefølge?
-            List<MerknadType> merknader = new List<MerknadType>();
-            MerknadType m1= new MerknadType();
-            m1.merknadstype = new MerknadstypeType();
-            m1.merknadstype.kode = "B";
-            m1.merknadstekst = "test";
-            merknader.Add(m1);
-            m.merknad = merknader.ToArray();
-            Byggesak v = new Byggesak();
-            v.bygningsnummer = "12345678";
-            v.systemID = Guid.NewGuid().ToString();
-            Prosess p = new Prosess();
-            p.kategori = "ET";
-            p.medDispensasjon = false;
-            Vedtak vedtak = new Vedtak() { status = "Godkjent", vedtaksdato = DateTime.Now, referanseVedtakDokument= "123456",  referanseUnderlagsdokumenter = new string[2] { "12345", "3454545" } };
+            if (mappe == null)
+                return NotFound();
 
-            p.resultat = new Vedtak[1] { vedtak };
-            v.saksbehandling = new Prosess[1] { p };
-                      
-            m.LinkList.Clear();
-            m.RepopulateHyperMedia();
-            if (m == null)
-            {
-                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
-            }
-
-            return m;
+            return Ok(mappe);
         }
 
         [Route("api/arkivstruktur/Mappe/{id}")]
@@ -182,7 +103,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
         {
             //TODO hvis det er en saksmappe eller møtemappe skal det sendes videre til riktig kontroller? På Saksmappe settes status i tillegg, mm
 
-            MappeType avsl = GetMappe(Id);
+            MappeType avsl = Datalayer.GetMappeById(Id);
             avsl.avsluttetAv = "tor";
             avsl.avsluttetDatoSpecified = true;
             avsl.avsluttetDato = DateTime.Now;
@@ -302,7 +223,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
             List<MappeType> testdata = new List<MappeType>();
 
-            testdata.Add(GetMappe("12345"));
+            testdata.Add(Datalayer.Mapper.First());
             testdata.Add(c.GetSaksmappe("234"));
 
             return testdata.ToArray();
@@ -396,7 +317,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
             List<MappeType> testdata = new List<MappeType>();
 
-            testdata.Add(GetMappe("12345"));
+            testdata.Add(Datalayer.Mapper.First());
             testdata.Add(c.GetSaksmappe("234"));
 
             return testdata.ToArray();
@@ -477,14 +398,13 @@ namespace arkitektum.kommit.noark5.api.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
         }
-
-
+        
         // GET api/Mappe/ND 234234
         public IEnumerable<MappeType> GetMappeByTittel(string tittel)
         {
             List<MappeType> testdata = new List<MappeType>();
 
-            MappeType m = GetMappe("123");
+            MappeType m = Datalayer.Mapper.First();
             m.tittel = tittel;
             testdata.Add(m);
             return testdata.AsEnumerable();
