@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.OData.Query;
+using arkitektum.kommit.noark5.api.Services;
 using WebApi.Hal;
 
 namespace arkitektum.kommit.noark5.api.Controllers
@@ -14,6 +15,8 @@ namespace arkitektum.kommit.noark5.api.Controllers
     public class MappeController : ApiController
     {
         private static ODataValidationSettings _validationSettings = new ODataValidationSettings();
+
+        private static readonly MockNoarkDatalayer Datalayer = new MockNoarkDatalayer();
 
         [Route("api/arkivstruktur/Mappe")]
         [HttpGet]
@@ -26,10 +29,11 @@ namespace arkitektum.kommit.noark5.api.Controllers
                     url.Host,
                     url.Port).Uri;
 
+            
             //TODO støtte odata filter syntaks
             //_validationSettings.AllowedArithmeticOperators = AllowedArithmeticOperators.None;
             //_validationSettings.AllowedQueryOptions = AllowedQueryOptions.Filter | AllowedQueryOptions.OrderBy | AllowedQueryOptions.Skip | AllowedQueryOptions.Top;
-            //_validationSettings.AllowedFunctions = AllowedFunctions.All;
+            //_validationSettings.AllowedFunctions = AllowedFunctions.Substring;
             //_validationSettings.AllowedLogicalOperators = AllowedLogicalOperators.All;
             //_validationSettings.MaxAnyAllExpressionDepth = 5;
             //_validationSettings.MaxExpansionDepth = 5;
@@ -66,8 +70,13 @@ namespace arkitektum.kommit.noark5.api.Controllers
                 testdata.Add(GetMappe(Guid.NewGuid().ToString()));
 
             }
+            var results = new List<MappeType>();
 
-            return testdata.ToArray();
+            var filtered = queryOptions.ApplyTo(testdata.AsQueryable()) as IEnumerable<MappeType>;
+            if (filtered != null)
+                results.AddRange(filtered);
+
+            return  results;
         }
 
         [Route("api/arkivstruktur/Mappe/{id}")]
