@@ -3471,7 +3471,7 @@ public partial class PresedensType : AbstraktResourceType
 
     private string systemIDField;
 
-    private System.DateTime presedensDatoField;
+    private System.Nullable<System.DateTime> presedensDatoField;
 
     private System.Nullable<System.DateTime> opprettetDatoField;
 
@@ -3527,7 +3527,7 @@ public partial class PresedensType : AbstraktResourceType
 
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(DataType = "date")]
-    public System.DateTime presedensDato
+    public System.Nullable<System.DateTime> presedensDato
     {
         get
         {
@@ -3535,7 +3535,7 @@ public partial class PresedensType : AbstraktResourceType
         }
         set
         {
-            this.presedensDatoField = value;
+                this.presedensDatoField = value;   
         }
     }
 
@@ -3826,7 +3826,7 @@ public partial class JournalpostType : BasisregistreringType
 
     private JournalstatusType journalstatusField;
 
-    private System.DateTime journaldatoField;
+    private System.Nullable<System.DateTime> journaldatoField;
 
     private System.Nullable<System.DateTime> dokumentetsDatoField;
 
@@ -3940,7 +3940,7 @@ public partial class JournalpostType : BasisregistreringType
 
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(DataType = "date")]
-    public System.DateTime journaldato
+    public System.Nullable<System.DateTime> journaldato
     {
         get
         {
@@ -4849,7 +4849,7 @@ public partial class AvskrivningType : AbstraktResourceType
 
     private string systemIDField;
 
-    private System.DateTime avskrivningsdatoField;
+    private System.Nullable<System.DateTime> avskrivningsdatoField;
 
     private string avskrevetAvField;
 
@@ -4877,7 +4877,7 @@ public partial class AvskrivningType : AbstraktResourceType
 
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(DataType = "date")]
-    public System.DateTime avskrivningsdato
+    public System.Nullable<System.DateTime> avskrivningsdato
     {
         get
         {
