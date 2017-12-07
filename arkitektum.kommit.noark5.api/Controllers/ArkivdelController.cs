@@ -13,13 +13,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
 {
     public class ArkivdelController : ApiController
     {
-        private MockNoarkDatalayer _ctx;
-
-        public ArkivdelController(MockNoarkDatalayer ctx)
-        {
-            _ctx = ctx;
-        }
-        private static ODataValidationSettings _validationSettings = new ODataValidationSettings();
+        private static readonly ODataValidationSettings ValidationSettings = new ODataValidationSettings();
 
         /// <summary>
         /// 
@@ -31,12 +25,12 @@ namespace arkitektum.kommit.noark5.api.Controllers
         public IEnumerable<ArkivdelType> GetArkivdels(ODataQueryOptions<ArkivdelType> queryOptions)
         {
             //TODO støtte odata filter syntaks
-            _validationSettings.MaxExpansionDepth = 1;
-            _validationSettings.MaxAnyAllExpressionDepth = 1;
+            ValidationSettings.MaxExpansionDepth = 1;
+            ValidationSettings.MaxAnyAllExpressionDepth = 1;
             ////støtte odata filter syntaks
-            queryOptions.Validate(_validationSettings);
+            queryOptions.Validate(ValidationSettings);
 
-            return queryOptions.ApplyTo(_ctx.Arkivdeler.AsQueryable()) as IEnumerable<ArkivdelType>;
+            return queryOptions.ApplyTo(MockNoarkDatalayer.Arkivdeler.AsQueryable()) as IEnumerable<ArkivdelType>;
 
         }
 
@@ -47,7 +41,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
         public HttpResponseMessage GetArkivdel(string id)
         {
 
-            ArkivdelType m = _ctx.Arkivdeler.FirstOrDefault(i => i.systemID == id);
+            ArkivdelType m = MockNoarkDatalayer.Arkivdeler.FirstOrDefault(i => i.systemID == id);
 
             if (m == null)
             {
@@ -114,7 +108,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
                 //Kan slettes? Har rettighet? Logges mm..
                 //Hva er forskjellen på datatype sletting?
                 //sjekke etag om objektet er endret av andre?
-                ArkivdelType m = _ctx.Arkivdeler.FirstOrDefault(i => i.systemID == id);
+                ArkivdelType m = MockNoarkDatalayer.Arkivdeler.FirstOrDefault(i => i.systemID == id);
                 
 
                 if (m == null)
@@ -246,7 +240,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
         [HttpGet]
         public IEnumerable<ArkivdelType> GetArkivdelerFraArkiv(string Id)
         {
-            IEnumerable<ArkivdelType> m = _ctx.Arkivdeler.Where(i => i.arkiv.systemID == Id);
+            IEnumerable<ArkivdelType> m = MockNoarkDatalayer.Arkivdeler.Where(i => i.arkiv.systemID == Id);
             return m;
         }
 

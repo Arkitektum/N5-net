@@ -331,7 +331,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Services\ArkivService.cs" />
     <Compile Include="Services\MockNoarkDatalayer.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

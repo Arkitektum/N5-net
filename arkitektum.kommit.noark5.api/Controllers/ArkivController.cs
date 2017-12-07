@@ -18,15 +18,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
     /// </summary>
     public class ArkivController : ApiController
     {
-        private static ODataValidationSettings _validationSettings = new ODataValidationSettings();
-        private MockNoarkDatalayer _ctx;
-        private readonly ArkivService _arkivService;
-
-        public ArkivController(MockNoarkDatalayer ctx, ArkivService arkivService)
-        {
-            _ctx = ctx;
-            _arkivService = arkivService;
-        }
+        private readonly static ODataValidationSettings ValidationSettings = new ODataValidationSettings();
 
         /// <summary>
         /// Henter tilgjengelige arkiv
@@ -47,7 +39,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
            
             //TODO Links
 
-            return _ctx.Arkiver.AsQueryable();
+            return MockNoarkDatalayer.Arkiver.AsQueryable();
         }
         /// <summary>
         /// Henter tilgjengelige arkiv - filter
@@ -66,18 +58,18 @@ namespace arkitektum.kommit.noark5.api.Controllers
         public PageResult<ArkivType> GetArkivs2(ODataQueryOptions<ArkivType> queryOptions)
         {
             //Konformitetsnivå på søk
-            _validationSettings.MaxExpansionDepth = 1;
-            _validationSettings.MaxAnyAllExpressionDepth = 1;
+            ValidationSettings.MaxExpansionDepth = 1;
+            ValidationSettings.MaxAnyAllExpressionDepth = 1;
 
             ////støtte odata filter syntaks
-            queryOptions.Validate(_validationSettings);
+            queryOptions.Validate(ValidationSettings);
             //Må returnere next link når resultat er større enn pagesize
             ODataQuerySettings settings = new ODataQuerySettings()
             {
                 PageSize = 2
             };
 
-            IQueryable results = queryOptions.ApplyTo(_ctx.Arkiver.AsQueryable(), settings);
+            IQueryable results = queryOptions.ApplyTo(MockNoarkDatalayer.Arkiver.AsQueryable(), settings);
 
             return new PageResult<ArkivType>(
                 results as IEnumerable<ArkivType>,
@@ -102,7 +94,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
         [ResponseType(typeof(ArkivType))]
         public IHttpActionResult GetArkiv(string id)
         {
-            ArkivType arkiv = _arkivService.GetArkiv(id);
+            ArkivType arkiv = MockNoarkDatalayer.GetArkivById(id);
 
             if (arkiv == null)
             {
@@ -139,7 +131,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
                         url.Host,
                         url.Port).Uri;
 
-                ArkivType m = _ctx.Arkiver.FirstOrDefault(i => i.systemID == arkiv.systemID);
+                ArkivType m = MockNoarkDatalayer.Arkiver.FirstOrDefault(i => i.systemID == arkiv.systemID);
 
                 if (m == null)
                 {
@@ -182,13 +174,13 @@ namespace arkitektum.kommit.noark5.api.Controllers
             {
                 //Kan slettes? Har rettighet? Logges mm..
                 //sjekke etag om objektet er endret av andre?
-                ArkivType m = _ctx.Arkiver.FirstOrDefault(i => i.systemID == id);
+                ArkivType m = MockNoarkDatalayer.Arkiver.FirstOrDefault(i => i.systemID == id);
                
                 if (m == null)
                 {
                     throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
                 }
-                _ctx.Arkiver.Remove(m);
+                MockNoarkDatalayer.Arkiver.Remove(m);
 
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.NoContent);
                 return response;
@@ -265,7 +257,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
                 arkiv.opprettetDatoSpecified = true;
                 arkiv.opprettetAv = "pålogget bruker";
 
-                _ctx.Arkiver.Add(arkiv);
+                MockNoarkDatalayer.Arkiver.Add(arkiv);
 
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, arkiv);
                 response.Headers.Location = new Uri(baseUri + "api/arkivstruktur/Arkiv/" + arkiv.systemID);
@@ -295,7 +287,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
             List<ArkivskaperType> list = new List<ArkivskaperType>();
 
-            ArkivType arkiv = _arkivService.GetArkiv(arkivId);
+            ArkivType arkiv = MockNoarkDatalayer.GetArkivById(arkivId);
             if (arkiv != null)
                 list.Add(arkiv.arkivskaper);
 
@@ -311,7 +303,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
         [HttpGet]
         public IHttpActionResult GetArkivskaper(string arkivskaperId)
         {
-            ArkivskaperType arkivskaper = _arkivService.GetArkivskaper(arkivskaperId);
+            ArkivskaperType arkivskaper = MockNoarkDatalayer.GetArkivskaperById(arkivskaperId);
             if (arkivskaper == null)
                 return NotFound();
 
@@ -364,7 +356,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
                 arkivskaper.opprettetDato = DateTime.Now;
                 arkivskaper.opprettetDatoSpecified = true;
 
-                _ctx.Arkivskaper.Add(arkivskaper);
+                MockNoarkDatalayer.Arkivskaper.Add(arkivskaper);
 
                 //List<LinkType> linker = new List<LinkType>();
                 //linker.Add(Set.addLink(baseUri, "api/arkivstruktur/Arkivdel/" + arkivdel.systemID, "self"));

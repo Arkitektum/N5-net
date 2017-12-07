@@ -17,7 +17,6 @@ namespace arkitektum.kommit.noark5.api.Controllers
     {
         private static ODataValidationSettings _validationSettings = new ODataValidationSettings();
 
-        private static readonly MockNoarkDatalayer Datalayer = new MockNoarkDatalayer();
 
         [Route("api/arkivstruktur/Mappe")]
         [HttpGet]
@@ -27,7 +26,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
             
             var results = new List<MappeType>();
 
-            var filtered = queryOptions.ApplyTo(Datalayer.Mapper.AsQueryable()) as IEnumerable<MappeType>;
+            var filtered = queryOptions.ApplyTo(MockNoarkDatalayer.Mapper.AsQueryable()) as IEnumerable<MappeType>;
             if (filtered != null)
                 results.AddRange(filtered);
 
@@ -44,7 +43,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
         [ResponseType(typeof(MappeType))]
         public IHttpActionResult GetMappe(string id)
         {
-            var mappe = Datalayer.GetMappeById(id);
+            var mappe = MockNoarkDatalayer.GetMappeById(id);
 
             if (mappe == null)
                 return NotFound();
@@ -103,7 +102,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
         {
             //TODO hvis det er en saksmappe eller møtemappe skal det sendes videre til riktig kontroller? På Saksmappe settes status i tillegg, mm
 
-            MappeType avsl = Datalayer.GetMappeById(Id);
+            MappeType avsl = MockNoarkDatalayer.GetMappeById(Id);
             avsl.avsluttetAv = "tor";
             avsl.avsluttetDatoSpecified = true;
             avsl.avsluttetDato = DateTime.Now;
@@ -223,8 +222,8 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
             List<MappeType> testdata = new List<MappeType>();
 
-            testdata.Add(Datalayer.Mapper.First());
-            testdata.Add(c.GetSaksmappe("234"));
+            testdata.Add(MockNoarkDatalayer.Mapper.First());
+            testdata.Add(MockNoarkDatalayer.Saksmapper.First());
 
             return testdata.ToArray();
         }
@@ -317,8 +316,8 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
             List<MappeType> testdata = new List<MappeType>();
 
-            testdata.Add(Datalayer.Mapper.First());
-            testdata.Add(c.GetSaksmappe("234"));
+            testdata.Add(MockNoarkDatalayer.Mapper.First());
+            testdata.Add(MockNoarkDatalayer.Saksmapper.First());
 
             return testdata.ToArray();
         }
@@ -404,7 +403,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
         {
             List<MappeType> testdata = new List<MappeType>();
 
-            MappeType m = Datalayer.Mapper.First();
+            MappeType m = MockNoarkDatalayer.Mapper.First();
             m.tittel = tittel;
             testdata.Add(m);
             return testdata.AsEnumerable();

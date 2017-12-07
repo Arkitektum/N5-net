@@ -14,24 +14,20 @@ namespace arkitektum.kommit.noark5.api.App_Start
     public class DependencyConfig
     {
         
-
         public static void Configure(IAppBuilder app)
         {
-            ConfigureDependenciesForAPI(app);
+            ConfigureDependenciesForApi(app);
         }
 
-        private static void ConfigureDependenciesForAPI(IAppBuilder app)
+        private static void ConfigureDependenciesForApi(IAppBuilder app)
         {
             var builder = new ContainerBuilder();
 
             // Get your HttpConfiguration.
             var config = GlobalConfiguration.Configuration;
-            MockNoarkDatalayer datalayer;
+
             // Register your Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
-            datalayer = new MockNoarkDatalayer();
-            builder.RegisterInstance(datalayer).SingleInstance();
-            builder.RegisterType<ArkivService>().AsSelf();
 
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();
