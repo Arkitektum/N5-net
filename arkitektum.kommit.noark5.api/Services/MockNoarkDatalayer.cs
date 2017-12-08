@@ -62,6 +62,7 @@ namespace arkitektum.kommit.noark5.api.Services
                 saksaar = "2017",
                 sakssekvensnummer = index.ToString(),
                 sakspart = OpprettSakspart(index),
+                saksdato = OpprettetDato(index),
                 nasjonalidentifikator = OpprettNasjonalidentifikator(index)
             };
             saksmappe.sakspart[0].RepopulateHyperMedia();
