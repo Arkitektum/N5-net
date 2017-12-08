@@ -60,6 +60,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
             //Konformitetsnivå på søk
             ValidationSettings.MaxExpansionDepth = 1;
             ValidationSettings.MaxAnyAllExpressionDepth = 1;
+            
 
             ////støtte odata filter syntaks
             queryOptions.Validate(ValidationSettings);

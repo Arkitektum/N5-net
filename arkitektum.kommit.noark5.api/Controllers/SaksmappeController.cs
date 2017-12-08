@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -37,17 +38,64 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
         /// <summary>
         /// Expand Mappe to Saksmappe
-        /// TODO: Not correct implemented yet
+        /// Required fields:
+        /// * saksdato
+        /// * saksansvarlig
+        /// * saksstatus
+        /// 
+        /// Implementation of this method should take care of extra fields provided by the client that exists in saksmappe and save them as well.
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="saksmappe"></param>
         /// <returns></returns>
         [Route("api/sakarkiv/Saksmappe/{id}/utvid-til-saksmappe")]
-        [HttpGet]
+        [HttpPut]
         [ResponseType(typeof(SaksmappeType))]
-        public IHttpActionResult UtvidTilSaksmappe(string id)
+        public IHttpActionResult UtvidTilSaksmappe(string id, SaksmappeType saksmappeOppdatert)
         {
-            // TODO: This is not correct implemented
-            return GetSaksmappe(id);
+            MappeType mappe = MockNoarkDatalayer.GetMappeById(id);
+
+            if (mappe == null)
+            {
+                return BadRequest("Invalid saksmappe id, saksmappe could not be found");
+            }
+            if (saksmappeOppdatert.saksdato == DateTime.MinValue)
+            {
+                return BadRequest("saksdato is required to upgrade mappe to saksmappe.");
+            }
+            if (string.IsNullOrWhiteSpace(saksmappeOppdatert.saksansvarlig))
+            {
+                return BadRequest("saksansvarlig is required to upgrade mappe to saksmappe.");
+            }
+            if (string.IsNullOrWhiteSpace(saksmappeOppdatert.saksstatus?.kode))
+            {
+                return BadRequest("saksstatus is required to upgrade mappe to saksmappe.");
+            }
+
+            var saksmappe = new SaksmappeType();
+            saksmappe.saksdato = saksmappeOppdatert.saksdato;
+            saksmappe.saksansvarlig = saksmappeOppdatert.saksansvarlig;
+            saksmappe.saksstatus = saksmappeOppdatert.saksstatus;
+
+            saksmappe.oppdatertDato = DateTime.Now;
+            saksmappe.oppdatertDatoSpecified = true;
+
+            // copy fields from mappe
+            saksmappe.tittel = mappe.tittel;
+            saksmappe.offentligTittel = mappe.offentligTittel;
+            saksmappe.systemID = mappe.systemID;
+            saksmappe.opprettetDato = mappe.opprettetDato;
+            saksmappe.opprettetDatoSpecified = mappe.opprettetDatoSpecified;
+            saksmappe.oppdatertAv = mappe.oppdatertAv;
+            saksmappe.mappeID = mappe.mappeID;
+            saksmappe.gradering = mappe.gradering;
+            saksmappe.klasse = mappe.klasse;
+            saksmappe.merknad = mappe.merknad;
+
+            saksmappe.RepopulateHyperMedia();
+            MockNoarkDatalayer.Saksmapper.Add(saksmappe);
+
+            return Ok(saksmappe);
         }
 
         /// <summary>
