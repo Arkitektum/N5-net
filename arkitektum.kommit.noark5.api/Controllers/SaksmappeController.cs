@@ -93,6 +93,8 @@ namespace arkitektum.kommit.noark5.api.Controllers
             saksmappe.merknad = mappe.merknad;
 
             saksmappe.RepopulateHyperMedia();
+            
+            MockNoarkDatalayer.Saksmapper.RemoveAll(x => x.systemID == id);
             MockNoarkDatalayer.Saksmapper.Add(saksmappe);
 
             return Ok(saksmappe);
