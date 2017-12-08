@@ -101,7 +101,7 @@ public partial class SaksmappeType
 
     private void InsertNewSelf(string baseUri)
     {
-        LinkList.Insert(0, new LinkType("self", baseUri + "api/arkivstruktur/saksmappe/" + systemID));
+        LinkList.Insert(0, new LinkType("self", baseUri + "api/sakarkiv/saksmappe/" + systemID));
     }
 
     private void RemoveOldSelf()
