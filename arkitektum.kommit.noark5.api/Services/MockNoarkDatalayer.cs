@@ -13,6 +13,7 @@ namespace arkitektum.kommit.noark5.api.Services
         internal static List<ArkivdelType> Arkivdeler = new List<ArkivdelType>();
         internal static List<MappeType> Mapper = new List<MappeType>();
         internal static List<SaksmappeType> Saksmapper = new List<SaksmappeType>();
+        internal static List<RegistreringType> Registreringer = new List<RegistreringType>();
 
         /// <summary>
         /// Number of examples to be generated of each type. The number of items in the example arrays should be the same size
@@ -35,11 +36,15 @@ namespace arkitektum.kommit.noark5.api.Services
             Arkivskaper.Clear();
             Mapper.Clear();
             Saksmapper.Clear();
+            Registreringer.Clear();
 
             OpprettArkiver();
             OpprettMapper();
             OpprettSaksmapper();
+            OpprettRegistreringer();
         }
+
+
 
         private static void OpprettSaksmapper()
         {
@@ -56,19 +61,62 @@ namespace arkitektum.kommit.noark5.api.Services
                 systemID = index.ToString(),
                 mappeID = $"100{index}/2017",
                 tittel = Tittel("saksmappe", index),
-                opprettetDato = OpprettetDato(index),
+                opprettetDato = GetDato(index),
                 opprettetDatoSpecified = true,
-                oppdatertAv = OppdatertAv(index),
+                oppdatertAv = GetName(index),
                 saksaar = "2017",
                 sakssekvensnummer = index.ToString(),
                 sakspart = OpprettSakspart(index),
-                saksdato = OpprettetDato(index),
+                saksdato = GetDato(index),
                 nasjonalidentifikator = OpprettNasjonalidentifikator(index)
             };
             saksmappe.sakspart[0].RepopulateHyperMedia();
             saksmappe.RepopulateHyperMedia();
             return saksmappe;
         }
+
+        private static void OpprettRegistreringer()
+        {
+            for (int i = 1; i <= NumberOfExamples; i++)
+            {
+                Registreringer.Add(OpprettRegistrering(i));
+            }
+        }
+
+        private static RegistreringType OpprettRegistrering(int index)
+        {
+            var registrering = new RegistreringType()
+            {
+                Links = null,
+
+                systemID = index.ToString(),
+                oppdatertDato = GetDato(index),
+                oppdatertDatoSpecified = true,
+                opprettetDato = GetDato(index),
+                opprettetDatoSpecified = true,
+                opprettetAv = GetName(index),
+                oppdatertAv = GetName(index),
+                referanseOppdatertAv = GetName(index),
+                referanseOpprettetAv = GetName(index),
+                logg = null,
+
+                arkivertDato = GetDato(index),
+                arkivertDatoSpecified = true,
+                arkivertAv = GetName(index),
+                referanseArkivertAv = GetName(index),
+                kassasjon = new KassasjonType(),
+                skjerming = new SkjermingType(),
+                gradering = new GraderingType(),
+                referanseArkivdel = null,
+                klasse = null,
+                mappe = null,
+                dokumentbeskrivelse = null,
+                arkivdel = null,
+                nasjonalidentifikator = OpprettNasjonalidentifikator(index)
+            };
+            return registrering;
+        }
+
 
         private static AbstraktNasjonalidentifikatorType[] OpprettNasjonalidentifikator(int index)
         {
@@ -130,18 +178,26 @@ namespace arkitektum.kommit.noark5.api.Services
             };
         }
 
-        private static DateTime OpprettetDato(int index)
+        private static DateTime GetDato(int index)
         {
             return FixedDate.AddDays(-(index + 10));
         }
 
         private static string Tittel(string objektType, int index)
         {
+            while (index > 10)
+            {
+                index = index - 10;
+            }
             return $"{Adjectives[index-1]} {objektType} nr. {index}";
         }
 
-        private static string OppdatertAv(int index)
+        private static string GetName(int index)
         {
+            while (index > 10)
+            {
+                index = index - 10;
+            }
             return FirstNames[index - 1];
         }
 

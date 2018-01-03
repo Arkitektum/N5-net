@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.OData.Query;
+using System.Web.UI;
+using arkitektum.kommit.noark5.api.Services;
 
 namespace arkitektum.kommit.noark5.api.Controllers
 {
@@ -16,44 +18,16 @@ namespace arkitektum.kommit.noark5.api.Controllers
         [Route("api/arkivstruktur/registrering")]
         public IEnumerable<RegistreringType> GetRegistreringer(ODataQueryOptions<RegistreringType> queryOptions)
         {
-            //TODO støtte odata filter syntaks
+            var results = new List<RegistreringType>();
+
             queryOptions.Validate(_validationSettings);
 
-            //Rettighetsstyring...og alle andre restriksjoner
-            List<RegistreringType> testdata = new List<RegistreringType>();
+            IQueryable<RegistreringType> filtered = queryOptions.ApplyTo(MockNoarkDatalayer.Registreringer.AsQueryable()) as IQueryable<RegistreringType>;
 
+            if (filtered != null)
+                results.AddRange(filtered);
 
-            //TODO Håndtere filter...
-
-            if (queryOptions.Filter != null)
-            {
-                var q = queryOptions.Filter.FilterClause.Expression;
-                if (queryOptions.Filter.RawValue.Contains("systemID"))
-                {
-                    var mockarkiv = GetRegistrering("fra filter eller ");
-     
-                    testdata.Add(GetRegistrering(((Microsoft.Data.OData.Query.SemanticAst.ConstantNode)(((Microsoft.Data.OData.Query.SemanticAst.BinaryOperatorNode)(queryOptions.Filter.FilterClause.Expression)).Right)).Value.ToString()));
-                }
-            }
-
-            if(queryOptions.Top == null)
-            {
-                testdata.Add(GetRegistrering(Guid.NewGuid().ToString()));
-                testdata.Add(GetRegistrering(Guid.NewGuid().ToString()));
-                testdata.Add(GetRegistrering(Guid.NewGuid().ToString()));
-                testdata.Add(GetRegistrering(Guid.NewGuid().ToString()));
-                testdata.Add(GetRegistrering(Guid.NewGuid().ToString()));
-            }
-            else if (queryOptions.Top != null)
-            {
-                while (testdata.Count < queryOptions.Top.Value)
-                {
-                    testdata.Add(GetRegistrering(Guid.NewGuid().ToString()));
-                }
-            }
-            
-
-            return testdata.AsEnumerable();
+            return results.ToArray();
         }
 
 
