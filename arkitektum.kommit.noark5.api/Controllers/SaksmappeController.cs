@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using System.Web.Http.OData.Query;
@@ -29,7 +30,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
             List<SaksmappeType> results = new List<SaksmappeType>();
 
             queryOptions.Validate(ValidationSettings);
-            
+
             IQueryable<SaksmappeType> filtered = queryOptions.ApplyTo(MockNoarkDatalayer.Saksmapper.AsQueryable()) as IQueryable<SaksmappeType>;
 
             if (filtered != null)
@@ -95,7 +96,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
             saksmappe.merknad = mappe.merknad;
 
             saksmappe.RepopulateHyperMedia();
-            
+
             MockNoarkDatalayer.Saksmapper.RemoveAll(x => x.systemID == id);
             MockNoarkDatalayer.Saksmapper.Add(saksmappe);
 
@@ -127,6 +128,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
         /// Returns all klasse coupled to the given saksmappe
         /// </summary>
         /// <param name="queryOptions"></param>
+        /// <param name="id">Saksmappe Id</param>
         /// <returns></returns>
         [Route("api/sakarkiv/Saksmappe/{id}/sekundaerklassifikasjoner")]
         [HttpGet]
@@ -154,15 +156,34 @@ namespace arkitektum.kommit.noark5.api.Controllers
         {
             if (id == null) return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
 
-            var saksmappe = MockNoarkDatalayer.GetSaksmappeById(id) ?? throw new ArgumentNullException("Saksmappen finnes ikke");
-            MockNoarkDatalayer.Saksmapper.Remove(saksmappe);
-
-            saksmappe.RemoveSekundaerklasseById(systemId);
-           
-            MockNoarkDatalayer.Saksmapper.Add(saksmappe);
+            MockNoarkDatalayer.DeleteSekundaerklassifikasjonFromSaksmappe(id, systemId);
 
             var response = Request.CreateResponse(HttpStatusCode.NoContent);
             return response;
+        }
+
+
+        /// <summary>
+        /// Legg til sekundærklassifikasjon
+        /// </summary>
+        /// <param name="id">Saksmappe Id</param>
+        /// <param name="klasseType">KlasseType objekt</param>
+        /// <returns></returns>
+        [Route("api/sakarkiv/Saksmappe/{id}/sekundaerklassifikasjoner")]
+        [HttpPost]
+        [ResponseType(typeof(KlasseType))]
+        public HttpResponseMessage NySekundaerklassifikasjon(string id, KlasseType klasseType)
+        {
+            if (id == null) return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+
+            MockNoarkDatalayer.AddSekundaerklassifikasjonToSaksmappe(id, klasseType);
+
+            var url = HttpContext.Current.Request.Url;
+            var baseUri = new UriBuilder( url.Scheme, url.Host, url.Port).Uri;
+            var response = Request.CreateResponse(HttpStatusCode.Created, klasseType);
+            response.Headers.Location = new Uri(baseUri + "api/sakarkiv/Saksmappe/{id}/sekundaerklassifikasjoner");
+            return response;
+
         }
 
     }

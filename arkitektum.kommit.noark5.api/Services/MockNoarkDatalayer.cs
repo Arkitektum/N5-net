@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace arkitektum.kommit.noark5.api.Services
 {
@@ -404,5 +405,31 @@ namespace arkitektum.kommit.noark5.api.Services
             return Saksmapper.Find(s => s.systemID == id);
         }
 
+
+        public static void AddSekundaerklassifikasjonToSaksmappe(string saksmappeSystemId, KlasseType klasseType)
+        {
+            if (klasseType != null)
+            {
+                var saksmappe = GetSaksmappeById(saksmappeSystemId) ??
+                                throw new ArgumentNullException("Saksmappen finnes ikke");
+                Saksmapper.Remove(saksmappe);
+
+                var sekundaerklassifikasjonerList = saksmappe.sekundaerklassifikasjon.ToList();
+                sekundaerklassifikasjonerList.Add(klasseType);
+                saksmappe.sekundaerklassifikasjon = sekundaerklassifikasjonerList.ToArray();
+
+                Saksmapper.Add(saksmappe);
+            }
+        }
+
+        public static void DeleteSekundaerklassifikasjonFromSaksmappe(string saksmappeSystemId, string sekundaerklassifikasjonId)
+        {
+            var saksmappe = GetSaksmappeById(saksmappeSystemId) ?? throw new ArgumentNullException("Saksmappen finnes ikke");
+            Saksmapper.Remove(saksmappe);
+
+            saksmappe.RemoveSekundaerklasseById(sekundaerklassifikasjonId);
+
+            Saksmapper.Add(saksmappe);
+        }
     }
 }
