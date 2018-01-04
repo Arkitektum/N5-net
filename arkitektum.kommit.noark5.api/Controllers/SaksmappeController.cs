@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using System.Web.Http.OData.Query;
@@ -130,12 +132,38 @@ namespace arkitektum.kommit.noark5.api.Controllers
         [HttpGet]
         public IEnumerable<KlasseType> GetSekundaerklassifikasjoner(ODataQueryOptions<KlasseType> queryOptions, string id)
         {
-            var saksmappe = MockNoarkDatalayer.GetSaksmappeById(id);
-            var sekundaerklassifikasjoner = saksmappe.sekundaerklassifikasjon;
+            var saksmappe = MockNoarkDatalayer.GetSaksmappeById(id) ?? throw new ArgumentNullException("Saksmappen finnes ikke");
+            var sekundaerklassifikasjoner = saksmappe.sekundaerklassifikasjon ?? throw new ArgumentNullException("Sekundærklassifikasjonen finnes ikke");
 
             queryOptions.Validate(ValidationSettings);
 
             return sekundaerklassifikasjoner.ToArray();
         }
+
+
+
+        /// <summary>
+        /// Sletter sekundærklassifikasjon
+        /// </summary>
+        /// <param name="id">Saksmappe Id</param>
+        /// <param name="systemId">Sekundærklassifikasjoner sin klasseId</param>
+        /// <returns></returns>
+        [Route("api/sakarkiv/Saksmappe/{id}/sekundaerklassifikasjoner/{systemId}")]
+        [HttpDelete]
+        public HttpResponseMessage SlettSekundaerklassifikasjon(string id, string systemId)
+        {
+            if (id == null) return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+
+            var saksmappe = MockNoarkDatalayer.GetSaksmappeById(id) ?? throw new ArgumentNullException("Saksmappen finnes ikke");
+            MockNoarkDatalayer.Saksmapper.Remove(saksmappe);
+
+            saksmappe.RemoveSekundaerklasseById(systemId);
+           
+            MockNoarkDatalayer.Saksmapper.Add(saksmappe);
+
+            var response = Request.CreateResponse(HttpStatusCode.NoContent);
+            return response;
+        }
+
     }
 }

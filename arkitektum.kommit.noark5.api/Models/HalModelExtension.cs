@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 
 public partial class RegistreringType
@@ -116,6 +117,25 @@ public partial class SaksmappeType
         var utvidTilSaksmappe =
             LinkList.First(x => x.rel == "http://rel.kxml.no/noark5/v4/api/sakarkiv/utvid-til-saksmappe");
         LinkList.Remove(utvidTilSaksmappe);
+    }
+
+    public void RemoveSekundaerklasseById(string id)
+    {
+        if (sekundaerklassifikasjon != null)
+        {
+            var sekundaerklassifikasjoner = sekundaerklassifikasjon.ToList();
+
+            var selectedSekundaerklassifikasjon = sekundaerklassifikasjon.FirstOrDefault(i => i.systemID == id);
+            if (selectedSekundaerklassifikasjon != null)
+            {
+                sekundaerklassifikasjoner.Remove(selectedSekundaerklassifikasjon);
+                sekundaerklassifikasjon = sekundaerklassifikasjoner.ToArray();
+            }
+            else
+            {
+                throw new ArgumentNullException("sekundærklassifikasjonen finnes ikke");
+            }
+        }
     }
 }
 
