@@ -95,6 +95,7 @@ public partial class SaksmappeType
         RemoveOldSelf();
 
         InsertNewSelf(baseUri);
+        LinkList.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/sakarkiv/sekundaerklassifikasjoner", baseUri + "api/sakarkiv/Saksmappe/" + this.systemID + "/sekundaerklassifikasjoner"));
 
         RemoveUtvidTilSaksmappe();
     }
