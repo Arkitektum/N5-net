@@ -119,5 +119,23 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
             return Ok(saksmappe);
         }
+
+
+        /// <summary>
+        /// Returns all klasse coupled to the given saksmappe
+        /// </summary>
+        /// <param name="queryOptions"></param>
+        /// <returns></returns>
+        [Route("api/sakarkiv/Saksmappe/{id}/sekundaerklassifikasjoner")]
+        [HttpGet]
+        public IEnumerable<KlasseType> GetSekundaerklassifikasjoner(ODataQueryOptions<KlasseType> queryOptions, string id)
+        {
+            var saksmappe = MockNoarkDatalayer.GetSaksmappeById(id);
+            var sekundaerklassifikasjoner = saksmappe.sekundaerklassifikasjon;
+
+            queryOptions.Validate(ValidationSettings);
+
+            return sekundaerklassifikasjoner.ToArray();
+        }
     }
 }

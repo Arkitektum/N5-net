@@ -5,7 +5,6 @@ namespace arkitektum.kommit.noark5.api.Services
 {
     internal static class MockNoarkDatalayer
     {
-
         private static readonly Random Random = new Random();
 
         internal static List<ArkivskaperType> Arkivskaper = new List<ArkivskaperType>();
@@ -44,6 +43,23 @@ namespace arkitektum.kommit.noark5.api.Services
             OpprettRegistreringer();
         }
 
+        private static KlasseType OpprettKlasse(int i)
+        {
+            var klasseType = new KlasseType();
+            klasseType.tittel = "Tittel" + i;
+            klasseType.systemID = i + "_sysId";
+            klasseType.beskrivelse = "Dette er en beskrivelse av" + i;
+            klasseType.klasseID = "KlasseId " + i;
+            klasseType.oppdatertDato = GetDato(i);
+            klasseType.oppdatertDatoSpecified = true;
+            klasseType.oppdatertAv = GetName(i);
+            klasseType.referanseOppdatertAv = GetName(i);
+            klasseType.opprettetDato = GetDato(i);
+            klasseType.opprettetDatoSpecified = true;
+            klasseType.opprettetAv = GetName(i);
+            klasseType.referanseOpprettetAv = GetName(i);
+            return klasseType;
+        }
 
 
         private static void OpprettSaksmapper()
@@ -68,11 +84,23 @@ namespace arkitektum.kommit.noark5.api.Services
                 sakssekvensnummer = index.ToString(),
                 sakspart = OpprettSakspart(index),
                 saksdato = GetDato(index),
-                nasjonalidentifikator = OpprettNasjonalidentifikator(index)
+                nasjonalidentifikator = OpprettNasjonalidentifikator(index),
+                sekundaerklassifikasjon = OpprettSekundaerklassifikasjoner()
             };
             saksmappe.sakspart[0].RepopulateHyperMedia();
             saksmappe.RepopulateHyperMedia();
             return saksmappe;
+        }
+
+        private static KlasseType[] OpprettSekundaerklassifikasjoner()
+        {
+            var klasseTyper = new List<KlasseType>();
+
+            for (int i = 1; i <= 2; i++)
+            {
+                klasseTyper.Add(OpprettKlasse(i));
+            }
+            return klasseTyper.ToArray();
         }
 
         private static void OpprettRegistreringer()
@@ -116,7 +144,6 @@ namespace arkitektum.kommit.noark5.api.Services
             };
             return registrering;
         }
-
 
         private static AbstraktNasjonalidentifikatorType[] OpprettNasjonalidentifikator(int index)
         {
@@ -201,8 +228,6 @@ namespace arkitektum.kommit.noark5.api.Services
             return FirstNames[index - 1];
         }
 
-        
-
         public static DokumentmediumType ElektroniskDokumentmedium = new DokumentmediumType
         {
             kode = "E",
@@ -232,8 +257,6 @@ namespace arkitektum.kommit.noark5.api.Services
             kode = "A",
             beskrivelse = "Arkivformat"
         };
-
-        
         
         private static ArkivskaperType OpprettArkivskaper()
         {
@@ -335,7 +358,6 @@ namespace arkitektum.kommit.noark5.api.Services
             return FirstNames[RandomNumber(0, FirstNames.Length - 1)];
         }
 
-
         private static string GenerateUuuid()
         {
             return Guid.NewGuid().ToString();
@@ -355,7 +377,6 @@ namespace arkitektum.kommit.noark5.api.Services
         {
             return Adjectives[RandomNumber(0, Adjectives.Length-1)];
         }
-
 
         private static string FirstLetterToUpper(string str)
         {
@@ -382,5 +403,6 @@ namespace arkitektum.kommit.noark5.api.Services
         {
             return Saksmapper.Find(s => s.systemID == id);
         }
+
     }
 }
