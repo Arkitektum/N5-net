@@ -430,6 +430,24 @@ namespace arkitektum.kommit.noark5.api.Services
             saksmappe.RemoveSekundaerklasseById(sekundaerklassifikasjonId);
 
             Saksmapper.Add(saksmappe);
+        public static void SetSekundaerklassifikasjonerToSaksmappe(string saksmappeSystemId, KlasseType[] klasseType)
+        {
+            var funnet = false;
+            if (klasseType != null)
+            {
+                foreach (var saksmappe in Saksmapper)
+                {
+                    if (saksmappe.systemID == saksmappeSystemId)
+                    {
+                        saksmappe.sekundaerklassifikasjon = klasseType;
+                        funnet = true;
+                    }
+                }
+            }
+            if (!funnet)
+            {
+                throw new ArgumentNullException("Saksmappen finnes ikke");
+            }
         }
     }
 }

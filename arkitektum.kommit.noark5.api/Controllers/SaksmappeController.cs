@@ -8,6 +8,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using System.Web.Http.OData.Query;
 using arkitektum.kommit.noark5.api.Services;
+using Thinktecture.IdentityModel.Tokens;
 
 namespace arkitektum.kommit.noark5.api.Controllers
 {
@@ -183,8 +184,63 @@ namespace arkitektum.kommit.noark5.api.Controllers
             var response = Request.CreateResponse(HttpStatusCode.Created, klasseType);
             response.Headers.Location = new Uri(baseUri + "api/sakarkiv/Saksmappe/{id}/sekundaerklassifikasjoner");
             return response;
-
         }
+
+
+        /// <summary>
+        /// Endre sekundærklassifikasjoner
+        /// </summary>
+        /// <param name="id">Saksmappe Id</param>
+        /// <param name="klasseType">Nye klassetyper</param>
+        /// <returns></returns>
+        [Route("api/sakarkiv/Saksmappe/{id}/sekundaerklassifikasjoner")]
+        [HttpPut]
+        [ResponseType(typeof(KlasseType))]
+        public HttpResponseMessage SettSekundaerklassifikasjon(string id, KlasseType[] klasseType)
+        {
+            klasseType = CreateNewKlasseTypeArray();
+            
+            if (id == null) return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+
+            MockNoarkDatalayer.SetSekundaerklassifikasjonerToSaksmappe(id, klasseType);
+
+            var url = HttpContext.Current.Request.Url;
+            var baseUri = new UriBuilder(url.Scheme, url.Host, url.Port).Uri;
+            var response = Request.CreateResponse(HttpStatusCode.Created, klasseType);
+            response.Headers.Location = new Uri(baseUri + "api/sakarkiv/Saksmappe/{id}/sekundaerklassifikasjoner");
+            return response;
+        }
+
+        private KlasseType[] CreateNewKlasseTypeArray()
+        {
+            var klasseTypeArray = new KlasseType[3];
+            klasseTypeArray[0] = CreateKlasseTypeExample(1);
+            klasseTypeArray[1] = CreateKlasseTypeExample(2);
+            klasseTypeArray[2] = CreateKlasseTypeExample(3);
+
+            return klasseTypeArray;
+        }
+
+
+        private KlasseType CreateKlasseTypeExample(int i = 1)
+        {
+            return new KlasseType()
+            {
+                tittel = "Tittel " + i,
+                systemID = "syst_" + i,
+                beskrivelse = "Dette er en beskrivelse av " + i,
+                klasseID = "KlasseId" + i,
+                oppdatertDato = DateTime.Now,
+                oppdatertDatoSpecified = true,
+                oppdatertAv = "Test navn" + i,
+                referanseOppdatertAv = "",
+                opprettetDato = DateTime.Now,
+                opprettetDatoSpecified = true,
+                opprettetAv = "Test navn" + i,
+                referanseOpprettetAv = "Test navn" + i,
+            };
+        }
+
 
     }
 }
