@@ -217,7 +217,7 @@ namespace arkitektum.kommit.noark5.api.Services
             {
                 index = index - 10;
             }
-            return $"{Adjectives[index-1]} {objektType} nr. {index}";
+            return $"{Adjectives[index - 1]} {objektType} nr. {index}";
         }
 
         private static string GetName(int index)
@@ -258,7 +258,7 @@ namespace arkitektum.kommit.noark5.api.Services
             kode = "A",
             beskrivelse = "Arkivformat"
         };
-        
+
         private static ArkivskaperType OpprettArkivskaper()
         {
             var arkivskaper = new ArkivskaperType
@@ -286,7 +286,7 @@ namespace arkitektum.kommit.noark5.api.Services
 
         private static ArkivType OpprettArkiv(string systemId)
         {
-            var arkiv =  new ArkivType()
+            var arkiv = new ArkivType()
             {
                 tittel = FirstLetterToUpper(GetRandomAdjective()) + " arkiv",
                 arkivstatus = AvsluttetArkivstatus,
@@ -300,7 +300,7 @@ namespace arkitektum.kommit.noark5.api.Services
                 referanseAvsluttetAv = GenerateUuuid(),
                 opprettetAv = "brukernavn",
                 referanseOpprettetAv = GenerateUuuid()
-                
+
             };
             arkiv.RepopulateHyperMedia();
             return arkiv;
@@ -320,7 +320,7 @@ namespace arkitektum.kommit.noark5.api.Services
         {
             for (int i = 0; i < 10; i++)
             {
-                Mapper.Add(OpprettMappe((i+1).ToString()));
+                Mapper.Add(OpprettMappe((i + 1).ToString()));
             }
         }
 
@@ -336,7 +336,7 @@ namespace arkitektum.kommit.noark5.api.Services
             m.mappeID = id + "/2014";
             m.gradering = new GraderingType
             {
-                graderingskode = new GraderingskodeType {kode = "B"},
+                graderingskode = new GraderingskodeType { kode = "B" },
                 graderingsdato = DateTime.Now
             };
             m.klasse = new KlasseType() { klasseID = "12345678901", tittel = "12345678901", klassifikasjonssystem = new KlassifikasjonssystemType { klassifikasjonstype = new KlassifikasjonstypeType { kode = "PNR", beskrivelse = "Personnr" } } }; //klassifikasjonssystem? rekkefølge?
@@ -376,7 +376,7 @@ namespace arkitektum.kommit.noark5.api.Services
 
         private static string GetRandomAdjective()
         {
-            return Adjectives[RandomNumber(0, Adjectives.Length-1)];
+            return Adjectives[RandomNumber(0, Adjectives.Length - 1)];
         }
 
         private static string FirstLetterToUpper(string str)
@@ -408,28 +408,46 @@ namespace arkitektum.kommit.noark5.api.Services
 
         public static void AddSekundaerklassifikasjonToSaksmappe(string saksmappeSystemId, KlasseType klasseType)
         {
+            var funnet = false;
             if (klasseType != null)
             {
-                var saksmappe = GetSaksmappeById(saksmappeSystemId) ??
-                                throw new ArgumentNullException("Saksmappen finnes ikke");
-                Saksmapper.Remove(saksmappe);
-
-                var sekundaerklassifikasjonerList = saksmappe.sekundaerklassifikasjon.ToList();
-                sekundaerklassifikasjonerList.Add(klasseType);
-                saksmappe.sekundaerklassifikasjon = sekundaerklassifikasjonerList.ToArray();
-
-                Saksmapper.Add(saksmappe);
+                foreach (var saksmappe in Saksmapper)
+                {
+                    if (saksmappe.systemID == saksmappeSystemId)
+                    {
+                        var sekundaerklassifikasjonerList = saksmappe.sekundaerklassifikasjon.ToList();
+                        sekundaerklassifikasjonerList.Add(klasseType);
+                        saksmappe.sekundaerklassifikasjon = sekundaerklassifikasjonerList.ToArray();
+                        funnet = true;
+                    }
+                }
+            }
+            if (!funnet)
+            {
+                throw new ArgumentNullException("Saksmappen finnes ikke");
             }
         }
 
         public static void DeleteSekundaerklassifikasjonFromSaksmappe(string saksmappeSystemId, string sekundaerklassifikasjonId)
         {
-            var saksmappe = GetSaksmappeById(saksmappeSystemId) ?? throw new ArgumentNullException("Saksmappen finnes ikke");
-            Saksmapper.Remove(saksmappe);
+            var funnet = false;
+            if (sekundaerklassifikasjonId != null)
+            {
+                foreach (var saksmappe in Saksmapper)
+                {
+                    if (saksmappe.systemID == saksmappeSystemId)
+                    {
+                        saksmappe.RemoveSekundaerklasseById(sekundaerklassifikasjonId);
+                        funnet = true;
+                    }
+                }
+            }
+            if (!funnet)
+            {
+                throw new ArgumentNullException("Saksmappen finnes ikke");
+            }
+        }
 
-            saksmappe.RemoveSekundaerklasseById(sekundaerklassifikasjonId);
-
-            Saksmapper.Add(saksmappe);
         public static void SetSekundaerklassifikasjonerToSaksmappe(string saksmappeSystemId, KlasseType[] klasseType)
         {
             var funnet = false;

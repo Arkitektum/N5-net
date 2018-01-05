@@ -175,6 +175,8 @@ namespace arkitektum.kommit.noark5.api.Controllers
         [ResponseType(typeof(KlasseType))]
         public HttpResponseMessage NySekundaerklassifikasjon(string id, KlasseType klasseType)
         {
+            klasseType = CreateKlasseTypeExample();
+
             if (id == null) return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
 
             MockNoarkDatalayer.AddSekundaerklassifikasjonToSaksmappe(id, klasseType);
