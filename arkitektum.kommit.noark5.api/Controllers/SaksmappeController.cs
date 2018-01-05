@@ -175,6 +175,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
         [ResponseType(typeof(KlasseType))]
         public HttpResponseMessage NySekundaerklassifikasjon(string id, KlasseType klasseType)
         {
+            // Testdata... 
             klasseType = CreateKlasseTypeExample();
 
             if (id == null) return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
@@ -200,6 +201,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
         [ResponseType(typeof(KlasseType))]
         public HttpResponseMessage SettSekundaerklassifikasjon(string id, KlasseType[] klasseType)
         {
+            // Testdata... 
             klasseType = CreateNewKlasseTypeArray();
             
             if (id == null) return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
