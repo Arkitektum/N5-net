@@ -475,5 +475,11 @@ namespace arkitektum.kommit.noark5.api.Services
                 throw new ArgumentNullException("Saksmappen finnes ikke");
             }
         }
+
+        public static KlasseType[] GetSekundaerklassifikasjonerBySaksmappeId(string id)
+        {
+            var saksmappe = GetSaksmappeById(id) ?? throw new ArgumentNullException("Saksmappen finnes ikke");
+            return saksmappe.sekundaerklassifikasjon;
+        }
     }
 }
