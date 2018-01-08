@@ -206,6 +206,14 @@ namespace arkitektum.kommit.noark5.api.Services
             };
         }
 
+        internal static void DeleteSekundaerklassifikasjonFromSaksmappe(string id, KlasseType[] klasseTyper)
+        {
+            foreach (var klasseType in klasseTyper)
+            {
+                DeleteSekundaerklassifikasjonFromSaksmappe(id, klasseType.systemID);
+            }
+        }
+
         private static DateTime GetDato(int index)
         {
             return FixedDate.AddDays(-(index + 10));

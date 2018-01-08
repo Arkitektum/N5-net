@@ -163,6 +163,24 @@ namespace arkitektum.kommit.noark5.api.Controllers
             return response;
         }
 
+        /// <summary>
+        /// Sletter sekundærklassifikasjoner
+        /// </summary>
+        /// <param name="id">Saksmappe Id</param>
+        /// <param name="klasseTyper">Sekundærklassifikasjoner</param>
+        /// <returns></returns>
+        [Route("api/sakarkiv/Saksmappe/{id}/sekundaerklassifikasjoner/{systemId}")]
+        [HttpDelete]
+        public HttpResponseMessage SlettSekundaerklassifikasjon(string id, KlasseType[] klasseTyper)
+        {
+            if (id == null) return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+
+            MockNoarkDatalayer.DeleteSekundaerklassifikasjonFromSaksmappe(id, klasseTyper);
+
+            var response = Request.CreateResponse(HttpStatusCode.NoContent);
+            return response;
+        }
+
 
         /// <summary>
         /// Legg til sekundærklassifikasjon
