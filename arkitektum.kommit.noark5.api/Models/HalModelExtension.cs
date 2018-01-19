@@ -82,6 +82,20 @@ public partial class ArkivskaperType
 
 }
 
+public partial class KlasseType
+{
+
+    protected override void CreateHypermedia()
+    {
+        var baseUri = arkitektum.kommit.noark5.api.Properties.Settings.Default.baseUri;
+
+        LinkList.Clear();
+        LinkList.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/administrasjon/dokumentmedium", baseUri + "api/kodelister/Dokumentmedium{?$filter&$orderby&$top&$skip}"));
+        LinkList.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/administrasjon/arkivstatus", baseUri + "api/kodelister/Arkivstatus{?$filter&$orderby&$top&$skip}"));
+    }
+
+}
+
 public partial class SaksmappeType
 {
     /// <summary>
@@ -97,6 +111,7 @@ public partial class SaksmappeType
 
         InsertNewSelf(baseUri);
         LinkList.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/sakarkiv/sekundaerklassifikasjoner", baseUri + "api/sakarkiv/Saksmappe/" + this.systemID + "/sekundaerklassifikasjoner"));
+        LinkList.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/sakarkiv/sekundaerklassifikasjoner", baseUri + "api/sakarkiv/Saksmappe/" + this.systemID + "/ny-sekundaerklassifikasjon"));
 
         RemoveUtvidTilSaksmappe();
     }
