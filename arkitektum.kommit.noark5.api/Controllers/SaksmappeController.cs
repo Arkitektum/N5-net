@@ -107,7 +107,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
         /// <summary>
         /// Return a single saksmappe
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Saksmappe id</param>
         /// <returns></returns>
         [Route("api/sakarkiv/Saksmappe/{id}")]
         [HttpGet]
@@ -148,7 +148,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
         /// Sletter sekundærklassifikasjon
         /// </summary>
         /// <param name="id">Saksmappe Id</param>
-        /// <param name="systemId">Sekundærklassifikasjoner sin klasseId</param>
+        /// <param name="systemId">Systemid til en sekundærklassifikasjon</param>
         /// <returns></returns>
         [Route("api/sakarkiv/Saksmappe/{id}/sekundaerklassifikasjon/{systemId}")]
         [HttpDelete]
@@ -166,16 +166,17 @@ namespace arkitektum.kommit.noark5.api.Controllers
         /// Sletter sekundærklassifikasjoner
         /// </summary>
         /// <param name="id">Saksmappe Id</param>
-        /// <param name="klasseTyper">Sekundærklassifikasjoner</param>
+        /// <param name="klasseTyper">En tabell med sekundærklassifikasjoner</param>
         /// <returns></returns>
         [Route("api/sakarkiv/Saksmappe/{id}/sekundaerklassifikasjoner")]
         [HttpDelete]
         public HttpResponseMessage SlettSekundaerklassifikasjoner(string id, KlasseType[] klasseTyper)
         {
             if (id == null) return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-
+            if (klasseTyper == null) klasseTyper = CreateNewKlasseTypeArray();
+            
             MockNoarkDatalayer.DeleteSekundaerklassifikasjonFromSaksmappe(id, klasseTyper);
-
+            
             var response = Request.CreateResponse(HttpStatusCode.NoContent);
             return response;
         }
@@ -185,7 +186,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
         /// Legg til sekundærklassifikasjon
         /// </summary>
         /// <param name="id">Saksmappe Id</param>
-        /// <param name="klasseType">KlasseType objekt</param>
+        /// <param name="klasseType">Klassetype</param>
         /// <returns></returns>
         [Route("api/sakarkiv/Saksmappe/{id}/sekundaerklassifikasjoner")]
         [HttpPost]
@@ -193,10 +194,8 @@ namespace arkitektum.kommit.noark5.api.Controllers
         public IHttpActionResult NyeSekundaerklassifikasjoner(string id, KlasseType klasseType)
         {
             // Testdata... 
-            if (klasseType == null)
-            {
-                klasseType = CreateKlasseTypeExample();
-            }
+            if (klasseType == null) klasseType = CreateKlasseTypeExample();
+
             if (id == null) return BadRequest("Invalid saksmappe id, saksmappe could not be found");
 
             MockNoarkDatalayer.AddSekundaerklassifikasjonToSaksmappe(id, klasseType);
@@ -206,10 +205,10 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
 
         /// <summary>
-        /// Endre sekundærklassifikasjoner
+        /// Erstatte sekundærklassifikasjoner
         /// </summary>
         /// <param name="id">Saksmappe Id</param>
-        /// <param name="klasseType">Nye klassetyper</param>
+        /// <param name="klasseType">En tabell med klassetyper</param>
         /// <returns></returns>
         [Route("api/sakarkiv/Saksmappe/{id}/sekundaerklassifikasjoner")]
         [HttpPut]
@@ -217,10 +216,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
         public IHttpActionResult SettSekundaerklassifikasjon(string id, KlasseType[] klasseType)
         {
             // Testdata... 
-            if (klasseType == null)
-            {                
-                klasseType = CreateNewKlasseTypeArray();
-            }
+            if (klasseType == null) klasseType = CreateNewKlasseTypeArray();
             
             if (id == null) return BadRequest("Invalid saksmappe id, saksmappe could not be found");
 
@@ -230,11 +226,17 @@ namespace arkitektum.kommit.noark5.api.Controllers
         }
 
 
+        /// <summary>
+        /// Opprette ny sekundærklasse
+        /// </summary>
+        /// <param name="id">Saksmappe id</param>
+        /// <returns></returns>
+        /// <exception cref="HttpResponseException"></exception>
         [Route("api/sakarkiv/Saksmappe/{id}/ny-sekundaerklassifikasjon")]
         [HttpGet]
         public KlasseType InitialiserSekundaerklasse(string id)
         {
-            KlasseType k = new KlasseType();
+            var k = new KlasseType();
             k.tittel = "angi tittel på mappe";
             k.opprettetAv = "Innlogget bruker";
             k.RepopulateHyperMedia();
@@ -247,22 +249,24 @@ namespace arkitektum.kommit.noark5.api.Controllers
             return k;
         }
 
+        /// <summary>
+        /// Legg til ny sekundærklassifikasjon i saksmappen
+        /// </summary>
+        /// <param name="id">Saksmappe id</param>
+        /// <param name="klasseType">klassetype</param>
+        /// <returns></returns>
         [Route("api/sakarkiv/Saksmappe/{id}/ny-sekundaerklassifikasjon")]
         [HttpPost]
         public IHttpActionResult InitialiserSekundaerklasse(string id, KlasseType klasseType)
         {
             // Testdata... 
-            if (klasseType == null)
-            {
-                klasseType = CreateKlasseTypeExample();
-            }
+            if (klasseType == null) klasseType = CreateKlasseTypeExample();
+            
             if (id == null) return BadRequest("Invalid saksmappe id, saksmappe could not be found");
 
             MockNoarkDatalayer.AddSekundaerklassifikasjonToSaksmappe(id, klasseType);
 
             return Ok(klasseType);
-
-            return null;
         }
 
 
@@ -296,7 +300,5 @@ namespace arkitektum.kommit.noark5.api.Controllers
                 referanseOpprettetAv = "Test navn" + i,
             };
         }
-
-
     }
 }

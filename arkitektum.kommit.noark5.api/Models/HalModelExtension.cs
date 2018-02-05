@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Thinktecture.IdentityServer.Core.Views;
 
 
 public partial class RegistreringType
@@ -101,6 +103,7 @@ public partial class SaksmappeType
     /// <summary>
     /// Override creation of hypermedia links coming from Mappe 
     /// </summary>
+
     protected override void CreateHypermedia()
     {
         var baseUri = arkitektum.kommit.noark5.api.Properties.Settings.Default.baseUri;
@@ -143,14 +146,50 @@ public partial class SaksmappeType
             var selectedSekundaerklassifikasjon = sekundaerklassifikasjon.FirstOrDefault(i => i.systemID == id);
             if (selectedSekundaerklassifikasjon != null)
             {
+                Logg(selectedSekundaerklassifikasjon);
+
                 sekundaerklassifikasjoner.Remove(selectedSekundaerklassifikasjon);
                 sekundaerklassifikasjon = sekundaerklassifikasjoner.ToArray();
             }
-            else
-            {
-                throw new ArgumentNullException("sekundærklassifikasjonen finnes ikke");
-            }
         }
+    }
+
+    private void Logg(object item)
+    {
+        var loggList = logg?.ToList() ?? new List<HendelsesloggType>();
+        loggList.Add(HendelsesloggType.LoggDelete(item));
+        logg = loggList.ToArray();
+    }
+}
+
+public partial class HendelsesloggType
+{
+    public static HendelsesloggType LoggDelete(Object item)
+    {
+        var logg = new HendelsesloggType();
+
+        if (item is KlasseType sekundaerklassifikasjon)
+        {
+            logg.beskrivelse = "Slettet sekundærklassifikasjon " + sekundaerklassifikasjon.tittel;
+            logg.hendelseDato = DateTime.Now;
+            logg.systemID = sekundaerklassifikasjon.systemID;
+            logg.endretAv = "Brukernavn";
+            logg.endretDato = DateTime.Now;
+            logg.hendelsetype = HendelsetypeType.Slett();
+        }
+
+        return logg;
+    }
+}
+
+public partial class HendelsetypeType
+{
+    public static HendelsetypeType Slett()
+    {
+        var type = new HendelsetypeType();
+        type.kode = "Slett";
+        type.beskrivelse = "Elementet er slettet";
+        return type;
     }
 }
 
