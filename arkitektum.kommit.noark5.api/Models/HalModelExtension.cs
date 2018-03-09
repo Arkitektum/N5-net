@@ -4,6 +4,16 @@ using System.Linq;
 using Thinktecture.IdentityServer.Core.Views;
 
 
+
+public partial class LinkType
+{
+    public LinkType(string rel, string href)
+    {
+        relField = rel;
+        hrefField = href;
+    }
+}
+
 public partial class RegistreringType
 {
 
