@@ -321,9 +321,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\byggesak_rest.cs" />
-    <Compile Include="Models\Generert_v2.cs" />
     <Compile Include="Models\HalModelExtension.cs" />
     <Compile Include="Models\Link.cs" />
+    <Compile Include="Models\Noark.cs" />
     <Compile Include="Models\VirksomhetsspesifikkeMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
