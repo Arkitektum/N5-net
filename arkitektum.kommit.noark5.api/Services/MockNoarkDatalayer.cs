@@ -116,7 +116,7 @@ namespace arkitektum.kommit.noark5.api.Services
         {
             var registrering = new RegistreringType()
             {
-                Links = null,
+                LinkList = null,
 
                 systemID = index.ToString(),
                 oppdatertDato = GetDato(index),
@@ -138,8 +138,7 @@ namespace arkitektum.kommit.noark5.api.Services
                 gradering = new GraderingType(),
                 referanseArkivdel = null,
                 klasse = null,
-                mappe = null,
-                dokumentbeskrivelse = null,
+                mappe = null, 
                 arkivdel = null,
                 nasjonalidentifikator = OpprettNasjonalidentifikator(index)
             };
