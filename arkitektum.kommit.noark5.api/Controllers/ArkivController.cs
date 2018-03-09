@@ -290,7 +290,10 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
             ArkivType arkiv = MockNoarkDatalayer.GetArkivById(arkivId);
             if (arkiv != null)
-                list.Add(arkiv.arkivskaper);
+                foreach (var arkivskaper in arkiv.arkivskaper)
+                {
+                    list.Add(arkivskaper);
+                }
 
            return list.AsQueryable();
         }
