@@ -246,7 +246,6 @@ public partial class MappeType
         LinkList.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/sakarkiv/utvid-til-saksmappe", baseUri + "api/sakarkiv/Saksmappe/" + this.systemID + "/utvid-til-saksmappe"));
         LinkList.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/arkivstruktur/registrering", baseUri + "api/arkivstruktur/Mappe/" + this.systemID + "/registrering{?$filter&$orderby&$top&$skip&$search}"));
         LinkList.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/arkivstruktur/ny-registrering", baseUri + "api/arkivstruktur/Mappe/" + this.systemID + "/ny-registrering"));
-        LinkList.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/arkivstruktur/ny-basisregistrering", baseUri + "api/arkivstruktur/Mappe/" + this.systemID + "/ny-basisregistrering"));
         LinkList.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/arkivstruktur/merknad", baseUri + "api/arkivstruktur/Mappe/" + this.systemID + "/merknad{?$filter&$orderby&$top&$skip&$search}"));
         LinkList.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/arkivstruktur/ny-merknad", baseUri + "api/arkivstruktur/Mappe/" + this.systemID + "/ny-merknad"));
         LinkList.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/arkivstruktur/undermappe", baseUri + "api/arkivstruktur/Mappe/" + this.systemID + "/undermappe{?$filter&$orderby&$top&$skip&$search}"));

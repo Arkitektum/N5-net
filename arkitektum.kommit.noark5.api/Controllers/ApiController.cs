@@ -79,7 +79,6 @@ namespace arkitektum.kommit.noark5.api.Controllers
             linker.LinkList.Add(Set.addTempLink(baseUri, "api/arkivstruktur/klasse", Set._REL + "/arkivstruktur/klasse", "?$filter&$orderby&$top&$skip&$search"));
             linker.LinkList.Add(Set.addTempLink(baseUri, "api/arkivstruktur/mappe", Set._REL + "/arkivstruktur/mappe", "?$filter&$orderby&$top&$skip&$search"));
             linker.LinkList.Add(Set.addTempLink(baseUri, "api/arkivstruktur/registrering", Set._REL + "/arkivstruktur/registrering", "?$filter&$orderby&$top&$skip&$search"));
-            linker.LinkList.Add(Set.addTempLink(baseUri, "api/arkivstruktur/basisregistrering", Set._REL + "/arkivstruktur/basisregistrering", "?$filter&$orderby&$top&$skip&$search"));
             linker.LinkList.Add(Set.addTempLink(baseUri, "api/arkivstruktur/dokumentbeskrivelse", Set._REL + "/arkivstruktur/dokumentbeskrivelse", "?$filter&$orderby&$top&$skip&$search"));
             linker.LinkList.Add(Set.addTempLink(baseUri, "api/arkivstruktur/dokumentobjekt", Set._REL + "/arkivstruktur/dokumentobjekt", "?$filter&$orderby&$top&$skip&$search"));
 
