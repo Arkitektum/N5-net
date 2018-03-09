@@ -116,7 +116,7 @@ namespace arkitektum.kommit.noark5.api.Services
         {
             var registrering = new RegistreringType()
             {
-                Links = null,
+                LinkList = null,
 
                 systemID = index.ToString(),
                 oppdatertDato = GetDato(index),
@@ -138,8 +138,7 @@ namespace arkitektum.kommit.noark5.api.Services
                 gradering = new GraderingType(),
                 referanseArkivdel = null,
                 klasse = null,
-                mappe = null,
-                dokumentbeskrivelse = null,
+                mappe = null, 
                 arkivdel = null,
                 nasjonalidentifikator = OpprettNasjonalidentifikator(index)
             };
@@ -267,8 +266,9 @@ namespace arkitektum.kommit.noark5.api.Services
             beskrivelse = "Arkivformat"
         };
 
-        private static ArkivskaperType OpprettArkivskaper()
+        private static ArkivskaperType[] OpprettArkivskaper()
         {
+            List<ArkivskaperType> arkivskaperTyper = new List<ArkivskaperType>();
             var arkivskaper = new ArkivskaperType
             {
                 systemID = GenerateUuuid(),
@@ -280,8 +280,9 @@ namespace arkitektum.kommit.noark5.api.Services
             };
             arkivskaper.RepopulateHyperMedia();
             Arkivskaper.Add(arkivskaper); // add to global list
+            arkivskaperTyper.Add(arkivskaper);
 
-            return arkivskaper;
+            return arkivskaperTyper.ToArray();
         }
 
         private static void OpprettArkiver()

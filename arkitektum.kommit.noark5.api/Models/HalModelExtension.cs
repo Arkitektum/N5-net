@@ -4,6 +4,42 @@ using System.Linq;
 using Thinktecture.IdentityServer.Core.Views;
 
 
+public partial class AbstraktResourceType
+{
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    [Newtonsoft.Json.JsonIgnore]
+    public IList<LinkType> LinkList { get; set; }
+
+    protected AbstraktResourceType()
+    {
+        LinkList = new List<LinkType>();
+    }
+    public void RepopulateHyperMedia()
+    {
+        if (LinkList == null)
+            LinkList = new List<LinkType>();
+
+        CreateHypermedia();
+
+
+        if ((LinkList != null) && !LinkList.Any())
+            LinkList = null;
+    }
+    protected virtual void CreateHypermedia()
+    {
+
+    }
+}
+
+public partial class LinkType
+{
+    public LinkType(string rel, string href)
+    {
+        relField = rel;
+        hrefField = href;
+    }
+}
+
 public partial class RegistreringType
 {
 
@@ -210,7 +246,6 @@ public partial class MappeType
         LinkList.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/sakarkiv/utvid-til-saksmappe", baseUri + "api/sakarkiv/Saksmappe/" + this.systemID + "/utvid-til-saksmappe"));
         LinkList.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/arkivstruktur/registrering", baseUri + "api/arkivstruktur/Mappe/" + this.systemID + "/registrering{?$filter&$orderby&$top&$skip&$search}"));
         LinkList.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/arkivstruktur/ny-registrering", baseUri + "api/arkivstruktur/Mappe/" + this.systemID + "/ny-registrering"));
-        LinkList.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/arkivstruktur/ny-basisregistrering", baseUri + "api/arkivstruktur/Mappe/" + this.systemID + "/ny-basisregistrering"));
         LinkList.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/arkivstruktur/merknad", baseUri + "api/arkivstruktur/Mappe/" + this.systemID + "/merknad{?$filter&$orderby&$top&$skip&$search}"));
         LinkList.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/arkivstruktur/ny-merknad", baseUri + "api/arkivstruktur/Mappe/" + this.systemID + "/ny-merknad"));
         LinkList.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/arkivstruktur/undermappe", baseUri + "api/arkivstruktur/Mappe/" + this.systemID + "/undermappe{?$filter&$orderby&$top&$skip&$search}"));

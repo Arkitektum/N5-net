@@ -80,59 +80,6 @@ namespace arkitektum.kommit.noark5.api.Controllers
             //return a;
         }
 
-        /// <summary>
-        /// Sletter arkivdel
-        /// </summary>
-        /// <param name="id">systemid for gitt arkivdel</param>
-        /// <returns>statuskode</returns>
-        /// <response code="200">OK</response>
-        /// <response code="204">NoContent - Slettet ok</response>
-        /// <response code="400">BadRequest - ugyldig forespørsel</response>
-        /// <response code="403">Forbidden - ingen tilgang</response>
-        /// <response code="404">NotFound - ikke funnet</response>
-        /// <response code="409">Conflict - objektet kan være endret av andre</response>
-        /// <response code="501">NotImplemented - ikke implementert</response>
-        /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/arkivdel">http://rel.kxml.no/noark5/v4/arkivstruktur/arkivdel</a>, og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell, restriksjoner og mulige relasjonsnøkler</a></remarks>
-        [Route("api/arkivstruktur/Arkivdel/{id}")]
-        [HttpDelete]
-        public HttpResponseMessage SlettArkivdel(string id)
-        {
-            if (id != null)
-            {
-                var url = HttpContext.Current.Request.Url;
-                var baseUri =
-                    new UriBuilder(
-                        url.Scheme,
-                        url.Host,
-                        url.Port).Uri;
-                //Kan slettes? Har rettighet? Logges mm..
-                //Hva er forskjellen på datatype sletting?
-                //sjekke etag om objektet er endret av andre?
-                ArkivdelType m = MockNoarkDatalayer.Arkivdeler.FirstOrDefault(i => i.systemID == id);
-                
-
-                if (m == null)
-                {
-                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Ikke funnet");
-                }
-
-                m.sletting = new SlettingType();
-                m.sletting.slettingstype = new SlettingstypeType();
-                m.sletting.slettingstype.kode = "SA";
-                m.sletting.slettingstype.beskrivelse = "Sletting av hele innholdet i arkivdelen";
-                m.sletting.slettetDato = DateTime.Now;
-                m.sletting.slettetAv = "pålogget bruker";
-                //_ctx.arkivdeler.Remove(m);
-
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, m);
-                response.Headers.Location = new Uri(baseUri + "api/arkivstruktur/Arkiv/" + m.systemID);
-                return response;
-            }
-            else
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-            }
-        }
 
         // NY
         [Route("api/arkivstruktur/Arkivdel/{id}")]
