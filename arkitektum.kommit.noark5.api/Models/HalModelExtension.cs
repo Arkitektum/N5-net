@@ -4,6 +4,32 @@ using System.Linq;
 using Thinktecture.IdentityServer.Core.Views;
 
 
+public partial class AbstraktResourceType
+{
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    [Newtonsoft.Json.JsonIgnore]
+    public IList<LinkType> LinkList { get; set; }
+
+    protected AbstraktResourceType()
+    {
+        LinkList = new List<LinkType>();
+    }
+    public void RepopulateHyperMedia()
+    {
+        if (LinkList == null)
+            LinkList = new List<LinkType>();
+
+        CreateHypermedia();
+
+
+        if ((LinkList != null) && !LinkList.Any())
+            LinkList = null;
+    }
+    protected virtual void CreateHypermedia()
+    {
+
+    }
+}
 
 public partial class LinkType
 {
