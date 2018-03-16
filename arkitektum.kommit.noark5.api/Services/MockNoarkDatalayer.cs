@@ -482,5 +482,23 @@ namespace arkitektum.kommit.noark5.api.Services
             var saksmappe = GetSaksmappeById(id) ?? throw new ArgumentNullException("Saksmappen finnes ikke");
             return saksmappe.sekundaerklassifikasjon;
         }
+
+        public static KryssreferanseType[] GetKryssreferanseFraMappe(string mappeSystemId)
+        {
+            try
+            {
+                var mappe = GetMappeById(mappeSystemId);
+                return mappe.kryssreferanse ?? new KryssreferanseType[0];
+            }
+            catch (NullReferenceException e)
+            {
+                return new KryssreferanseType[0];
+            }
+        }
+
+        public static bool MappeExists(string id)
+        {
+            return GetMappeById(id) != null;
+        }
     }
 }

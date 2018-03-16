@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using System.Web.Http.OData.Query;
+using System.Web.Mvc;
 using arkitektum.kommit.noark5.api.Services;
 using WebApi.Hal;
 
@@ -18,8 +19,8 @@ namespace arkitektum.kommit.noark5.api.Controllers
         private static ODataValidationSettings _validationSettings = new ODataValidationSettings();
 
 
-        [Route("api/arkivstruktur/Mappe")]
-        [HttpGet]
+        [System.Web.Http.Route("api/arkivstruktur/Mappe")]
+        [System.Web.Http.HttpGet]
         public IEnumerable<MappeType> GetMappes(ODataQueryOptions<MappeType> queryOptions)
         {
             queryOptions.Validate(_validationSettings);
@@ -38,8 +39,8 @@ namespace arkitektum.kommit.noark5.api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [Route("api/arkivstruktur/Mappe/{id}")]
-        [HttpGet]
+        [System.Web.Http.Route("api/arkivstruktur/Mappe/{id}")]
+        [System.Web.Http.HttpGet]
         [ResponseType(typeof(MappeType))]
         public IHttpActionResult GetMappe(string id)
         {
@@ -51,8 +52,8 @@ namespace arkitektum.kommit.noark5.api.Controllers
             return Ok(mappe);
         }
 
-        [Route("api/arkivstruktur/Mappe/{id}")]
-        [HttpPut]
+        [System.Web.Http.Route("api/arkivstruktur/Mappe/{id}")]
+        [System.Web.Http.HttpPut]
         public HttpResponseMessage OppdaterMappe(MappeType mappe)
         {
             if (mappe != null)
@@ -82,22 +83,22 @@ namespace arkitektum.kommit.noark5.api.Controllers
             }
         }
 
-        [Route("api/arkivstruktur/ny-mappe")]
-        [HttpGet]
+        [System.Web.Http.Route("api/arkivstruktur/ny-mappe")]
+        [System.Web.Http.HttpGet]
         public MappeType InitialiserMappe()
         {
             return null;
         }
 
-        [Route("api/arkivstruktur/ny-mappe")]
-        [HttpPost]
+        [System.Web.Http.Route("api/arkivstruktur/ny-mappe")]
+        [System.Web.Http.HttpPost]
         public HttpResponseMessage PostMappe(MappeType mappe)
         {
             return null;
         }      
 
-        [Route("api/arkivstruktur/Mappe/{Id}/avslutt-mappe")]
-        [HttpGet]
+        [System.Web.Http.Route("api/arkivstruktur/Mappe/{Id}/avslutt-mappe")]
+        [System.Web.Http.HttpGet]
         public MappeType AvsluttMappe(string Id)
         {
             //TODO hvis det er en saksmappe eller møtemappe skal det sendes videre til riktig kontroller? På Saksmappe settes status i tillegg, mm
@@ -110,112 +111,119 @@ namespace arkitektum.kommit.noark5.api.Controllers
         }
 
         // NY
-        [Route("api/arkivstruktur/Mappe/{Id}/kryssreferanse")]
-        [HttpGet]
-        public IEnumerable<MappeType> GetKryssreferanserFraMappe(string id)
+        [System.Web.Http.Route("api/arkivstruktur/Mappe/{Id}/kryssreferanse")]
+        [System.Web.Http.HttpGet]
+        public IEnumerable<KryssreferanseType> GetKryssreferanserFraMappe(string id)
         {
+            if (MockNoarkDatalayer.MappeExists(id))
+            {
+                var kryssreferanser = MockNoarkDatalayer.GetKryssreferanseFraMappe(id);
+                return kryssreferanser;
+
+            }
             return null;
+
         }
 
         // NY
-        [Route("api/arkivstruktur/Mappe/{Id}/ny-kryssreferanse")]
-        [HttpGet]
+        [System.Web.Http.Route("api/arkivstruktur/Mappe/{Id}/ny-kryssreferanse")]
+        [System.Web.Http.HttpGet]
         public KryssreferanseType InitialiserFraMappeKryssreferanse(string Id)
         {
             return null;
         }
 
         // NY
-        [Route("api/arkivstruktur/Mappe/{Id}/ny-kryssreferanse")]
-        [HttpPost]
+        [System.Web.Http.Route("api/arkivstruktur/Mappe/{Id}/ny-kryssreferanse")]
+        [System.Web.Http.HttpPost]
         public HttpResponseMessage PostKryssreferanseFraMappe(KryssreferanseType kryssreferanse)
         {
             return null;
         }
 
         // NY
-        [Route("api/arkivstruktur/Mappe/{Id}/undermappe")]
-        [HttpGet]
+        [System.Web.Http.Route("api/arkivstruktur/Mappe/{Id}/undermappe")]
+        [System.Web.Http.HttpGet]
         public IEnumerable<MappeType> GetUndermapper(string Id)
         {
             return null;
         }
 
         // NY
-        [Route("api/arkivstruktur/Mappe/{Id}/ny-undermappe")]
-        [HttpGet]
+        [System.Web.Http.Route("api/arkivstruktur/Mappe/{Id}/ny-undermappe")]
+        [System.Web.Http.HttpGet]
         public MappeType InitialiserMappe(string arkivdelid)
         {
             return null;
         }
 
         // NY
-        [Route("api/arkivstruktur/Mappe/{Id}/ny-undermappe")]
-        [HttpPost]
+        [System.Web.Http.Route("api/arkivstruktur/Mappe/{Id}/ny-undermappe")]
+        [System.Web.Http.HttpPost]
         public HttpResponseMessage PostUndermapper(MappeType undermappe)
         {
             return null;
         }
 
         // NY
-        [Route("api/arkivstruktur/Mappe/{Id}/undermappe/{undermappeId}")]
-        [HttpGet]
+        [System.Web.Http.Route("api/arkivstruktur/Mappe/{Id}/undermappe/{undermappeId}")]
+        [System.Web.Http.HttpGet]
         public MappeType GetUndermappe(string Id, string undermappeId)
         {
             return null;
         }
 
         // NY
-        [Route("api/arkivstruktur/Mappe/{Id}/undermappe/{undermappeId}")]
-        [HttpPost]
+        [System.Web.Http.Route("api/arkivstruktur/Mappe/{Id}/undermappe/{undermappeId}")]
+        [System.Web.Http.HttpPost]
         public HttpResponseMessage OppdaterUndermappe(MappeType undermappe)
         {
             return null;
         }
 
         // NY
-        [Route("api/arkivstruktur/Mappe/{Id}/merknad")]
-        [HttpGet]
+        [System.Web.Http.Route("api/arkivstruktur/Mappe/{Id}/merknad")]
+        [System.Web.Http.HttpGet]
         public IEnumerable<MerknadType> GetMerknaderIMappe(string id)
         {
             return null;
         }
 
         // NY
-        [Route("api/arkivstruktur/Mappe/{Id}/merknad/{merknadId}")]
-        [HttpGet]
+        [System.Web.Http.Route("api/arkivstruktur/Mappe/{Id}/merknad/{merknadId}")]
+        [System.Web.Http.HttpGet]
         public MerknadType GetMerknadIMappe(string id, string merknadId)
         {
             return null;
         }
 
         // NY
-        [Route("api/arkivstruktur/Mappe/{Id}/merknad/{merknadId}")]
-        [HttpPost]
+        [System.Web.Http.Route("api/arkivstruktur/Mappe/{Id}/merknad/{merknadId}")]
+        [System.Web.Http.HttpPost]
         public HttpResponseMessage OppdaterMerknadIMappe(MerknadType merknad)
         {
             return null;
         }
 
         // NY
-        [Route("api/arkivstruktur/Mappe/{Id}/ny-merknad")]
-        [HttpGet]
+        [System.Web.Http.Route("api/arkivstruktur/Mappe/{Id}/ny-merknad")]
+        [System.Web.Http.HttpGet]
         public MerknadType InitialiserMerknadIMappe(string Id)
         {
             return null;
         }
 
         // NY
-        [Route("api/arkivstruktur/Mappe/{Id}/ny-merknad")]
-        [HttpPost]
+        [System.Web.Http.Route("api/arkivstruktur/Mappe/{Id}/ny-merknad")]
+        [System.Web.Http.HttpPost]
         public HttpResponseMessage PostMerknadIMappe(MerknadType merknad)
         {
             return null;
         }
 
 
-        [Route("api/arkivstruktur/Arkivdel/{Id}/mappe")]
-        [HttpGet]
+        [System.Web.Http.Route("api/arkivstruktur/Arkivdel/{Id}/mappe")]
+        [System.Web.Http.HttpGet]
         public IEnumerable<MappeType> GetMapperFraArkivdel(string Id)
         {
             SaksmappeController c = new SaksmappeController();
@@ -229,24 +237,24 @@ namespace arkitektum.kommit.noark5.api.Controllers
         }
 
 
-        [Route("api/arkivstruktur/Arkivdel/{Id}/mappe/{mappeId}")]
-        [HttpGet]
+        [System.Web.Http.Route("api/arkivstruktur/Arkivdel/{Id}/mappe/{mappeId}")]
+        [System.Web.Http.HttpGet]
         public MappeType GetMappeFraArkivdel(string Id, string mappeId)
         {
             return null;
         }
 
 
-        [Route("api/arkivstruktur/Arkivdel/{Id}/mappe/{mappeId}")]
-        [HttpPost]
+        [System.Web.Http.Route("api/arkivstruktur/Arkivdel/{Id}/mappe/{mappeId}")]
+        [System.Web.Http.HttpPost]
         public MappeType OppdaterMappeFraArkivdel(MappeType mappe)
         {
             return null;
         }
 
 
-        [Route("api/arkivstruktur/Arkivdel/{Id}/ny-mappe")]
-        [HttpGet]
+        [System.Web.Http.Route("api/arkivstruktur/Arkivdel/{Id}/ny-mappe")]
+        [System.Web.Http.HttpGet]
         public MappeType InitialiserMappeIArkivdel(string Id)
         {
             var url = HttpContext.Current.Request.Url;
@@ -274,8 +282,8 @@ namespace arkitektum.kommit.noark5.api.Controllers
         }
 
 
-        [Route("api/arkivstruktur/Arkivdel/{Id}/ny-mappe")]
-        [HttpPost]
+        [System.Web.Http.Route("api/arkivstruktur/Arkivdel/{Id}/ny-mappe")]
+        [System.Web.Http.HttpPost]
         public HttpResponseMessage PostMappeIArkivdel(MappeType mappe)
         {
             if (mappe != null)
@@ -308,8 +316,8 @@ namespace arkitektum.kommit.noark5.api.Controllers
 
 
 
-        [Route("api/arkivstruktur/Klasse/{Id}/mappe")]
-        [HttpGet]
+        [System.Web.Http.Route("api/arkivstruktur/Klasse/{Id}/mappe")]
+        [System.Web.Http.HttpGet]
         public IEnumerable<MappeType> GetMapperIKlasse(string Id)
         {
             SaksmappeController c = new SaksmappeController();
@@ -323,24 +331,24 @@ namespace arkitektum.kommit.noark5.api.Controllers
         }
 
 
-        [Route("api/arkivstruktur/Klasse/{Id}/mappe/{mappeId}")]
-        [HttpGet]
+        [System.Web.Http.Route("api/arkivstruktur/Klasse/{Id}/mappe/{mappeId}")]
+        [System.Web.Http.HttpGet]
         public MappeType GetMappeFraKlasse(string Id, string mappeId)
         {
             return null;
         }
 
 
-        [Route("api/arkivstruktur/Klasse/{Id}/mappe/{mappeId}")]
-        [HttpPost]
+        [System.Web.Http.Route("api/arkivstruktur/Klasse/{Id}/mappe/{mappeId}")]
+        [System.Web.Http.HttpPost]
         public MappeType OppdaterMappeFraKlasse(MappeType mappe)
         {
             return null;
         }
 
 
-        [Route("api/arkivstruktur/Klasse/{Id}/ny-mappe")]
-        [HttpGet]
+        [System.Web.Http.Route("api/arkivstruktur/Klasse/{Id}/ny-mappe")]
+        [System.Web.Http.HttpGet]
         public MappeType InitialiserMappeIKlasse(string Id)
         {
             var url = HttpContext.Current.Request.Url;
@@ -370,8 +378,8 @@ namespace arkitektum.kommit.noark5.api.Controllers
         }
 
 
-        [Route("api/arkivstruktur/Klasse/{Id}/ny-mappe")]
-        [HttpPost]
+        [System.Web.Http.Route("api/arkivstruktur/Klasse/{Id}/ny-mappe")]
+        [System.Web.Http.HttpPost]
         public HttpResponseMessage PostMappeIKlasse(MappeType mappe)
         {
             if (mappe != null)
