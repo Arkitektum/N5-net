@@ -104,6 +104,16 @@ namespace arkitektum.kommit.noark5.api.Services
             return klasseTyper.ToArray();
         }
 
+        /// <summary>
+        /// Find a registrering by id. Uses the field systemID to search within.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static RegistreringType GetRegistreringById(string id)
+        {
+            return Registreringer.Find(m => m.systemID == id);
+        }
+
         private static void OpprettRegistreringer()
         {
             for (int i = 1; i <= NumberOfExamples; i++)
@@ -138,7 +148,7 @@ namespace arkitektum.kommit.noark5.api.Services
                 gradering = new GraderingType(),
                 referanseArkivdel = null,
                 klasse = null,
-                mappe = null, 
+                mappe = null,
                 arkivdel = null,
                 nasjonalidentifikator = OpprettNasjonalidentifikator(index)
             };
@@ -203,6 +213,31 @@ namespace arkitektum.kommit.noark5.api.Services
                     }
                 }
             };
+        }
+
+        private static KryssreferanseType OpprettKryssreferanseTilSaksmappe(string mappeId)
+        {
+            return new KryssreferanseType
+            {
+                referanseTilMappe = "3",
+                referanseTilKlasse = "1",
+                referanseTilRegistrering = "1", 
+                mappe = GetMappeById(mappeId), // Referanse til mappe eller fra mappen?
+                klasse = new KlasseType(), // Referanse til klasse eller fra klasse?
+                registrering = new RegistreringType() // Referanse til registrering eller fra registrering?
+            };
+        }
+
+        private static KryssreferanseType OpprettKryssreferanseTilMappe(string mappeId)
+        {
+            var type = new KryssreferanseType();
+            type.referanseTilMappe = "2";
+            type.referanseTilKlasse = "1";
+            type.referanseTilRegistrering = "1";
+            type.mappe = GetMappeById(mappeId);
+            type.klasse = new KlasseType();
+            type.registrering = new RegistreringType();
+            return type;
         }
 
         internal static void DeleteSekundaerklassifikasjonFromSaksmappe(string id, KlasseType[] klasseTyper)
@@ -488,7 +523,13 @@ namespace arkitektum.kommit.noark5.api.Services
             try
             {
                 var mappe = GetMappeById(mappeSystemId);
-                return mappe.kryssreferanse ?? new KryssreferanseType[0];
+                if (mappe != null)
+                    return mappe.kryssreferanse ?? new KryssreferanseType[2]
+                    {
+                        OpprettKryssreferanseTilSaksmappe(mappeSystemId),
+                        OpprettKryssreferanseTilMappe(mappeSystemId)
+                    };
+                return new KryssreferanseType[0];
             }
             catch (NullReferenceException e)
             {
