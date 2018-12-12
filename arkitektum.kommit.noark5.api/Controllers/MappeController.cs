@@ -128,7 +128,16 @@ namespace arkitektum.kommit.noark5.api.Controllers
         [HttpGet]
         public KryssreferanseType InitialiserFraMappeKryssreferanse(string Id)
         {
-            return null;
+            var type = new KryssreferanseType
+            {
+                referanseTilMappe = "Angi systemId på til mappe",
+                referanseTilKlasse = "Angi systemId på til klasse",
+                referanseTilRegistrering = "Angi systemId på til registrering",
+                mappe = MockNoarkDatalayer.GetMappeById(Id),
+                registrering = MockNoarkDatalayer.GetRegistreringById("1"),
+                klasse = MockNoarkDatalayer.OpprettKlasse(1)
+            };
+            return type;
         }
 
         // NY
