@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -44,7 +44,7 @@ namespace arkitektum.kommit.noark5.api.Services
             OpprettRegistreringer();
         }
 
-        private static KlasseType OpprettKlasse(int i)
+        public static KlasseType OpprettKlasse(int i)
         {
             var klasseType = new KlasseType();
             klasseType.tittel = "Tittel" + i;
