@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,6 +14,7 @@ namespace arkitektum.kommit.noark5.api.Services
         internal static List<MappeType> Mapper = new List<MappeType>();
         internal static List<SaksmappeType> Saksmapper = new List<SaksmappeType>();
         internal static List<RegistreringType> Registreringer = new List<RegistreringType>();
+        internal static List<KryssreferanseType> Kryssreferanser = new List<KryssreferanseType>();
 
         /// <summary>
         /// Number of examples to be generated of each type. The number of items in the example arrays should be the same size
@@ -37,6 +38,7 @@ namespace arkitektum.kommit.noark5.api.Services
             Mapper.Clear();
             Saksmapper.Clear();
             Registreringer.Clear();
+            Kryssreferanser.Clear();
 
             OpprettArkiver();
             OpprettMapper();
@@ -122,38 +124,35 @@ namespace arkitektum.kommit.noark5.api.Services
             }
         }
 
-        private static RegistreringType OpprettRegistrering(int index)
+        private static RegistreringType OpprettRegistrering(int index, string mappeId = null)
         {
-            var registrering = new RegistreringType()
-            {
-                LinkList = null,
-
-                systemID = index.ToString(),
-                oppdatertDato = GetDato(index),
-                oppdatertDatoSpecified = true,
-                opprettetDato = GetDato(index),
-                opprettetDatoSpecified = true,
-                opprettetAv = GetName(index),
-                oppdatertAv = GetName(index),
-                referanseOppdatertAv = GetName(index),
-                referanseOpprettetAv = GetName(index),
-                logg = null,
-
-                arkivertDato = GetDato(index),
-                arkivertDatoSpecified = true,
-                arkivertAv = GetName(index),
-                referanseArkivertAv = GetName(index),
-                kassasjon = new KassasjonType(),
-                skjerming = new SkjermingType(),
-                gradering = new GraderingType(),
-                referanseArkivdel = null,
-                klasse = null,
-                mappe = null,
-                arkivdel = null,
-                nasjonalidentifikator = OpprettNasjonalidentifikator(index)
-            };
+            var registrering = new RegistreringType();
+            registrering.LinkList = null;
+            registrering.systemID = index.ToString();
+            registrering.oppdatertDato = GetDato(index);
+            registrering.oppdatertDatoSpecified = true;
+            registrering.opprettetDato = GetDato(index);
+            registrering.opprettetDatoSpecified = true;
+            registrering.opprettetAv = GetName(index);
+            registrering.oppdatertAv = GetName(index);
+            registrering.referanseOppdatertAv = GetName(index);
+            registrering.referanseOpprettetAv = GetName(index);
+            registrering.logg = null;
+            registrering.arkivertDato = GetDato(index);
+            registrering.arkivertDatoSpecified = true;
+            registrering.arkivertAv = GetName(index);
+            registrering.referanseArkivertAv = GetName(index);
+            registrering.kassasjon = new KassasjonType();
+            registrering.skjerming = new SkjermingType();
+            registrering.gradering = new GraderingType();
+            registrering.referanseArkivdel = null;
+            registrering.klasse = null;
+            registrering.mappe = mappeId == null ? null : GetMappeById(mappeId);
+            registrering.arkivdel = null;
+            registrering.nasjonalidentifikator = OpprettNasjonalidentifikator(index);
             return registrering;
         }
+
 
         private static AbstraktNasjonalidentifikatorType[] OpprettNasjonalidentifikator(int index)
         {
@@ -215,29 +214,44 @@ namespace arkitektum.kommit.noark5.api.Services
             };
         }
 
-        private static KryssreferanseType OpprettKryssreferanseTilSaksmappe(string mappeId)
+        public static KryssreferanseType OpprettKryssreferanse(string mappeSystemId)
         {
-            return new KryssreferanseType
+            var mappe = GetMappeById(mappeSystemId);
+            var kryssreferanse = new KryssreferanseType();
+
+            if (mappe != null)
             {
-                referanseTilMappe = "3",
-                referanseTilKlasse = "1",
-                referanseTilRegistrering = "1", 
-                mappe = GetMappeById(mappeId), // Referanse til mappe eller fra mappen?
-                klasse = new KlasseType(), // Referanse til klasse eller fra klasse?
-                registrering = new RegistreringType() // Referanse til registrering eller fra registrering?
-            };
+                kryssreferanse.mappe = GetKryssreferanseTilMappe(mappe);
+                kryssreferanse.klasse = OpprettKlasse(1);
+                kryssreferanse.registrering = OpprettRegistrering(Registreringer.Count);
+
+                kryssreferanse.referanseTilMappe = mappeSystemId;
+                kryssreferanse.referanseTilKlasse = OpprettKlasse(1).systemID;
+                kryssreferanse.referanseTilRegistrering = OpprettRegistrering(Registreringer.Count, mappeSystemId).systemID;
+                Kryssreferanser.Add(kryssreferanse);
+            }
+
+            return kryssreferanse;
         }
 
-        private static KryssreferanseType OpprettKryssreferanseTilMappe(string mappeId)
+        private static MappeType GetKryssreferanseTilMappe(MappeType tilMappe)
         {
-            var type = new KryssreferanseType();
-            type.referanseTilMappe = "2";
-            type.referanseTilKlasse = "1";
-            type.referanseTilRegistrering = "1";
-            type.mappe = GetMappeById(mappeId);
-            type.klasse = new KlasseType();
-            type.registrering = new RegistreringType();
-            return type;
+            var indexMappe = Mapper.IndexOf(tilMappe);
+            if (indexMappe != null)
+            {
+                try
+                {
+                    return Mapper[indexMappe + 1];
+                }
+                catch (Exception)
+                {
+                    var newMappeId = Mapper.Count + 1;
+                    Mapper.Add(OpprettMappe(newMappeId.ToString()));
+                    return Mapper[newMappeId];
+                }
+            }
+
+            return null;
         }
 
         internal static void DeleteSekundaerklassifikasjonFromSaksmappe(string id, KlasseType[] klasseTyper)
@@ -472,6 +486,28 @@ namespace arkitektum.kommit.noark5.api.Services
             }
         }
 
+        public static void AddKryssreferanseToMappe(string mappeSystemId, KryssreferanseType kryssreferanseType)
+        {
+            var funnet = false;
+            if (kryssreferanseType != null)
+            {
+                foreach (var mappe in Mapper)
+                {
+                    if (mappe.systemID == mappeSystemId)
+                    {
+                        var kryssreferaser = mappe.kryssreferanse?.ToList() ?? new List<KryssreferanseType>();
+                        kryssreferaser.Add(kryssreferanseType);
+                        mappe.kryssreferanse = kryssreferaser.ToArray();
+                        funnet = true;
+                    }
+                }
+            }
+            if (!funnet)
+            {
+                throw new ArgumentNullException("Mappen finnes ikke");
+            }
+        }
+
         public static void DeleteSekundaerklassifikasjonFromSaksmappe(string saksmappeSystemId, string sekundaerklassifikasjonId)
         {
             var funnet = false;
@@ -520,21 +556,10 @@ namespace arkitektum.kommit.noark5.api.Services
 
         public static KryssreferanseType[] GetKryssreferanseFraMappe(string mappeSystemId)
         {
-            try
-            {
                 var mappe = GetMappeById(mappeSystemId);
                 if (mappe != null)
-                    return mappe.kryssreferanse ?? new KryssreferanseType[2]
-                    {
-                        OpprettKryssreferanseTilSaksmappe(mappeSystemId),
-                        OpprettKryssreferanseTilMappe(mappeSystemId)
-                    };
+                    return mappe.kryssreferanse ?? new KryssreferanseType[0];
                 return new KryssreferanseType[0];
-            }
-            catch (NullReferenceException e)
-            {
-                return new KryssreferanseType[0];
-            }
         }
 
         public static bool MappeExists(string id)

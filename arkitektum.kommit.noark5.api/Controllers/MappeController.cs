@@ -128,14 +128,21 @@ namespace arkitektum.kommit.noark5.api.Controllers
         [HttpGet]
         public KryssreferanseType InitialiserFraMappeKryssreferanse(string Id)
         {
-            var type = new KryssreferanseType
+            var type = new KryssreferanseType();
+            type.referanseTilMappe = Id;
+            type.referanseTilKlasse = MockNoarkDatalayer.GetMappeById(Id).klasse.systemID ?? "systemid til Klasse";
+            type.referanseTilRegistrering = "systemid til registrering";
+            type.mappe = new MappeType()
             {
-                referanseTilMappe = "Angi systemId på til mappe",
-                referanseTilKlasse = "Angi systemId på til klasse",
-                referanseTilRegistrering = "Angi systemId på til registrering",
-                mappe = MockNoarkDatalayer.GetMappeById(Id),
-                registrering = MockNoarkDatalayer.GetRegistreringById("1"),
-                klasse = MockNoarkDatalayer.OpprettKlasse(1)
+                systemID = "kryssregeranse fra mappe"
+            }; 
+            type.registrering = new RegistreringType()
+            {
+                systemID = "Kryssreferanse fra registrering"
+            };
+            type.klasse = new KlasseType()
+            {
+                systemID = "Kryssreferanse fra klasse"
             };
             return type;
         }
@@ -143,9 +150,16 @@ namespace arkitektum.kommit.noark5.api.Controllers
         // NY
         [Route("api/arkivstruktur/Mappe/{Id}/ny-kryssreferanse")]
         [HttpPost]
-        public HttpResponseMessage PostKryssreferanseFraMappe(KryssreferanseType kryssreferanse)
+        public IHttpActionResult PostKryssreferanseFraMappe(KryssreferanseType kryssreferanse, string id)
         {
-            return null;
+            // Testdata... 
+            if (kryssreferanse == null) kryssreferanse = MockNoarkDatalayer.OpprettKryssreferanse(id);
+
+            if (id == null) return BadRequest("Invalid saksmappe id, saksmappe could not be found");
+
+            MockNoarkDatalayer.AddKryssreferanseToMappe(id, kryssreferanse);
+
+            return Ok(kryssreferanse);
         }
 
         // NY
@@ -422,6 +436,20 @@ namespace arkitektum.kommit.noark5.api.Controllers
             m.tittel = tittel;
             testdata.Add(m);
             return testdata.AsEnumerable();
+        }
+
+        private KryssreferanseType CreateKryssreferanseTypeExample(string mappeId)
+        {
+            return new KryssreferanseType()
+            {
+                mappe = MockNoarkDatalayer.GetMappeById(mappeId),
+                registrering =  MockNoarkDatalayer.GetRegistreringById("1"),
+                klasse = MockNoarkDatalayer.OpprettKlasse(1),
+
+                referanseTilMappe = mappeId + 1,
+                referanseTilKlasse = mappeId + 1,
+                referanseTilRegistrering = mappeId + 1
+            };
         }
     }
 }
