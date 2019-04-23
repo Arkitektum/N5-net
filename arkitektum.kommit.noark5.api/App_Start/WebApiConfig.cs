@@ -47,7 +47,7 @@ namespace arkitektum.kommit.noark5.api
             config.Formatters.XmlFormatter.UseXmlSerializer = true;
             config.Formatters.XmlFormatter.MaxDepth = 5;
             //config.Formatters.XmlFormatter.WriterSettings.ConformanceLevel= System.Xml.ConformanceLevel.
-            config.Formatters.JsonFormatter.SerializerSettings.Re‌ferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             config.Formatters.JsonFormatter.SerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
 
             var cachecow = new CachingHandler(config);
