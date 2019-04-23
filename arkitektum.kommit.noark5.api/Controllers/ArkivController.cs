@@ -30,7 +30,9 @@ namespace arkitektum.kommit.noark5.api.Controllers
         /// <response code="403">Forbidden - ingen tilgang</response>
         /// <response code="404">NotFound - ikke funnet</response>
         /// <response code="501">NotImplemented - ikke implementert</response>
-        /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv">http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv</a>, og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell, restriksjoner og mulige relasjonsnøkler</a></remarks>
+        /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv/">http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv/</a>,
+        /// og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell,
+        /// restriksjoner og mulige relasjonsnøkler</a></remarks>
         [Route("api/arkivstruktur/Arkivquery")]
         [HttpGet]
         [EnableQuery(PageSize = 1, MaxExpansionDepth =1)]
@@ -51,7 +53,8 @@ namespace arkitektum.kommit.noark5.api.Controllers
         /// <response code="403">Forbidden - ingen tilgang</response>
         /// <response code="404">NotFound - ikke funnet</response>
         /// <response code="501">NotImplemented - ikke implementert</response>
-        /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv">http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv</a>, og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell, restriksjoner og mulige relasjonsnøkler</a></remarks>
+        /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv/">http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv/</a>,
+        /// og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell, restriksjoner og mulige relasjonsnøkler</a></remarks>
         [Route("api/arkivstruktur/Arkiv")]
         [HttpGet]
         [EnableQuery()]
@@ -89,7 +92,9 @@ namespace arkitektum.kommit.noark5.api.Controllers
         /// <response code="403">Forbidden - ingen tilgang</response>
         /// <response code="404">NotFound - ikke funnet</response>
         /// <response code="501">NotImplemented - ikke implementert</response>
-        /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv">http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv</a>, og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell, restriksjoner og mulige relasjonsnøkler</a></remarks>
+        /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv/">http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv/</a>,
+        /// og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell,
+        /// restriksjoner og mulige relasjonsnøkler</a></remarks>
         [Route("api/arkivstruktur/Arkiv/{id}")]
         [HttpGet]
         [ResponseType(typeof(ArkivType))]
@@ -116,7 +121,8 @@ namespace arkitektum.kommit.noark5.api.Controllers
         /// <response code="404">NotFound - ikke funnet</response>
         /// <response code="409">Conflict - objektet kan være endret av andre</response>
         /// <response code="501">NotImplemented - ikke implementert</response>
-        /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv">http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv</a>, og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell, restriksjoner og mulige relasjonsnøkler</a></remarks>
+        /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv/">http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv/</a>,
+        /// og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell, restriksjoner og mulige relasjonsnøkler</a></remarks>
         [Route("api/arkivstruktur/Arkiv/{id}")]
         [HttpPut]
         [ResponseType(typeof(ArkivType))]
@@ -166,7 +172,9 @@ namespace arkitektum.kommit.noark5.api.Controllers
         /// <response code="404">NotFound - ikke funnet</response>
         /// <response code="409">Conflict - objektet kan være endret av andre</response>
         /// <response code="501">NotImplemented - ikke implementert</response>
-        /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv">http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv</a>, og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell, restriksjoner og mulige relasjonsnøkler</a></remarks>
+        /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv/">http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv/</a>,
+        /// og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell,
+        /// restriksjoner og mulige relasjonsnøkler</a></remarks>
         [Route("api/arkivstruktur/Arkiv/{id}")]
         [HttpDelete]
         public HttpResponseMessage SlettArkiv(string id)
@@ -203,7 +211,9 @@ namespace arkitektum.kommit.noark5.api.Controllers
         /// <response code="403">Forbidden - ingen tilgang</response>
         /// <response code="404">NotFound - ikke funnet</response>
         /// <response code="501">NotImplemented - ikke implementert</response>
-        /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/ny-arkiv">http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv</a>, og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell, restriksjoner og mulige relasjonsnøkler</a></remarks>
+        /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/ny-arkiv/">http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv/</a>,
+        /// og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell,
+        /// restriksjoner og mulige relasjonsnøkler</a></remarks>
         [Route("api/arkivstruktur/nytt-arkiv")]
         [HttpGet]
         public ArkivType InitialiserArkiv()
@@ -238,7 +248,9 @@ namespace arkitektum.kommit.noark5.api.Controllers
         /// <response code="404">NotFound - ikke funnet</response>
         /// <response code="409">Conflict - objektet kan være endret av andre</response>
         /// <response code="501">NotImplemented - ikke implementert</response>
-        /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/ny-arkiv">http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv</a>, og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell, restriksjoner og mulige relasjonsnøkler</a></remarks>
+        /// <remarks>relasjonsnøkkel <a href="http://rel.kxml.no/noark5/v4/arkivstruktur/ny-arkiv/">http://rel.kxml.no/noark5/v4/arkivstruktur/arkiv/</a>,
+        /// og dokumentasjon av <a href="http://arkivverket.metakat.no/Objekttype/Index/EAID_C24AA8BC_2F54_4277_AA3E_54644165DBD6">datamodell,
+        /// restriksjoner og mulige relasjonsnøkler</a></remarks>
         [Route("api/arkivstruktur/nytt-arkiv")]
         [HttpPost]
         [ResponseType(typeof(ArkivType))]

@@ -35,7 +35,7 @@ public partial class LinkType
 {
     public LinkType(string rel, string href)
     {
-        relField = rel;
+        relField = rel.Insert(rel.Length, "/");
         hrefField = href;
     }
 }
