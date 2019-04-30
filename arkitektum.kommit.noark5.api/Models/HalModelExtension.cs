@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Thinktecture.IdentityServer.Core.Views;
@@ -8,22 +8,15 @@ public partial class AbstraktResourceType
 {
     [System.Xml.Serialization.XmlIgnoreAttribute()]
     [Newtonsoft.Json.JsonIgnore]
-    public IList<LinkType> LinkList { get; set; }
+    public IList<LinkType> LinkList { get; set; } = new List<LinkType>();
 
-    protected AbstraktResourceType()
-    {
-        LinkList = new List<LinkType>();
-    }
     public void RepopulateHyperMedia()
     {
-        if (LinkList == null)
-            LinkList = new List<LinkType>();
-
+        // create links
         CreateHypermedia();
 
-
-        if ((LinkList != null) && !LinkList.Any())
-            LinkList = null;
+        // push links to public link list
+        _links = LinkList.ToArray();
     }
     protected virtual void CreateHypermedia()
     {
