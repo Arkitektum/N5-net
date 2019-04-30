@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Thinktecture.IdentityServer.Core.Views;
@@ -18,6 +18,11 @@ public partial class AbstraktResourceType
         // push links to public link list
         _links = LinkList.ToArray();
     }
+
+    /// <summary>
+    /// Populate list of links for this object type.
+    /// Each individual object type must override this method to provide the proper links.
+    /// </summary>
     protected virtual void CreateHypermedia()
     {
 
