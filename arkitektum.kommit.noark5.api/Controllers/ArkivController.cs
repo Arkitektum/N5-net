@@ -16,7 +16,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
     /// <summary>
     /// rel.kxml.no/noark5/v4/arkivstruktur/arkiv og rel.kxml.no/noark5/v4/arkivstruktur/ny-arkiv
     /// </summary>
-    public class ArkivController : ApiController
+    public class ArkivController : System.Web.Http.ApiController
     {
         private readonly static ODataValidationSettings ValidationSettings = new ODataValidationSettings();
 

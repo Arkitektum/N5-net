@@ -13,7 +13,7 @@ using WebApi.Hal;
 
 namespace arkitektum.kommit.noark5.api.Controllers
 {
-    public class MappeController : ApiController
+    public class MappeController : System.Web.Http.ApiController
     {
         private static ODataValidationSettings _validationSettings = new ODataValidationSettings();
 

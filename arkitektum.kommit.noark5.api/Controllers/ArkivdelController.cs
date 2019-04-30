@@ -11,7 +11,7 @@ using System.Web.Http.OData.Query;
 
 namespace arkitektum.kommit.noark5.api.Controllers
 {
-    public class ArkivdelController : ApiController
+    public class ArkivdelController : System.Web.Http.ApiController
     {
         private static readonly ODataValidationSettings ValidationSettings = new ODataValidationSettings();
 

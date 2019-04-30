@@ -13,7 +13,7 @@ using System.Web.Http.OData.Query;
 
 namespace arkitektum.kommit.noark5.api.Controllers
 {
-    public class DokumentobjektController : ApiController
+    public class DokumentobjektController : System.Web.Http.ApiController
     {
         private static ODataValidationSettings _validationSettings = new ODataValidationSettings();
 

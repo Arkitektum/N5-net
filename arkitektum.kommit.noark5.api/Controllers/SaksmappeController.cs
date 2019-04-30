@@ -15,7 +15,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
     /// <summary>
     /// Provides api methods for saksmappe - api/sakarkiv/Saksmappe
     /// </summary>
-    public class SaksmappeController : ApiController
+    public class SaksmappeController : System.Web.Http.ApiController
     {
         private static readonly ODataValidationSettings ValidationSettings = new ODataValidationSettings();
 

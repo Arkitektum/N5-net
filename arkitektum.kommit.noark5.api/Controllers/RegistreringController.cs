@@ -11,7 +11,7 @@ using arkitektum.kommit.noark5.api.Services;
 
 namespace arkitektum.kommit.noark5.api.Controllers
 {
-    public class RegistreringController : ApiController
+    public class RegistreringController : System.Web.Http.ApiController
     {
         private static ODataValidationSettings _validationSettings = new ODataValidationSettings();
 

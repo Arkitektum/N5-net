@@ -7,7 +7,7 @@ using WebApi.Hal;
 
 namespace arkitektum.kommit.noark5.api.Controllers
 {
-    public class SecureApiController : ApiController
+    public class SecureApiController : System.Web.Http.ApiController
     {
         [Route("api/secure")]
         [HttpGet]

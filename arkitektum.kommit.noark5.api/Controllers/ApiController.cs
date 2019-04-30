@@ -6,7 +6,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
 {
 
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class Api4Controller : ApiController
+    public class ApiController : System.Web.Http.ApiController
     {
         /// <summary>
         /// Henter tilgjengelige moduler
