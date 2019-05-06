@@ -8,7 +8,7 @@ namespace arkitektum.kommit.noark5.api.Controllers
 {
     public static class Set
     {
-        public  const string _REL = "http://rel.kxml.no/noark5/v4/api";
+        public  const string _REL = "http://rel.arkivverket.no/noark5/v4/api";
 
         
         public static LinkType addLink(string baseUri, string apiUrl, string relUrl)

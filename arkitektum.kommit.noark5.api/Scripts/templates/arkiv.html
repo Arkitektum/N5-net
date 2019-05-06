@@ -23,8 +23,8 @@
 <p>Navigering(lenker):</p>
 <ul>
     <li ng-repeat="link in data._links">
-        <a ng-if="link.rel=='http://rel.kxml.no/noark5/v4/api/administrasjon/dokumentmedium'" href="#/link/{{link.href}}">Søk etter lovlige dokumentmedium</a>
-        <a ng-if="link.rel=='http://rel.kxml.no/noark5/v4/api/administrasjon/arkivstatus'" href="#/link/{{link.href}}">Søk etter lovlige arkivstatus</a>
+        <a ng-if="link.rel=='http://rel.arkivverket.no/noark5/v4/api/administrasjon/dokumentmedium'" href="#/link/{{link.href}}">Søk etter lovlige dokumentmedium</a>
+        <a ng-if="link.rel=='http://rel.arkivverket.no/noark5/v4/api/administrasjon/arkivstatus'" href="#/link/{{link.href}}">Søk etter lovlige arkivstatus</a>
         <a target="_blank" href="{{link.rel}}"><span class="glyphicon glyphicon-info-sign"></span></a>
     </li>
 </ul>

@@ -262,8 +262,8 @@ namespace arkitektum.kommit.noark5.api.Controllers
             m.mappetype = new MappetypeType() { kode = "BYGG", beskrivelse = "Byggesak" };
 
             m.LinkList.Clear();
-            m.LinkList.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/administrasjon/dokumentmedium", baseUri + "api/kodelister/Dokumentmedium{?$filter&$orderby&$top&$skip}"));
-            m.LinkList.Add(new LinkType("http://rel.kxml.no/noark5/v4/api/administrasjon/mappetype", baseUri + "api/kodelister/Mappetype{?$filter&$orderby&$top&$skip}"));
+            m.LinkList.Add(new LinkType("http://rel.arkivverket.no/noark5/v4/api/administrasjon/dokumentmedium", baseUri + "api/kodelister/Dokumentmedium{?$filter&$orderby&$top&$skip}"));
+            m.LinkList.Add(new LinkType("http://rel.arkivverket.no/noark5/v4/api/administrasjon/mappetype", baseUri + "api/kodelister/Mappetype{?$filter&$orderby&$top&$skip}"));
 
             if (m == null)
             {
