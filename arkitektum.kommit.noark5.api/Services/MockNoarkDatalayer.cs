@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -89,7 +89,6 @@ namespace arkitektum.kommit.noark5.api.Services
                 sekundaerklassifikasjon = OpprettSekundaerklassifikasjoner()
             };
             saksmappe.sakspart[0].RepopulateHyperMedia();
-            saksmappe.RepopulateHyperMedia();
             return saksmappe;
         }
 
